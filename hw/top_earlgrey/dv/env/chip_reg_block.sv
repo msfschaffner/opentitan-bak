@@ -5985,6 +5985,14 @@ typedef class rv_plic_reg_prio51;
 typedef class rv_plic_reg_prio52;
 typedef class rv_plic_reg_prio53;
 typedef class rv_plic_reg_prio54;
+typedef class rv_plic_reg_prio55;
+typedef class rv_plic_reg_prio56;
+typedef class rv_plic_reg_prio57;
+typedef class rv_plic_reg_prio58;
+typedef class rv_plic_reg_prio59;
+typedef class rv_plic_reg_prio60;
+typedef class rv_plic_reg_prio61;
+typedef class rv_plic_reg_prio62;
 typedef class rv_plic_reg_ie00;
 typedef class rv_plic_reg_ie01;
 typedef class rv_plic_reg_threshold0;
@@ -6420,6 +6428,14 @@ class rv_plic_reg_ip1 extends dv_base_reg;
   rand dv_base_reg_field p52;
   rand dv_base_reg_field p53;
   rand dv_base_reg_field p54;
+  rand dv_base_reg_field p55;
+  rand dv_base_reg_field p56;
+  rand dv_base_reg_field p57;
+  rand dv_base_reg_field p58;
+  rand dv_base_reg_field p59;
+  rand dv_base_reg_field p60;
+  rand dv_base_reg_field p61;
+  rand dv_base_reg_field p62;
 
   `uvm_object_utils(rv_plic_reg_ip1)
 
@@ -6678,6 +6694,94 @@ class rv_plic_reg_ip1 extends dv_base_reg;
       .parent(this),
       .size(1),
       .lsb_pos(22),
+      .access("RO"),
+      .volatile(1),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    p55 = dv_base_reg_field::type_id::create("p55");
+    p55.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(23),
+      .access("RO"),
+      .volatile(1),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    p56 = dv_base_reg_field::type_id::create("p56");
+    p56.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(24),
+      .access("RO"),
+      .volatile(1),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    p57 = dv_base_reg_field::type_id::create("p57");
+    p57.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(25),
+      .access("RO"),
+      .volatile(1),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    p58 = dv_base_reg_field::type_id::create("p58");
+    p58.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(26),
+      .access("RO"),
+      .volatile(1),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    p59 = dv_base_reg_field::type_id::create("p59");
+    p59.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(27),
+      .access("RO"),
+      .volatile(1),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    p60 = dv_base_reg_field::type_id::create("p60");
+    p60.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(28),
+      .access("RO"),
+      .volatile(1),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    p61 = dv_base_reg_field::type_id::create("p61");
+    p61.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(29),
+      .access("RO"),
+      .volatile(1),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    p62 = dv_base_reg_field::type_id::create("p62");
+    p62.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(30),
       .access("RO"),
       .volatile(1),
       .reset(32'h0),
@@ -7116,6 +7220,14 @@ class rv_plic_reg_le1 extends dv_base_reg;
   rand dv_base_reg_field le52;
   rand dv_base_reg_field le53;
   rand dv_base_reg_field le54;
+  rand dv_base_reg_field le55;
+  rand dv_base_reg_field le56;
+  rand dv_base_reg_field le57;
+  rand dv_base_reg_field le58;
+  rand dv_base_reg_field le59;
+  rand dv_base_reg_field le60;
+  rand dv_base_reg_field le61;
+  rand dv_base_reg_field le62;
 
   `uvm_object_utils(rv_plic_reg_le1)
 
@@ -7374,6 +7486,94 @@ class rv_plic_reg_le1 extends dv_base_reg;
       .parent(this),
       .size(1),
       .lsb_pos(22),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    le55 = dv_base_reg_field::type_id::create("le55");
+    le55.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(23),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    le56 = dv_base_reg_field::type_id::create("le56");
+    le56.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(24),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    le57 = dv_base_reg_field::type_id::create("le57");
+    le57.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(25),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    le58 = dv_base_reg_field::type_id::create("le58");
+    le58.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(26),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    le59 = dv_base_reg_field::type_id::create("le59");
+    le59.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(27),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    le60 = dv_base_reg_field::type_id::create("le60");
+    le60.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(28),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    le61 = dv_base_reg_field::type_id::create("le61");
+    le61.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(29),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    le62 = dv_base_reg_field::type_id::create("le62");
+    le62.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(30),
       .access("RW"),
       .volatile(0),
       .reset(32'h0),
@@ -9034,6 +9234,246 @@ class rv_plic_reg_prio54 extends dv_base_reg;
 
 endclass : rv_plic_reg_prio54
 
+// Class: rv_plic_reg_prio55
+class rv_plic_reg_prio55 extends dv_base_reg;
+  // fields
+  rand dv_base_reg_field prio55;
+
+  `uvm_object_utils(rv_plic_reg_prio55)
+
+  function new(string       name = "rv_plic_reg_prio55",
+               int unsigned n_bits = 32,
+               int          has_coverage = UVM_NO_COVERAGE);
+    super.new(name, n_bits, has_coverage);
+  endfunction : new
+
+  virtual function void build();
+    // create fields
+    prio55 = dv_base_reg_field::type_id::create("prio55");
+    prio55.configure(
+      .parent(this),
+      .size(2),
+      .lsb_pos(0),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+  endfunction : build
+
+endclass : rv_plic_reg_prio55
+
+// Class: rv_plic_reg_prio56
+class rv_plic_reg_prio56 extends dv_base_reg;
+  // fields
+  rand dv_base_reg_field prio56;
+
+  `uvm_object_utils(rv_plic_reg_prio56)
+
+  function new(string       name = "rv_plic_reg_prio56",
+               int unsigned n_bits = 32,
+               int          has_coverage = UVM_NO_COVERAGE);
+    super.new(name, n_bits, has_coverage);
+  endfunction : new
+
+  virtual function void build();
+    // create fields
+    prio56 = dv_base_reg_field::type_id::create("prio56");
+    prio56.configure(
+      .parent(this),
+      .size(2),
+      .lsb_pos(0),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+  endfunction : build
+
+endclass : rv_plic_reg_prio56
+
+// Class: rv_plic_reg_prio57
+class rv_plic_reg_prio57 extends dv_base_reg;
+  // fields
+  rand dv_base_reg_field prio57;
+
+  `uvm_object_utils(rv_plic_reg_prio57)
+
+  function new(string       name = "rv_plic_reg_prio57",
+               int unsigned n_bits = 32,
+               int          has_coverage = UVM_NO_COVERAGE);
+    super.new(name, n_bits, has_coverage);
+  endfunction : new
+
+  virtual function void build();
+    // create fields
+    prio57 = dv_base_reg_field::type_id::create("prio57");
+    prio57.configure(
+      .parent(this),
+      .size(2),
+      .lsb_pos(0),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+  endfunction : build
+
+endclass : rv_plic_reg_prio57
+
+// Class: rv_plic_reg_prio58
+class rv_plic_reg_prio58 extends dv_base_reg;
+  // fields
+  rand dv_base_reg_field prio58;
+
+  `uvm_object_utils(rv_plic_reg_prio58)
+
+  function new(string       name = "rv_plic_reg_prio58",
+               int unsigned n_bits = 32,
+               int          has_coverage = UVM_NO_COVERAGE);
+    super.new(name, n_bits, has_coverage);
+  endfunction : new
+
+  virtual function void build();
+    // create fields
+    prio58 = dv_base_reg_field::type_id::create("prio58");
+    prio58.configure(
+      .parent(this),
+      .size(2),
+      .lsb_pos(0),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+  endfunction : build
+
+endclass : rv_plic_reg_prio58
+
+// Class: rv_plic_reg_prio59
+class rv_plic_reg_prio59 extends dv_base_reg;
+  // fields
+  rand dv_base_reg_field prio59;
+
+  `uvm_object_utils(rv_plic_reg_prio59)
+
+  function new(string       name = "rv_plic_reg_prio59",
+               int unsigned n_bits = 32,
+               int          has_coverage = UVM_NO_COVERAGE);
+    super.new(name, n_bits, has_coverage);
+  endfunction : new
+
+  virtual function void build();
+    // create fields
+    prio59 = dv_base_reg_field::type_id::create("prio59");
+    prio59.configure(
+      .parent(this),
+      .size(2),
+      .lsb_pos(0),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+  endfunction : build
+
+endclass : rv_plic_reg_prio59
+
+// Class: rv_plic_reg_prio60
+class rv_plic_reg_prio60 extends dv_base_reg;
+  // fields
+  rand dv_base_reg_field prio60;
+
+  `uvm_object_utils(rv_plic_reg_prio60)
+
+  function new(string       name = "rv_plic_reg_prio60",
+               int unsigned n_bits = 32,
+               int          has_coverage = UVM_NO_COVERAGE);
+    super.new(name, n_bits, has_coverage);
+  endfunction : new
+
+  virtual function void build();
+    // create fields
+    prio60 = dv_base_reg_field::type_id::create("prio60");
+    prio60.configure(
+      .parent(this),
+      .size(2),
+      .lsb_pos(0),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+  endfunction : build
+
+endclass : rv_plic_reg_prio60
+
+// Class: rv_plic_reg_prio61
+class rv_plic_reg_prio61 extends dv_base_reg;
+  // fields
+  rand dv_base_reg_field prio61;
+
+  `uvm_object_utils(rv_plic_reg_prio61)
+
+  function new(string       name = "rv_plic_reg_prio61",
+               int unsigned n_bits = 32,
+               int          has_coverage = UVM_NO_COVERAGE);
+    super.new(name, n_bits, has_coverage);
+  endfunction : new
+
+  virtual function void build();
+    // create fields
+    prio61 = dv_base_reg_field::type_id::create("prio61");
+    prio61.configure(
+      .parent(this),
+      .size(2),
+      .lsb_pos(0),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+  endfunction : build
+
+endclass : rv_plic_reg_prio61
+
+// Class: rv_plic_reg_prio62
+class rv_plic_reg_prio62 extends dv_base_reg;
+  // fields
+  rand dv_base_reg_field prio62;
+
+  `uvm_object_utils(rv_plic_reg_prio62)
+
+  function new(string       name = "rv_plic_reg_prio62",
+               int unsigned n_bits = 32,
+               int          has_coverage = UVM_NO_COVERAGE);
+    super.new(name, n_bits, has_coverage);
+  endfunction : new
+
+  virtual function void build();
+    // create fields
+    prio62 = dv_base_reg_field::type_id::create("prio62");
+    prio62.configure(
+      .parent(this),
+      .size(2),
+      .lsb_pos(0),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+  endfunction : build
+
+endclass : rv_plic_reg_prio62
+
 // Class: rv_plic_reg_ie00
 class rv_plic_reg_ie00 extends dv_base_reg;
   // fields
@@ -9462,6 +9902,14 @@ class rv_plic_reg_ie01 extends dv_base_reg;
   rand dv_base_reg_field e52;
   rand dv_base_reg_field e53;
   rand dv_base_reg_field e54;
+  rand dv_base_reg_field e55;
+  rand dv_base_reg_field e56;
+  rand dv_base_reg_field e57;
+  rand dv_base_reg_field e58;
+  rand dv_base_reg_field e59;
+  rand dv_base_reg_field e60;
+  rand dv_base_reg_field e61;
+  rand dv_base_reg_field e62;
 
   `uvm_object_utils(rv_plic_reg_ie01)
 
@@ -9726,6 +10174,94 @@ class rv_plic_reg_ie01 extends dv_base_reg;
       .has_reset(1),
       .is_rand(1),
       .individually_accessible(1));
+    e55 = dv_base_reg_field::type_id::create("e55");
+    e55.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(23),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    e56 = dv_base_reg_field::type_id::create("e56");
+    e56.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(24),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    e57 = dv_base_reg_field::type_id::create("e57");
+    e57.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(25),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    e58 = dv_base_reg_field::type_id::create("e58");
+    e58.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(26),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    e59 = dv_base_reg_field::type_id::create("e59");
+    e59.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(27),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    e60 = dv_base_reg_field::type_id::create("e60");
+    e60.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(28),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    e61 = dv_base_reg_field::type_id::create("e61");
+    e61.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(29),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    e62 = dv_base_reg_field::type_id::create("e62");
+    e62.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(30),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
   endfunction : build
 
 endclass : rv_plic_reg_ie01
@@ -9882,6 +10418,14 @@ class rv_plic_reg_block extends dv_base_reg_block;
   rand rv_plic_reg_prio52 prio52;
   rand rv_plic_reg_prio53 prio53;
   rand rv_plic_reg_prio54 prio54;
+  rand rv_plic_reg_prio55 prio55;
+  rand rv_plic_reg_prio56 prio56;
+  rand rv_plic_reg_prio57 prio57;
+  rand rv_plic_reg_prio58 prio58;
+  rand rv_plic_reg_prio59 prio59;
+  rand rv_plic_reg_prio60 prio60;
+  rand rv_plic_reg_prio61 prio61;
+  rand rv_plic_reg_prio62 prio62;
   rand rv_plic_reg_ie00 ie00;
   rand rv_plic_reg_ie01 ie01;
   rand rv_plic_reg_threshold0 threshold0;
@@ -10257,35 +10801,83 @@ class rv_plic_reg_block extends dv_base_reg_block;
     default_map.add_reg(.rg(prio54),
                         .offset(32'he8),
                         .rights("RW"));
+    prio55 = rv_plic_reg_prio55::type_id::create("prio55");
+    prio55.configure(.blk_parent(this));
+    prio55.build();
+    default_map.add_reg(.rg(prio55),
+                        .offset(32'hec),
+                        .rights("RW"));
+    prio56 = rv_plic_reg_prio56::type_id::create("prio56");
+    prio56.configure(.blk_parent(this));
+    prio56.build();
+    default_map.add_reg(.rg(prio56),
+                        .offset(32'hf0),
+                        .rights("RW"));
+    prio57 = rv_plic_reg_prio57::type_id::create("prio57");
+    prio57.configure(.blk_parent(this));
+    prio57.build();
+    default_map.add_reg(.rg(prio57),
+                        .offset(32'hf4),
+                        .rights("RW"));
+    prio58 = rv_plic_reg_prio58::type_id::create("prio58");
+    prio58.configure(.blk_parent(this));
+    prio58.build();
+    default_map.add_reg(.rg(prio58),
+                        .offset(32'hf8),
+                        .rights("RW"));
+    prio59 = rv_plic_reg_prio59::type_id::create("prio59");
+    prio59.configure(.blk_parent(this));
+    prio59.build();
+    default_map.add_reg(.rg(prio59),
+                        .offset(32'hfc),
+                        .rights("RW"));
+    prio60 = rv_plic_reg_prio60::type_id::create("prio60");
+    prio60.configure(.blk_parent(this));
+    prio60.build();
+    default_map.add_reg(.rg(prio60),
+                        .offset(32'h100),
+                        .rights("RW"));
+    prio61 = rv_plic_reg_prio61::type_id::create("prio61");
+    prio61.configure(.blk_parent(this));
+    prio61.build();
+    default_map.add_reg(.rg(prio61),
+                        .offset(32'h104),
+                        .rights("RW"));
+    prio62 = rv_plic_reg_prio62::type_id::create("prio62");
+    prio62.configure(.blk_parent(this));
+    prio62.build();
+    default_map.add_reg(.rg(prio62),
+                        .offset(32'h108),
+                        .rights("RW"));
     ie00 = rv_plic_reg_ie00::type_id::create("ie00");
     ie00.configure(.blk_parent(this));
     ie00.build();
     default_map.add_reg(.rg(ie00),
-                        .offset(32'h100),
+                        .offset(32'h200),
                         .rights("RW"));
     ie01 = rv_plic_reg_ie01::type_id::create("ie01");
     ie01.configure(.blk_parent(this));
     ie01.build();
     default_map.add_reg(.rg(ie01),
-                        .offset(32'h104),
+                        .offset(32'h204),
                         .rights("RW"));
     threshold0 = rv_plic_reg_threshold0::type_id::create("threshold0");
     threshold0.configure(.blk_parent(this));
     threshold0.build();
     default_map.add_reg(.rg(threshold0),
-                        .offset(32'h108),
+                        .offset(32'h208),
                         .rights("RW"));
     cc0 = rv_plic_reg_cc0::type_id::create("cc0");
     cc0.configure(.blk_parent(this));
     cc0.build();
     default_map.add_reg(.rg(cc0),
-                        .offset(32'h10c),
+                        .offset(32'h20c),
                         .rights("RW"));
     msip0 = rv_plic_reg_msip0::type_id::create("msip0");
     msip0.configure(.blk_parent(this));
     msip0.build();
     default_map.add_reg(.rg(msip0),
-                        .offset(32'h110),
+                        .offset(32'h210),
                         .rights("RW"));
   endfunction : build
 
@@ -12332,6 +12924,3290 @@ endclass : hmac_reg_block
 
 `endif
 
+// Block: alert_handler
+`ifndef ALERT_HANDLER_REG_BLOCK__SV
+`define ALERT_HANDLER_REG_BLOCK__SV
+
+// Forward declare all register/memory/block classes
+typedef class alert_handler_reg_intr_state;
+typedef class alert_handler_reg_intr_enable;
+typedef class alert_handler_reg_intr_test;
+typedef class alert_handler_reg_regen;
+typedef class alert_handler_reg_ping_timeout_cyc;
+typedef class alert_handler_reg_alert_en;
+typedef class alert_handler_reg_alert_class;
+typedef class alert_handler_reg_alert_cause;
+typedef class alert_handler_reg_loc_alert_en;
+typedef class alert_handler_reg_loc_alert_class;
+typedef class alert_handler_reg_loc_alert_cause;
+typedef class alert_handler_reg_classa_ctrl;
+typedef class alert_handler_reg_classa_clren;
+typedef class alert_handler_reg_classa_clr;
+typedef class alert_handler_reg_classa_accum_cnt;
+typedef class alert_handler_reg_classa_accum_thresh;
+typedef class alert_handler_reg_classa_timeout_cyc;
+typedef class alert_handler_reg_classa_phase0_cyc;
+typedef class alert_handler_reg_classa_phase1_cyc;
+typedef class alert_handler_reg_classa_phase2_cyc;
+typedef class alert_handler_reg_classa_phase3_cyc;
+typedef class alert_handler_reg_classa_esc_cnt;
+typedef class alert_handler_reg_classa_state;
+typedef class alert_handler_reg_classb_ctrl;
+typedef class alert_handler_reg_classb_clren;
+typedef class alert_handler_reg_classb_clr;
+typedef class alert_handler_reg_classb_accum_cnt;
+typedef class alert_handler_reg_classb_accum_thresh;
+typedef class alert_handler_reg_classb_timeout_cyc;
+typedef class alert_handler_reg_classb_phase0_cyc;
+typedef class alert_handler_reg_classb_phase1_cyc;
+typedef class alert_handler_reg_classb_phase2_cyc;
+typedef class alert_handler_reg_classb_phase3_cyc;
+typedef class alert_handler_reg_classb_esc_cnt;
+typedef class alert_handler_reg_classb_state;
+typedef class alert_handler_reg_classc_ctrl;
+typedef class alert_handler_reg_classc_clren;
+typedef class alert_handler_reg_classc_clr;
+typedef class alert_handler_reg_classc_accum_cnt;
+typedef class alert_handler_reg_classc_accum_thresh;
+typedef class alert_handler_reg_classc_timeout_cyc;
+typedef class alert_handler_reg_classc_phase0_cyc;
+typedef class alert_handler_reg_classc_phase1_cyc;
+typedef class alert_handler_reg_classc_phase2_cyc;
+typedef class alert_handler_reg_classc_phase3_cyc;
+typedef class alert_handler_reg_classc_esc_cnt;
+typedef class alert_handler_reg_classc_state;
+typedef class alert_handler_reg_classd_ctrl;
+typedef class alert_handler_reg_classd_clren;
+typedef class alert_handler_reg_classd_clr;
+typedef class alert_handler_reg_classd_accum_cnt;
+typedef class alert_handler_reg_classd_accum_thresh;
+typedef class alert_handler_reg_classd_timeout_cyc;
+typedef class alert_handler_reg_classd_phase0_cyc;
+typedef class alert_handler_reg_classd_phase1_cyc;
+typedef class alert_handler_reg_classd_phase2_cyc;
+typedef class alert_handler_reg_classd_phase3_cyc;
+typedef class alert_handler_reg_classd_esc_cnt;
+typedef class alert_handler_reg_classd_state;
+typedef class alert_handler_reg_block;
+
+// Class: alert_handler_reg_intr_state
+class alert_handler_reg_intr_state extends dv_base_reg;
+  // fields
+  rand dv_base_reg_field classa;
+  rand dv_base_reg_field classb;
+  rand dv_base_reg_field classc;
+  rand dv_base_reg_field classd;
+
+  `uvm_object_utils(alert_handler_reg_intr_state)
+
+  function new(string       name = "alert_handler_reg_intr_state",
+               int unsigned n_bits = 32,
+               int          has_coverage = UVM_NO_COVERAGE);
+    super.new(name, n_bits, has_coverage);
+  endfunction : new
+
+  virtual function void build();
+    // create fields
+    classa = dv_base_reg_field::type_id::create("classa");
+    classa.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(0),
+      .access("W1C"),
+      .volatile(1),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    classb = dv_base_reg_field::type_id::create("classb");
+    classb.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(1),
+      .access("W1C"),
+      .volatile(1),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    classc = dv_base_reg_field::type_id::create("classc");
+    classc.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(2),
+      .access("W1C"),
+      .volatile(1),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    classd = dv_base_reg_field::type_id::create("classd");
+    classd.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(3),
+      .access("W1C"),
+      .volatile(1),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+  endfunction : build
+
+endclass : alert_handler_reg_intr_state
+
+// Class: alert_handler_reg_intr_enable
+class alert_handler_reg_intr_enable extends dv_base_reg;
+  // fields
+  rand dv_base_reg_field classa;
+  rand dv_base_reg_field classb;
+  rand dv_base_reg_field classc;
+  rand dv_base_reg_field classd;
+
+  `uvm_object_utils(alert_handler_reg_intr_enable)
+
+  function new(string       name = "alert_handler_reg_intr_enable",
+               int unsigned n_bits = 32,
+               int          has_coverage = UVM_NO_COVERAGE);
+    super.new(name, n_bits, has_coverage);
+  endfunction : new
+
+  virtual function void build();
+    // create fields
+    classa = dv_base_reg_field::type_id::create("classa");
+    classa.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(0),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    classb = dv_base_reg_field::type_id::create("classb");
+    classb.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(1),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    classc = dv_base_reg_field::type_id::create("classc");
+    classc.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(2),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    classd = dv_base_reg_field::type_id::create("classd");
+    classd.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(3),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+  endfunction : build
+
+endclass : alert_handler_reg_intr_enable
+
+// Class: alert_handler_reg_intr_test
+class alert_handler_reg_intr_test extends dv_base_reg;
+  // fields
+  rand dv_base_reg_field classa;
+  rand dv_base_reg_field classb;
+  rand dv_base_reg_field classc;
+  rand dv_base_reg_field classd;
+
+  `uvm_object_utils(alert_handler_reg_intr_test)
+
+  function new(string       name = "alert_handler_reg_intr_test",
+               int unsigned n_bits = 32,
+               int          has_coverage = UVM_NO_COVERAGE);
+    super.new(name, n_bits, has_coverage);
+  endfunction : new
+
+  virtual function void build();
+    // create fields
+    classa = dv_base_reg_field::type_id::create("classa");
+    classa.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(0),
+      .access("WO"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    classb = dv_base_reg_field::type_id::create("classb");
+    classb.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(1),
+      .access("WO"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    classc = dv_base_reg_field::type_id::create("classc");
+    classc.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(2),
+      .access("WO"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    classd = dv_base_reg_field::type_id::create("classd");
+    classd.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(3),
+      .access("WO"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+  endfunction : build
+
+endclass : alert_handler_reg_intr_test
+
+// Class: alert_handler_reg_regen
+class alert_handler_reg_regen extends dv_base_reg;
+  // fields
+  rand dv_base_reg_field regen;
+
+  `uvm_object_utils(alert_handler_reg_regen)
+
+  function new(string       name = "alert_handler_reg_regen",
+               int unsigned n_bits = 32,
+               int          has_coverage = UVM_NO_COVERAGE);
+    super.new(name, n_bits, has_coverage);
+  endfunction : new
+
+  virtual function void build();
+    // create fields
+    regen = dv_base_reg_field::type_id::create("regen");
+    regen.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(0),
+      .access("W1C"),
+      .volatile(0),
+      .reset(32'h1),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+  endfunction : build
+
+endclass : alert_handler_reg_regen
+
+// Class: alert_handler_reg_ping_timeout_cyc
+class alert_handler_reg_ping_timeout_cyc extends dv_base_reg;
+  // fields
+  rand dv_base_reg_field ping_timeout_cyc;
+
+  `uvm_object_utils(alert_handler_reg_ping_timeout_cyc)
+
+  function new(string       name = "alert_handler_reg_ping_timeout_cyc",
+               int unsigned n_bits = 32,
+               int          has_coverage = UVM_NO_COVERAGE);
+    super.new(name, n_bits, has_coverage);
+  endfunction : new
+
+  virtual function void build();
+    // create fields
+    ping_timeout_cyc = dv_base_reg_field::type_id::create("ping_timeout_cyc");
+    ping_timeout_cyc.configure(
+      .parent(this),
+      .size(24),
+      .lsb_pos(0),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h20),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+  endfunction : build
+
+endclass : alert_handler_reg_ping_timeout_cyc
+
+// Class: alert_handler_reg_alert_en
+class alert_handler_reg_alert_en extends dv_base_reg;
+  // fields
+  rand dv_base_reg_field en_a0;
+  rand dv_base_reg_field en_a1;
+  rand dv_base_reg_field en_a2;
+  rand dv_base_reg_field en_a3;
+
+  `uvm_object_utils(alert_handler_reg_alert_en)
+
+  function new(string       name = "alert_handler_reg_alert_en",
+               int unsigned n_bits = 32,
+               int          has_coverage = UVM_NO_COVERAGE);
+    super.new(name, n_bits, has_coverage);
+  endfunction : new
+
+  virtual function void build();
+    // create fields
+    en_a0 = dv_base_reg_field::type_id::create("en_a0");
+    en_a0.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(0),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    en_a1 = dv_base_reg_field::type_id::create("en_a1");
+    en_a1.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(1),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    en_a2 = dv_base_reg_field::type_id::create("en_a2");
+    en_a2.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(2),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    en_a3 = dv_base_reg_field::type_id::create("en_a3");
+    en_a3.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(3),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+  endfunction : build
+
+endclass : alert_handler_reg_alert_en
+
+// Class: alert_handler_reg_alert_class
+class alert_handler_reg_alert_class extends dv_base_reg;
+  // fields
+  rand dv_base_reg_field class_a0;
+  rand dv_base_reg_field class_a1;
+  rand dv_base_reg_field class_a2;
+  rand dv_base_reg_field class_a3;
+
+  `uvm_object_utils(alert_handler_reg_alert_class)
+
+  function new(string       name = "alert_handler_reg_alert_class",
+               int unsigned n_bits = 32,
+               int          has_coverage = UVM_NO_COVERAGE);
+    super.new(name, n_bits, has_coverage);
+  endfunction : new
+
+  virtual function void build();
+    // create fields
+    class_a0 = dv_base_reg_field::type_id::create("class_a0");
+    class_a0.configure(
+      .parent(this),
+      .size(2),
+      .lsb_pos(0),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    class_a1 = dv_base_reg_field::type_id::create("class_a1");
+    class_a1.configure(
+      .parent(this),
+      .size(2),
+      .lsb_pos(2),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    class_a2 = dv_base_reg_field::type_id::create("class_a2");
+    class_a2.configure(
+      .parent(this),
+      .size(2),
+      .lsb_pos(4),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    class_a3 = dv_base_reg_field::type_id::create("class_a3");
+    class_a3.configure(
+      .parent(this),
+      .size(2),
+      .lsb_pos(6),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+  endfunction : build
+
+endclass : alert_handler_reg_alert_class
+
+// Class: alert_handler_reg_alert_cause
+class alert_handler_reg_alert_cause extends dv_base_reg;
+  // fields
+  rand dv_base_reg_field a0;
+  rand dv_base_reg_field a1;
+  rand dv_base_reg_field a2;
+  rand dv_base_reg_field a3;
+
+  `uvm_object_utils(alert_handler_reg_alert_cause)
+
+  function new(string       name = "alert_handler_reg_alert_cause",
+               int unsigned n_bits = 32,
+               int          has_coverage = UVM_NO_COVERAGE);
+    super.new(name, n_bits, has_coverage);
+  endfunction : new
+
+  virtual function void build();
+    // create fields
+    a0 = dv_base_reg_field::type_id::create("a0");
+    a0.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(0),
+      .access("W1C"),
+      .volatile(1),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    a1 = dv_base_reg_field::type_id::create("a1");
+    a1.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(1),
+      .access("W1C"),
+      .volatile(1),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    a2 = dv_base_reg_field::type_id::create("a2");
+    a2.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(2),
+      .access("W1C"),
+      .volatile(1),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    a3 = dv_base_reg_field::type_id::create("a3");
+    a3.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(3),
+      .access("W1C"),
+      .volatile(1),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+  endfunction : build
+
+endclass : alert_handler_reg_alert_cause
+
+// Class: alert_handler_reg_loc_alert_en
+class alert_handler_reg_loc_alert_en extends dv_base_reg;
+  // fields
+  rand dv_base_reg_field en_la0;
+  rand dv_base_reg_field en_la1;
+  rand dv_base_reg_field en_la2;
+  rand dv_base_reg_field en_la3;
+
+  `uvm_object_utils(alert_handler_reg_loc_alert_en)
+
+  function new(string       name = "alert_handler_reg_loc_alert_en",
+               int unsigned n_bits = 32,
+               int          has_coverage = UVM_NO_COVERAGE);
+    super.new(name, n_bits, has_coverage);
+  endfunction : new
+
+  virtual function void build();
+    // create fields
+    en_la0 = dv_base_reg_field::type_id::create("en_la0");
+    en_la0.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(0),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    en_la1 = dv_base_reg_field::type_id::create("en_la1");
+    en_la1.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(1),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    en_la2 = dv_base_reg_field::type_id::create("en_la2");
+    en_la2.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(2),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    en_la3 = dv_base_reg_field::type_id::create("en_la3");
+    en_la3.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(3),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+  endfunction : build
+
+endclass : alert_handler_reg_loc_alert_en
+
+// Class: alert_handler_reg_loc_alert_class
+class alert_handler_reg_loc_alert_class extends dv_base_reg;
+  // fields
+  rand dv_base_reg_field class_la0;
+  rand dv_base_reg_field class_la1;
+  rand dv_base_reg_field class_la2;
+  rand dv_base_reg_field class_la3;
+
+  `uvm_object_utils(alert_handler_reg_loc_alert_class)
+
+  function new(string       name = "alert_handler_reg_loc_alert_class",
+               int unsigned n_bits = 32,
+               int          has_coverage = UVM_NO_COVERAGE);
+    super.new(name, n_bits, has_coverage);
+  endfunction : new
+
+  virtual function void build();
+    // create fields
+    class_la0 = dv_base_reg_field::type_id::create("class_la0");
+    class_la0.configure(
+      .parent(this),
+      .size(2),
+      .lsb_pos(0),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    class_la1 = dv_base_reg_field::type_id::create("class_la1");
+    class_la1.configure(
+      .parent(this),
+      .size(2),
+      .lsb_pos(2),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    class_la2 = dv_base_reg_field::type_id::create("class_la2");
+    class_la2.configure(
+      .parent(this),
+      .size(2),
+      .lsb_pos(4),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    class_la3 = dv_base_reg_field::type_id::create("class_la3");
+    class_la3.configure(
+      .parent(this),
+      .size(2),
+      .lsb_pos(6),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+  endfunction : build
+
+endclass : alert_handler_reg_loc_alert_class
+
+// Class: alert_handler_reg_loc_alert_cause
+class alert_handler_reg_loc_alert_cause extends dv_base_reg;
+  // fields
+  rand dv_base_reg_field la0;
+  rand dv_base_reg_field la1;
+  rand dv_base_reg_field la2;
+  rand dv_base_reg_field la3;
+
+  `uvm_object_utils(alert_handler_reg_loc_alert_cause)
+
+  function new(string       name = "alert_handler_reg_loc_alert_cause",
+               int unsigned n_bits = 32,
+               int          has_coverage = UVM_NO_COVERAGE);
+    super.new(name, n_bits, has_coverage);
+  endfunction : new
+
+  virtual function void build();
+    // create fields
+    la0 = dv_base_reg_field::type_id::create("la0");
+    la0.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(0),
+      .access("W1C"),
+      .volatile(1),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    la1 = dv_base_reg_field::type_id::create("la1");
+    la1.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(1),
+      .access("W1C"),
+      .volatile(1),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    la2 = dv_base_reg_field::type_id::create("la2");
+    la2.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(2),
+      .access("W1C"),
+      .volatile(1),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    la3 = dv_base_reg_field::type_id::create("la3");
+    la3.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(3),
+      .access("W1C"),
+      .volatile(1),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+  endfunction : build
+
+endclass : alert_handler_reg_loc_alert_cause
+
+// Class: alert_handler_reg_classa_ctrl
+class alert_handler_reg_classa_ctrl extends dv_base_reg;
+  // fields
+  rand dv_base_reg_field en;
+  rand dv_base_reg_field lock;
+  rand dv_base_reg_field en_e0;
+  rand dv_base_reg_field en_e1;
+  rand dv_base_reg_field en_e2;
+  rand dv_base_reg_field en_e3;
+  rand dv_base_reg_field map_e0;
+  rand dv_base_reg_field map_e1;
+  rand dv_base_reg_field map_e2;
+  rand dv_base_reg_field map_e3;
+
+  `uvm_object_utils(alert_handler_reg_classa_ctrl)
+
+  function new(string       name = "alert_handler_reg_classa_ctrl",
+               int unsigned n_bits = 32,
+               int          has_coverage = UVM_NO_COVERAGE);
+    super.new(name, n_bits, has_coverage);
+  endfunction : new
+
+  virtual function void build();
+    // create fields
+    en = dv_base_reg_field::type_id::create("en");
+    en.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(0),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    lock = dv_base_reg_field::type_id::create("lock");
+    lock.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(1),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    en_e0 = dv_base_reg_field::type_id::create("en_e0");
+    en_e0.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(2),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h1),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    en_e1 = dv_base_reg_field::type_id::create("en_e1");
+    en_e1.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(3),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h1),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    en_e2 = dv_base_reg_field::type_id::create("en_e2");
+    en_e2.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(4),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h1),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    en_e3 = dv_base_reg_field::type_id::create("en_e3");
+    en_e3.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(5),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h1),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    map_e0 = dv_base_reg_field::type_id::create("map_e0");
+    map_e0.configure(
+      .parent(this),
+      .size(2),
+      .lsb_pos(6),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    map_e1 = dv_base_reg_field::type_id::create("map_e1");
+    map_e1.configure(
+      .parent(this),
+      .size(2),
+      .lsb_pos(8),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h1),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    map_e2 = dv_base_reg_field::type_id::create("map_e2");
+    map_e2.configure(
+      .parent(this),
+      .size(2),
+      .lsb_pos(10),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h2),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    map_e3 = dv_base_reg_field::type_id::create("map_e3");
+    map_e3.configure(
+      .parent(this),
+      .size(2),
+      .lsb_pos(12),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h3),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+  endfunction : build
+
+endclass : alert_handler_reg_classa_ctrl
+
+// Class: alert_handler_reg_classa_clren
+class alert_handler_reg_classa_clren extends dv_base_reg;
+  // fields
+  rand dv_base_reg_field classa_clren;
+
+  `uvm_object_utils(alert_handler_reg_classa_clren)
+
+  function new(string       name = "alert_handler_reg_classa_clren",
+               int unsigned n_bits = 32,
+               int          has_coverage = UVM_NO_COVERAGE);
+    super.new(name, n_bits, has_coverage);
+  endfunction : new
+
+  virtual function void build();
+    // create fields
+    classa_clren = dv_base_reg_field::type_id::create("classa_clren");
+    classa_clren.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(0),
+      .access("W1C"),
+      .volatile(1),
+      .reset(32'h1),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+  endfunction : build
+
+endclass : alert_handler_reg_classa_clren
+
+// Class: alert_handler_reg_classa_clr
+class alert_handler_reg_classa_clr extends dv_base_reg;
+  // fields
+  rand dv_base_reg_field classa_clr;
+
+  `uvm_object_utils(alert_handler_reg_classa_clr)
+
+  function new(string       name = "alert_handler_reg_classa_clr",
+               int unsigned n_bits = 32,
+               int          has_coverage = UVM_NO_COVERAGE);
+    super.new(name, n_bits, has_coverage);
+  endfunction : new
+
+  virtual function void build();
+    // create fields
+    classa_clr = dv_base_reg_field::type_id::create("classa_clr");
+    classa_clr.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(0),
+      .access("WO"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+  endfunction : build
+
+endclass : alert_handler_reg_classa_clr
+
+// Class: alert_handler_reg_classa_accum_cnt
+class alert_handler_reg_classa_accum_cnt extends dv_base_reg;
+  // fields
+  rand dv_base_reg_field classa_accum_cnt;
+
+  `uvm_object_utils(alert_handler_reg_classa_accum_cnt)
+
+  function new(string       name = "alert_handler_reg_classa_accum_cnt",
+               int unsigned n_bits = 32,
+               int          has_coverage = UVM_NO_COVERAGE);
+    super.new(name, n_bits, has_coverage);
+  endfunction : new
+
+  virtual function void build();
+    // create fields
+    classa_accum_cnt = dv_base_reg_field::type_id::create("classa_accum_cnt");
+    classa_accum_cnt.configure(
+      .parent(this),
+      .size(16),
+      .lsb_pos(0),
+      .access("RO"),
+      .volatile(1),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+  endfunction : build
+
+endclass : alert_handler_reg_classa_accum_cnt
+
+// Class: alert_handler_reg_classa_accum_thresh
+class alert_handler_reg_classa_accum_thresh extends dv_base_reg;
+  // fields
+  rand dv_base_reg_field classa_accum_thresh;
+
+  `uvm_object_utils(alert_handler_reg_classa_accum_thresh)
+
+  function new(string       name = "alert_handler_reg_classa_accum_thresh",
+               int unsigned n_bits = 32,
+               int          has_coverage = UVM_NO_COVERAGE);
+    super.new(name, n_bits, has_coverage);
+  endfunction : new
+
+  virtual function void build();
+    // create fields
+    classa_accum_thresh = dv_base_reg_field::type_id::create("classa_accum_thresh");
+    classa_accum_thresh.configure(
+      .parent(this),
+      .size(16),
+      .lsb_pos(0),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+  endfunction : build
+
+endclass : alert_handler_reg_classa_accum_thresh
+
+// Class: alert_handler_reg_classa_timeout_cyc
+class alert_handler_reg_classa_timeout_cyc extends dv_base_reg;
+  // fields
+  rand dv_base_reg_field classa_timeout_cyc;
+
+  `uvm_object_utils(alert_handler_reg_classa_timeout_cyc)
+
+  function new(string       name = "alert_handler_reg_classa_timeout_cyc",
+               int unsigned n_bits = 32,
+               int          has_coverage = UVM_NO_COVERAGE);
+    super.new(name, n_bits, has_coverage);
+  endfunction : new
+
+  virtual function void build();
+    // create fields
+    classa_timeout_cyc = dv_base_reg_field::type_id::create("classa_timeout_cyc");
+    classa_timeout_cyc.configure(
+      .parent(this),
+      .size(32),
+      .lsb_pos(0),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+  endfunction : build
+
+endclass : alert_handler_reg_classa_timeout_cyc
+
+// Class: alert_handler_reg_classa_phase0_cyc
+class alert_handler_reg_classa_phase0_cyc extends dv_base_reg;
+  // fields
+  rand dv_base_reg_field classa_phase0_cyc;
+
+  `uvm_object_utils(alert_handler_reg_classa_phase0_cyc)
+
+  function new(string       name = "alert_handler_reg_classa_phase0_cyc",
+               int unsigned n_bits = 32,
+               int          has_coverage = UVM_NO_COVERAGE);
+    super.new(name, n_bits, has_coverage);
+  endfunction : new
+
+  virtual function void build();
+    // create fields
+    classa_phase0_cyc = dv_base_reg_field::type_id::create("classa_phase0_cyc");
+    classa_phase0_cyc.configure(
+      .parent(this),
+      .size(32),
+      .lsb_pos(0),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+  endfunction : build
+
+endclass : alert_handler_reg_classa_phase0_cyc
+
+// Class: alert_handler_reg_classa_phase1_cyc
+class alert_handler_reg_classa_phase1_cyc extends dv_base_reg;
+  // fields
+  rand dv_base_reg_field classa_phase1_cyc;
+
+  `uvm_object_utils(alert_handler_reg_classa_phase1_cyc)
+
+  function new(string       name = "alert_handler_reg_classa_phase1_cyc",
+               int unsigned n_bits = 32,
+               int          has_coverage = UVM_NO_COVERAGE);
+    super.new(name, n_bits, has_coverage);
+  endfunction : new
+
+  virtual function void build();
+    // create fields
+    classa_phase1_cyc = dv_base_reg_field::type_id::create("classa_phase1_cyc");
+    classa_phase1_cyc.configure(
+      .parent(this),
+      .size(32),
+      .lsb_pos(0),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+  endfunction : build
+
+endclass : alert_handler_reg_classa_phase1_cyc
+
+// Class: alert_handler_reg_classa_phase2_cyc
+class alert_handler_reg_classa_phase2_cyc extends dv_base_reg;
+  // fields
+  rand dv_base_reg_field classa_phase2_cyc;
+
+  `uvm_object_utils(alert_handler_reg_classa_phase2_cyc)
+
+  function new(string       name = "alert_handler_reg_classa_phase2_cyc",
+               int unsigned n_bits = 32,
+               int          has_coverage = UVM_NO_COVERAGE);
+    super.new(name, n_bits, has_coverage);
+  endfunction : new
+
+  virtual function void build();
+    // create fields
+    classa_phase2_cyc = dv_base_reg_field::type_id::create("classa_phase2_cyc");
+    classa_phase2_cyc.configure(
+      .parent(this),
+      .size(32),
+      .lsb_pos(0),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+  endfunction : build
+
+endclass : alert_handler_reg_classa_phase2_cyc
+
+// Class: alert_handler_reg_classa_phase3_cyc
+class alert_handler_reg_classa_phase3_cyc extends dv_base_reg;
+  // fields
+  rand dv_base_reg_field classa_phase3_cyc;
+
+  `uvm_object_utils(alert_handler_reg_classa_phase3_cyc)
+
+  function new(string       name = "alert_handler_reg_classa_phase3_cyc",
+               int unsigned n_bits = 32,
+               int          has_coverage = UVM_NO_COVERAGE);
+    super.new(name, n_bits, has_coverage);
+  endfunction : new
+
+  virtual function void build();
+    // create fields
+    classa_phase3_cyc = dv_base_reg_field::type_id::create("classa_phase3_cyc");
+    classa_phase3_cyc.configure(
+      .parent(this),
+      .size(32),
+      .lsb_pos(0),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+  endfunction : build
+
+endclass : alert_handler_reg_classa_phase3_cyc
+
+// Class: alert_handler_reg_classa_esc_cnt
+class alert_handler_reg_classa_esc_cnt extends dv_base_reg;
+  // fields
+  rand dv_base_reg_field classa_esc_cnt;
+
+  `uvm_object_utils(alert_handler_reg_classa_esc_cnt)
+
+  function new(string       name = "alert_handler_reg_classa_esc_cnt",
+               int unsigned n_bits = 32,
+               int          has_coverage = UVM_NO_COVERAGE);
+    super.new(name, n_bits, has_coverage);
+  endfunction : new
+
+  virtual function void build();
+    // create fields
+    classa_esc_cnt = dv_base_reg_field::type_id::create("classa_esc_cnt");
+    classa_esc_cnt.configure(
+      .parent(this),
+      .size(32),
+      .lsb_pos(0),
+      .access("RO"),
+      .volatile(1),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+  endfunction : build
+
+endclass : alert_handler_reg_classa_esc_cnt
+
+// Class: alert_handler_reg_classa_state
+class alert_handler_reg_classa_state extends dv_base_reg;
+  // fields
+  rand dv_base_reg_field classa_state;
+
+  `uvm_object_utils(alert_handler_reg_classa_state)
+
+  function new(string       name = "alert_handler_reg_classa_state",
+               int unsigned n_bits = 32,
+               int          has_coverage = UVM_NO_COVERAGE);
+    super.new(name, n_bits, has_coverage);
+  endfunction : new
+
+  virtual function void build();
+    // create fields
+    classa_state = dv_base_reg_field::type_id::create("classa_state");
+    classa_state.configure(
+      .parent(this),
+      .size(3),
+      .lsb_pos(0),
+      .access("RO"),
+      .volatile(1),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+  endfunction : build
+
+endclass : alert_handler_reg_classa_state
+
+// Class: alert_handler_reg_classb_ctrl
+class alert_handler_reg_classb_ctrl extends dv_base_reg;
+  // fields
+  rand dv_base_reg_field en;
+  rand dv_base_reg_field lock;
+  rand dv_base_reg_field en_e0;
+  rand dv_base_reg_field en_e1;
+  rand dv_base_reg_field en_e2;
+  rand dv_base_reg_field en_e3;
+  rand dv_base_reg_field map_e0;
+  rand dv_base_reg_field map_e1;
+  rand dv_base_reg_field map_e2;
+  rand dv_base_reg_field map_e3;
+
+  `uvm_object_utils(alert_handler_reg_classb_ctrl)
+
+  function new(string       name = "alert_handler_reg_classb_ctrl",
+               int unsigned n_bits = 32,
+               int          has_coverage = UVM_NO_COVERAGE);
+    super.new(name, n_bits, has_coverage);
+  endfunction : new
+
+  virtual function void build();
+    // create fields
+    en = dv_base_reg_field::type_id::create("en");
+    en.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(0),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    lock = dv_base_reg_field::type_id::create("lock");
+    lock.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(1),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    en_e0 = dv_base_reg_field::type_id::create("en_e0");
+    en_e0.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(2),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h1),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    en_e1 = dv_base_reg_field::type_id::create("en_e1");
+    en_e1.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(3),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h1),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    en_e2 = dv_base_reg_field::type_id::create("en_e2");
+    en_e2.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(4),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h1),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    en_e3 = dv_base_reg_field::type_id::create("en_e3");
+    en_e3.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(5),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h1),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    map_e0 = dv_base_reg_field::type_id::create("map_e0");
+    map_e0.configure(
+      .parent(this),
+      .size(2),
+      .lsb_pos(6),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    map_e1 = dv_base_reg_field::type_id::create("map_e1");
+    map_e1.configure(
+      .parent(this),
+      .size(2),
+      .lsb_pos(8),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h1),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    map_e2 = dv_base_reg_field::type_id::create("map_e2");
+    map_e2.configure(
+      .parent(this),
+      .size(2),
+      .lsb_pos(10),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h2),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    map_e3 = dv_base_reg_field::type_id::create("map_e3");
+    map_e3.configure(
+      .parent(this),
+      .size(2),
+      .lsb_pos(12),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h3),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+  endfunction : build
+
+endclass : alert_handler_reg_classb_ctrl
+
+// Class: alert_handler_reg_classb_clren
+class alert_handler_reg_classb_clren extends dv_base_reg;
+  // fields
+  rand dv_base_reg_field classb_clren;
+
+  `uvm_object_utils(alert_handler_reg_classb_clren)
+
+  function new(string       name = "alert_handler_reg_classb_clren",
+               int unsigned n_bits = 32,
+               int          has_coverage = UVM_NO_COVERAGE);
+    super.new(name, n_bits, has_coverage);
+  endfunction : new
+
+  virtual function void build();
+    // create fields
+    classb_clren = dv_base_reg_field::type_id::create("classb_clren");
+    classb_clren.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(0),
+      .access("W1C"),
+      .volatile(1),
+      .reset(32'h1),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+  endfunction : build
+
+endclass : alert_handler_reg_classb_clren
+
+// Class: alert_handler_reg_classb_clr
+class alert_handler_reg_classb_clr extends dv_base_reg;
+  // fields
+  rand dv_base_reg_field classb_clr;
+
+  `uvm_object_utils(alert_handler_reg_classb_clr)
+
+  function new(string       name = "alert_handler_reg_classb_clr",
+               int unsigned n_bits = 32,
+               int          has_coverage = UVM_NO_COVERAGE);
+    super.new(name, n_bits, has_coverage);
+  endfunction : new
+
+  virtual function void build();
+    // create fields
+    classb_clr = dv_base_reg_field::type_id::create("classb_clr");
+    classb_clr.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(0),
+      .access("WO"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+  endfunction : build
+
+endclass : alert_handler_reg_classb_clr
+
+// Class: alert_handler_reg_classb_accum_cnt
+class alert_handler_reg_classb_accum_cnt extends dv_base_reg;
+  // fields
+  rand dv_base_reg_field classb_accum_cnt;
+
+  `uvm_object_utils(alert_handler_reg_classb_accum_cnt)
+
+  function new(string       name = "alert_handler_reg_classb_accum_cnt",
+               int unsigned n_bits = 32,
+               int          has_coverage = UVM_NO_COVERAGE);
+    super.new(name, n_bits, has_coverage);
+  endfunction : new
+
+  virtual function void build();
+    // create fields
+    classb_accum_cnt = dv_base_reg_field::type_id::create("classb_accum_cnt");
+    classb_accum_cnt.configure(
+      .parent(this),
+      .size(16),
+      .lsb_pos(0),
+      .access("RO"),
+      .volatile(1),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+  endfunction : build
+
+endclass : alert_handler_reg_classb_accum_cnt
+
+// Class: alert_handler_reg_classb_accum_thresh
+class alert_handler_reg_classb_accum_thresh extends dv_base_reg;
+  // fields
+  rand dv_base_reg_field classb_accum_thresh;
+
+  `uvm_object_utils(alert_handler_reg_classb_accum_thresh)
+
+  function new(string       name = "alert_handler_reg_classb_accum_thresh",
+               int unsigned n_bits = 32,
+               int          has_coverage = UVM_NO_COVERAGE);
+    super.new(name, n_bits, has_coverage);
+  endfunction : new
+
+  virtual function void build();
+    // create fields
+    classb_accum_thresh = dv_base_reg_field::type_id::create("classb_accum_thresh");
+    classb_accum_thresh.configure(
+      .parent(this),
+      .size(16),
+      .lsb_pos(0),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+  endfunction : build
+
+endclass : alert_handler_reg_classb_accum_thresh
+
+// Class: alert_handler_reg_classb_timeout_cyc
+class alert_handler_reg_classb_timeout_cyc extends dv_base_reg;
+  // fields
+  rand dv_base_reg_field classb_timeout_cyc;
+
+  `uvm_object_utils(alert_handler_reg_classb_timeout_cyc)
+
+  function new(string       name = "alert_handler_reg_classb_timeout_cyc",
+               int unsigned n_bits = 32,
+               int          has_coverage = UVM_NO_COVERAGE);
+    super.new(name, n_bits, has_coverage);
+  endfunction : new
+
+  virtual function void build();
+    // create fields
+    classb_timeout_cyc = dv_base_reg_field::type_id::create("classb_timeout_cyc");
+    classb_timeout_cyc.configure(
+      .parent(this),
+      .size(32),
+      .lsb_pos(0),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+  endfunction : build
+
+endclass : alert_handler_reg_classb_timeout_cyc
+
+// Class: alert_handler_reg_classb_phase0_cyc
+class alert_handler_reg_classb_phase0_cyc extends dv_base_reg;
+  // fields
+  rand dv_base_reg_field classb_phase0_cyc;
+
+  `uvm_object_utils(alert_handler_reg_classb_phase0_cyc)
+
+  function new(string       name = "alert_handler_reg_classb_phase0_cyc",
+               int unsigned n_bits = 32,
+               int          has_coverage = UVM_NO_COVERAGE);
+    super.new(name, n_bits, has_coverage);
+  endfunction : new
+
+  virtual function void build();
+    // create fields
+    classb_phase0_cyc = dv_base_reg_field::type_id::create("classb_phase0_cyc");
+    classb_phase0_cyc.configure(
+      .parent(this),
+      .size(32),
+      .lsb_pos(0),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+  endfunction : build
+
+endclass : alert_handler_reg_classb_phase0_cyc
+
+// Class: alert_handler_reg_classb_phase1_cyc
+class alert_handler_reg_classb_phase1_cyc extends dv_base_reg;
+  // fields
+  rand dv_base_reg_field classb_phase1_cyc;
+
+  `uvm_object_utils(alert_handler_reg_classb_phase1_cyc)
+
+  function new(string       name = "alert_handler_reg_classb_phase1_cyc",
+               int unsigned n_bits = 32,
+               int          has_coverage = UVM_NO_COVERAGE);
+    super.new(name, n_bits, has_coverage);
+  endfunction : new
+
+  virtual function void build();
+    // create fields
+    classb_phase1_cyc = dv_base_reg_field::type_id::create("classb_phase1_cyc");
+    classb_phase1_cyc.configure(
+      .parent(this),
+      .size(32),
+      .lsb_pos(0),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+  endfunction : build
+
+endclass : alert_handler_reg_classb_phase1_cyc
+
+// Class: alert_handler_reg_classb_phase2_cyc
+class alert_handler_reg_classb_phase2_cyc extends dv_base_reg;
+  // fields
+  rand dv_base_reg_field classb_phase2_cyc;
+
+  `uvm_object_utils(alert_handler_reg_classb_phase2_cyc)
+
+  function new(string       name = "alert_handler_reg_classb_phase2_cyc",
+               int unsigned n_bits = 32,
+               int          has_coverage = UVM_NO_COVERAGE);
+    super.new(name, n_bits, has_coverage);
+  endfunction : new
+
+  virtual function void build();
+    // create fields
+    classb_phase2_cyc = dv_base_reg_field::type_id::create("classb_phase2_cyc");
+    classb_phase2_cyc.configure(
+      .parent(this),
+      .size(32),
+      .lsb_pos(0),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+  endfunction : build
+
+endclass : alert_handler_reg_classb_phase2_cyc
+
+// Class: alert_handler_reg_classb_phase3_cyc
+class alert_handler_reg_classb_phase3_cyc extends dv_base_reg;
+  // fields
+  rand dv_base_reg_field classb_phase3_cyc;
+
+  `uvm_object_utils(alert_handler_reg_classb_phase3_cyc)
+
+  function new(string       name = "alert_handler_reg_classb_phase3_cyc",
+               int unsigned n_bits = 32,
+               int          has_coverage = UVM_NO_COVERAGE);
+    super.new(name, n_bits, has_coverage);
+  endfunction : new
+
+  virtual function void build();
+    // create fields
+    classb_phase3_cyc = dv_base_reg_field::type_id::create("classb_phase3_cyc");
+    classb_phase3_cyc.configure(
+      .parent(this),
+      .size(32),
+      .lsb_pos(0),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+  endfunction : build
+
+endclass : alert_handler_reg_classb_phase3_cyc
+
+// Class: alert_handler_reg_classb_esc_cnt
+class alert_handler_reg_classb_esc_cnt extends dv_base_reg;
+  // fields
+  rand dv_base_reg_field classb_esc_cnt;
+
+  `uvm_object_utils(alert_handler_reg_classb_esc_cnt)
+
+  function new(string       name = "alert_handler_reg_classb_esc_cnt",
+               int unsigned n_bits = 32,
+               int          has_coverage = UVM_NO_COVERAGE);
+    super.new(name, n_bits, has_coverage);
+  endfunction : new
+
+  virtual function void build();
+    // create fields
+    classb_esc_cnt = dv_base_reg_field::type_id::create("classb_esc_cnt");
+    classb_esc_cnt.configure(
+      .parent(this),
+      .size(32),
+      .lsb_pos(0),
+      .access("RO"),
+      .volatile(1),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+  endfunction : build
+
+endclass : alert_handler_reg_classb_esc_cnt
+
+// Class: alert_handler_reg_classb_state
+class alert_handler_reg_classb_state extends dv_base_reg;
+  // fields
+  rand dv_base_reg_field classb_state;
+
+  `uvm_object_utils(alert_handler_reg_classb_state)
+
+  function new(string       name = "alert_handler_reg_classb_state",
+               int unsigned n_bits = 32,
+               int          has_coverage = UVM_NO_COVERAGE);
+    super.new(name, n_bits, has_coverage);
+  endfunction : new
+
+  virtual function void build();
+    // create fields
+    classb_state = dv_base_reg_field::type_id::create("classb_state");
+    classb_state.configure(
+      .parent(this),
+      .size(3),
+      .lsb_pos(0),
+      .access("RO"),
+      .volatile(1),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+  endfunction : build
+
+endclass : alert_handler_reg_classb_state
+
+// Class: alert_handler_reg_classc_ctrl
+class alert_handler_reg_classc_ctrl extends dv_base_reg;
+  // fields
+  rand dv_base_reg_field en;
+  rand dv_base_reg_field lock;
+  rand dv_base_reg_field en_e0;
+  rand dv_base_reg_field en_e1;
+  rand dv_base_reg_field en_e2;
+  rand dv_base_reg_field en_e3;
+  rand dv_base_reg_field map_e0;
+  rand dv_base_reg_field map_e1;
+  rand dv_base_reg_field map_e2;
+  rand dv_base_reg_field map_e3;
+
+  `uvm_object_utils(alert_handler_reg_classc_ctrl)
+
+  function new(string       name = "alert_handler_reg_classc_ctrl",
+               int unsigned n_bits = 32,
+               int          has_coverage = UVM_NO_COVERAGE);
+    super.new(name, n_bits, has_coverage);
+  endfunction : new
+
+  virtual function void build();
+    // create fields
+    en = dv_base_reg_field::type_id::create("en");
+    en.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(0),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    lock = dv_base_reg_field::type_id::create("lock");
+    lock.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(1),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    en_e0 = dv_base_reg_field::type_id::create("en_e0");
+    en_e0.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(2),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h1),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    en_e1 = dv_base_reg_field::type_id::create("en_e1");
+    en_e1.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(3),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h1),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    en_e2 = dv_base_reg_field::type_id::create("en_e2");
+    en_e2.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(4),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h1),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    en_e3 = dv_base_reg_field::type_id::create("en_e3");
+    en_e3.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(5),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h1),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    map_e0 = dv_base_reg_field::type_id::create("map_e0");
+    map_e0.configure(
+      .parent(this),
+      .size(2),
+      .lsb_pos(6),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    map_e1 = dv_base_reg_field::type_id::create("map_e1");
+    map_e1.configure(
+      .parent(this),
+      .size(2),
+      .lsb_pos(8),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h1),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    map_e2 = dv_base_reg_field::type_id::create("map_e2");
+    map_e2.configure(
+      .parent(this),
+      .size(2),
+      .lsb_pos(10),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h2),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    map_e3 = dv_base_reg_field::type_id::create("map_e3");
+    map_e3.configure(
+      .parent(this),
+      .size(2),
+      .lsb_pos(12),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h3),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+  endfunction : build
+
+endclass : alert_handler_reg_classc_ctrl
+
+// Class: alert_handler_reg_classc_clren
+class alert_handler_reg_classc_clren extends dv_base_reg;
+  // fields
+  rand dv_base_reg_field classc_clren;
+
+  `uvm_object_utils(alert_handler_reg_classc_clren)
+
+  function new(string       name = "alert_handler_reg_classc_clren",
+               int unsigned n_bits = 32,
+               int          has_coverage = UVM_NO_COVERAGE);
+    super.new(name, n_bits, has_coverage);
+  endfunction : new
+
+  virtual function void build();
+    // create fields
+    classc_clren = dv_base_reg_field::type_id::create("classc_clren");
+    classc_clren.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(0),
+      .access("W1C"),
+      .volatile(1),
+      .reset(32'h1),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+  endfunction : build
+
+endclass : alert_handler_reg_classc_clren
+
+// Class: alert_handler_reg_classc_clr
+class alert_handler_reg_classc_clr extends dv_base_reg;
+  // fields
+  rand dv_base_reg_field classc_clr;
+
+  `uvm_object_utils(alert_handler_reg_classc_clr)
+
+  function new(string       name = "alert_handler_reg_classc_clr",
+               int unsigned n_bits = 32,
+               int          has_coverage = UVM_NO_COVERAGE);
+    super.new(name, n_bits, has_coverage);
+  endfunction : new
+
+  virtual function void build();
+    // create fields
+    classc_clr = dv_base_reg_field::type_id::create("classc_clr");
+    classc_clr.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(0),
+      .access("WO"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+  endfunction : build
+
+endclass : alert_handler_reg_classc_clr
+
+// Class: alert_handler_reg_classc_accum_cnt
+class alert_handler_reg_classc_accum_cnt extends dv_base_reg;
+  // fields
+  rand dv_base_reg_field classc_accum_cnt;
+
+  `uvm_object_utils(alert_handler_reg_classc_accum_cnt)
+
+  function new(string       name = "alert_handler_reg_classc_accum_cnt",
+               int unsigned n_bits = 32,
+               int          has_coverage = UVM_NO_COVERAGE);
+    super.new(name, n_bits, has_coverage);
+  endfunction : new
+
+  virtual function void build();
+    // create fields
+    classc_accum_cnt = dv_base_reg_field::type_id::create("classc_accum_cnt");
+    classc_accum_cnt.configure(
+      .parent(this),
+      .size(16),
+      .lsb_pos(0),
+      .access("RO"),
+      .volatile(1),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+  endfunction : build
+
+endclass : alert_handler_reg_classc_accum_cnt
+
+// Class: alert_handler_reg_classc_accum_thresh
+class alert_handler_reg_classc_accum_thresh extends dv_base_reg;
+  // fields
+  rand dv_base_reg_field classc_accum_thresh;
+
+  `uvm_object_utils(alert_handler_reg_classc_accum_thresh)
+
+  function new(string       name = "alert_handler_reg_classc_accum_thresh",
+               int unsigned n_bits = 32,
+               int          has_coverage = UVM_NO_COVERAGE);
+    super.new(name, n_bits, has_coverage);
+  endfunction : new
+
+  virtual function void build();
+    // create fields
+    classc_accum_thresh = dv_base_reg_field::type_id::create("classc_accum_thresh");
+    classc_accum_thresh.configure(
+      .parent(this),
+      .size(16),
+      .lsb_pos(0),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+  endfunction : build
+
+endclass : alert_handler_reg_classc_accum_thresh
+
+// Class: alert_handler_reg_classc_timeout_cyc
+class alert_handler_reg_classc_timeout_cyc extends dv_base_reg;
+  // fields
+  rand dv_base_reg_field classc_timeout_cyc;
+
+  `uvm_object_utils(alert_handler_reg_classc_timeout_cyc)
+
+  function new(string       name = "alert_handler_reg_classc_timeout_cyc",
+               int unsigned n_bits = 32,
+               int          has_coverage = UVM_NO_COVERAGE);
+    super.new(name, n_bits, has_coverage);
+  endfunction : new
+
+  virtual function void build();
+    // create fields
+    classc_timeout_cyc = dv_base_reg_field::type_id::create("classc_timeout_cyc");
+    classc_timeout_cyc.configure(
+      .parent(this),
+      .size(32),
+      .lsb_pos(0),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+  endfunction : build
+
+endclass : alert_handler_reg_classc_timeout_cyc
+
+// Class: alert_handler_reg_classc_phase0_cyc
+class alert_handler_reg_classc_phase0_cyc extends dv_base_reg;
+  // fields
+  rand dv_base_reg_field classc_phase0_cyc;
+
+  `uvm_object_utils(alert_handler_reg_classc_phase0_cyc)
+
+  function new(string       name = "alert_handler_reg_classc_phase0_cyc",
+               int unsigned n_bits = 32,
+               int          has_coverage = UVM_NO_COVERAGE);
+    super.new(name, n_bits, has_coverage);
+  endfunction : new
+
+  virtual function void build();
+    // create fields
+    classc_phase0_cyc = dv_base_reg_field::type_id::create("classc_phase0_cyc");
+    classc_phase0_cyc.configure(
+      .parent(this),
+      .size(32),
+      .lsb_pos(0),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+  endfunction : build
+
+endclass : alert_handler_reg_classc_phase0_cyc
+
+// Class: alert_handler_reg_classc_phase1_cyc
+class alert_handler_reg_classc_phase1_cyc extends dv_base_reg;
+  // fields
+  rand dv_base_reg_field classc_phase1_cyc;
+
+  `uvm_object_utils(alert_handler_reg_classc_phase1_cyc)
+
+  function new(string       name = "alert_handler_reg_classc_phase1_cyc",
+               int unsigned n_bits = 32,
+               int          has_coverage = UVM_NO_COVERAGE);
+    super.new(name, n_bits, has_coverage);
+  endfunction : new
+
+  virtual function void build();
+    // create fields
+    classc_phase1_cyc = dv_base_reg_field::type_id::create("classc_phase1_cyc");
+    classc_phase1_cyc.configure(
+      .parent(this),
+      .size(32),
+      .lsb_pos(0),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+  endfunction : build
+
+endclass : alert_handler_reg_classc_phase1_cyc
+
+// Class: alert_handler_reg_classc_phase2_cyc
+class alert_handler_reg_classc_phase2_cyc extends dv_base_reg;
+  // fields
+  rand dv_base_reg_field classc_phase2_cyc;
+
+  `uvm_object_utils(alert_handler_reg_classc_phase2_cyc)
+
+  function new(string       name = "alert_handler_reg_classc_phase2_cyc",
+               int unsigned n_bits = 32,
+               int          has_coverage = UVM_NO_COVERAGE);
+    super.new(name, n_bits, has_coverage);
+  endfunction : new
+
+  virtual function void build();
+    // create fields
+    classc_phase2_cyc = dv_base_reg_field::type_id::create("classc_phase2_cyc");
+    classc_phase2_cyc.configure(
+      .parent(this),
+      .size(32),
+      .lsb_pos(0),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+  endfunction : build
+
+endclass : alert_handler_reg_classc_phase2_cyc
+
+// Class: alert_handler_reg_classc_phase3_cyc
+class alert_handler_reg_classc_phase3_cyc extends dv_base_reg;
+  // fields
+  rand dv_base_reg_field classc_phase3_cyc;
+
+  `uvm_object_utils(alert_handler_reg_classc_phase3_cyc)
+
+  function new(string       name = "alert_handler_reg_classc_phase3_cyc",
+               int unsigned n_bits = 32,
+               int          has_coverage = UVM_NO_COVERAGE);
+    super.new(name, n_bits, has_coverage);
+  endfunction : new
+
+  virtual function void build();
+    // create fields
+    classc_phase3_cyc = dv_base_reg_field::type_id::create("classc_phase3_cyc");
+    classc_phase3_cyc.configure(
+      .parent(this),
+      .size(32),
+      .lsb_pos(0),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+  endfunction : build
+
+endclass : alert_handler_reg_classc_phase3_cyc
+
+// Class: alert_handler_reg_classc_esc_cnt
+class alert_handler_reg_classc_esc_cnt extends dv_base_reg;
+  // fields
+  rand dv_base_reg_field classc_esc_cnt;
+
+  `uvm_object_utils(alert_handler_reg_classc_esc_cnt)
+
+  function new(string       name = "alert_handler_reg_classc_esc_cnt",
+               int unsigned n_bits = 32,
+               int          has_coverage = UVM_NO_COVERAGE);
+    super.new(name, n_bits, has_coverage);
+  endfunction : new
+
+  virtual function void build();
+    // create fields
+    classc_esc_cnt = dv_base_reg_field::type_id::create("classc_esc_cnt");
+    classc_esc_cnt.configure(
+      .parent(this),
+      .size(32),
+      .lsb_pos(0),
+      .access("RO"),
+      .volatile(1),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+  endfunction : build
+
+endclass : alert_handler_reg_classc_esc_cnt
+
+// Class: alert_handler_reg_classc_state
+class alert_handler_reg_classc_state extends dv_base_reg;
+  // fields
+  rand dv_base_reg_field classc_state;
+
+  `uvm_object_utils(alert_handler_reg_classc_state)
+
+  function new(string       name = "alert_handler_reg_classc_state",
+               int unsigned n_bits = 32,
+               int          has_coverage = UVM_NO_COVERAGE);
+    super.new(name, n_bits, has_coverage);
+  endfunction : new
+
+  virtual function void build();
+    // create fields
+    classc_state = dv_base_reg_field::type_id::create("classc_state");
+    classc_state.configure(
+      .parent(this),
+      .size(3),
+      .lsb_pos(0),
+      .access("RO"),
+      .volatile(1),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+  endfunction : build
+
+endclass : alert_handler_reg_classc_state
+
+// Class: alert_handler_reg_classd_ctrl
+class alert_handler_reg_classd_ctrl extends dv_base_reg;
+  // fields
+  rand dv_base_reg_field en;
+  rand dv_base_reg_field lock;
+  rand dv_base_reg_field en_e0;
+  rand dv_base_reg_field en_e1;
+  rand dv_base_reg_field en_e2;
+  rand dv_base_reg_field en_e3;
+  rand dv_base_reg_field map_e0;
+  rand dv_base_reg_field map_e1;
+  rand dv_base_reg_field map_e2;
+  rand dv_base_reg_field map_e3;
+
+  `uvm_object_utils(alert_handler_reg_classd_ctrl)
+
+  function new(string       name = "alert_handler_reg_classd_ctrl",
+               int unsigned n_bits = 32,
+               int          has_coverage = UVM_NO_COVERAGE);
+    super.new(name, n_bits, has_coverage);
+  endfunction : new
+
+  virtual function void build();
+    // create fields
+    en = dv_base_reg_field::type_id::create("en");
+    en.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(0),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    lock = dv_base_reg_field::type_id::create("lock");
+    lock.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(1),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    en_e0 = dv_base_reg_field::type_id::create("en_e0");
+    en_e0.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(2),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h1),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    en_e1 = dv_base_reg_field::type_id::create("en_e1");
+    en_e1.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(3),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h1),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    en_e2 = dv_base_reg_field::type_id::create("en_e2");
+    en_e2.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(4),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h1),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    en_e3 = dv_base_reg_field::type_id::create("en_e3");
+    en_e3.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(5),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h1),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    map_e0 = dv_base_reg_field::type_id::create("map_e0");
+    map_e0.configure(
+      .parent(this),
+      .size(2),
+      .lsb_pos(6),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    map_e1 = dv_base_reg_field::type_id::create("map_e1");
+    map_e1.configure(
+      .parent(this),
+      .size(2),
+      .lsb_pos(8),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h1),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    map_e2 = dv_base_reg_field::type_id::create("map_e2");
+    map_e2.configure(
+      .parent(this),
+      .size(2),
+      .lsb_pos(10),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h2),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    map_e3 = dv_base_reg_field::type_id::create("map_e3");
+    map_e3.configure(
+      .parent(this),
+      .size(2),
+      .lsb_pos(12),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h3),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+  endfunction : build
+
+endclass : alert_handler_reg_classd_ctrl
+
+// Class: alert_handler_reg_classd_clren
+class alert_handler_reg_classd_clren extends dv_base_reg;
+  // fields
+  rand dv_base_reg_field classd_clren;
+
+  `uvm_object_utils(alert_handler_reg_classd_clren)
+
+  function new(string       name = "alert_handler_reg_classd_clren",
+               int unsigned n_bits = 32,
+               int          has_coverage = UVM_NO_COVERAGE);
+    super.new(name, n_bits, has_coverage);
+  endfunction : new
+
+  virtual function void build();
+    // create fields
+    classd_clren = dv_base_reg_field::type_id::create("classd_clren");
+    classd_clren.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(0),
+      .access("W1C"),
+      .volatile(1),
+      .reset(32'h1),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+  endfunction : build
+
+endclass : alert_handler_reg_classd_clren
+
+// Class: alert_handler_reg_classd_clr
+class alert_handler_reg_classd_clr extends dv_base_reg;
+  // fields
+  rand dv_base_reg_field classd_clr;
+
+  `uvm_object_utils(alert_handler_reg_classd_clr)
+
+  function new(string       name = "alert_handler_reg_classd_clr",
+               int unsigned n_bits = 32,
+               int          has_coverage = UVM_NO_COVERAGE);
+    super.new(name, n_bits, has_coverage);
+  endfunction : new
+
+  virtual function void build();
+    // create fields
+    classd_clr = dv_base_reg_field::type_id::create("classd_clr");
+    classd_clr.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(0),
+      .access("WO"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+  endfunction : build
+
+endclass : alert_handler_reg_classd_clr
+
+// Class: alert_handler_reg_classd_accum_cnt
+class alert_handler_reg_classd_accum_cnt extends dv_base_reg;
+  // fields
+  rand dv_base_reg_field classd_accum_cnt;
+
+  `uvm_object_utils(alert_handler_reg_classd_accum_cnt)
+
+  function new(string       name = "alert_handler_reg_classd_accum_cnt",
+               int unsigned n_bits = 32,
+               int          has_coverage = UVM_NO_COVERAGE);
+    super.new(name, n_bits, has_coverage);
+  endfunction : new
+
+  virtual function void build();
+    // create fields
+    classd_accum_cnt = dv_base_reg_field::type_id::create("classd_accum_cnt");
+    classd_accum_cnt.configure(
+      .parent(this),
+      .size(16),
+      .lsb_pos(0),
+      .access("RO"),
+      .volatile(1),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+  endfunction : build
+
+endclass : alert_handler_reg_classd_accum_cnt
+
+// Class: alert_handler_reg_classd_accum_thresh
+class alert_handler_reg_classd_accum_thresh extends dv_base_reg;
+  // fields
+  rand dv_base_reg_field classd_accum_thresh;
+
+  `uvm_object_utils(alert_handler_reg_classd_accum_thresh)
+
+  function new(string       name = "alert_handler_reg_classd_accum_thresh",
+               int unsigned n_bits = 32,
+               int          has_coverage = UVM_NO_COVERAGE);
+    super.new(name, n_bits, has_coverage);
+  endfunction : new
+
+  virtual function void build();
+    // create fields
+    classd_accum_thresh = dv_base_reg_field::type_id::create("classd_accum_thresh");
+    classd_accum_thresh.configure(
+      .parent(this),
+      .size(16),
+      .lsb_pos(0),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+  endfunction : build
+
+endclass : alert_handler_reg_classd_accum_thresh
+
+// Class: alert_handler_reg_classd_timeout_cyc
+class alert_handler_reg_classd_timeout_cyc extends dv_base_reg;
+  // fields
+  rand dv_base_reg_field classd_timeout_cyc;
+
+  `uvm_object_utils(alert_handler_reg_classd_timeout_cyc)
+
+  function new(string       name = "alert_handler_reg_classd_timeout_cyc",
+               int unsigned n_bits = 32,
+               int          has_coverage = UVM_NO_COVERAGE);
+    super.new(name, n_bits, has_coverage);
+  endfunction : new
+
+  virtual function void build();
+    // create fields
+    classd_timeout_cyc = dv_base_reg_field::type_id::create("classd_timeout_cyc");
+    classd_timeout_cyc.configure(
+      .parent(this),
+      .size(32),
+      .lsb_pos(0),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+  endfunction : build
+
+endclass : alert_handler_reg_classd_timeout_cyc
+
+// Class: alert_handler_reg_classd_phase0_cyc
+class alert_handler_reg_classd_phase0_cyc extends dv_base_reg;
+  // fields
+  rand dv_base_reg_field classd_phase0_cyc;
+
+  `uvm_object_utils(alert_handler_reg_classd_phase0_cyc)
+
+  function new(string       name = "alert_handler_reg_classd_phase0_cyc",
+               int unsigned n_bits = 32,
+               int          has_coverage = UVM_NO_COVERAGE);
+    super.new(name, n_bits, has_coverage);
+  endfunction : new
+
+  virtual function void build();
+    // create fields
+    classd_phase0_cyc = dv_base_reg_field::type_id::create("classd_phase0_cyc");
+    classd_phase0_cyc.configure(
+      .parent(this),
+      .size(32),
+      .lsb_pos(0),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+  endfunction : build
+
+endclass : alert_handler_reg_classd_phase0_cyc
+
+// Class: alert_handler_reg_classd_phase1_cyc
+class alert_handler_reg_classd_phase1_cyc extends dv_base_reg;
+  // fields
+  rand dv_base_reg_field classd_phase1_cyc;
+
+  `uvm_object_utils(alert_handler_reg_classd_phase1_cyc)
+
+  function new(string       name = "alert_handler_reg_classd_phase1_cyc",
+               int unsigned n_bits = 32,
+               int          has_coverage = UVM_NO_COVERAGE);
+    super.new(name, n_bits, has_coverage);
+  endfunction : new
+
+  virtual function void build();
+    // create fields
+    classd_phase1_cyc = dv_base_reg_field::type_id::create("classd_phase1_cyc");
+    classd_phase1_cyc.configure(
+      .parent(this),
+      .size(32),
+      .lsb_pos(0),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+  endfunction : build
+
+endclass : alert_handler_reg_classd_phase1_cyc
+
+// Class: alert_handler_reg_classd_phase2_cyc
+class alert_handler_reg_classd_phase2_cyc extends dv_base_reg;
+  // fields
+  rand dv_base_reg_field classd_phase2_cyc;
+
+  `uvm_object_utils(alert_handler_reg_classd_phase2_cyc)
+
+  function new(string       name = "alert_handler_reg_classd_phase2_cyc",
+               int unsigned n_bits = 32,
+               int          has_coverage = UVM_NO_COVERAGE);
+    super.new(name, n_bits, has_coverage);
+  endfunction : new
+
+  virtual function void build();
+    // create fields
+    classd_phase2_cyc = dv_base_reg_field::type_id::create("classd_phase2_cyc");
+    classd_phase2_cyc.configure(
+      .parent(this),
+      .size(32),
+      .lsb_pos(0),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+  endfunction : build
+
+endclass : alert_handler_reg_classd_phase2_cyc
+
+// Class: alert_handler_reg_classd_phase3_cyc
+class alert_handler_reg_classd_phase3_cyc extends dv_base_reg;
+  // fields
+  rand dv_base_reg_field classd_phase3_cyc;
+
+  `uvm_object_utils(alert_handler_reg_classd_phase3_cyc)
+
+  function new(string       name = "alert_handler_reg_classd_phase3_cyc",
+               int unsigned n_bits = 32,
+               int          has_coverage = UVM_NO_COVERAGE);
+    super.new(name, n_bits, has_coverage);
+  endfunction : new
+
+  virtual function void build();
+    // create fields
+    classd_phase3_cyc = dv_base_reg_field::type_id::create("classd_phase3_cyc");
+    classd_phase3_cyc.configure(
+      .parent(this),
+      .size(32),
+      .lsb_pos(0),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+  endfunction : build
+
+endclass : alert_handler_reg_classd_phase3_cyc
+
+// Class: alert_handler_reg_classd_esc_cnt
+class alert_handler_reg_classd_esc_cnt extends dv_base_reg;
+  // fields
+  rand dv_base_reg_field classd_esc_cnt;
+
+  `uvm_object_utils(alert_handler_reg_classd_esc_cnt)
+
+  function new(string       name = "alert_handler_reg_classd_esc_cnt",
+               int unsigned n_bits = 32,
+               int          has_coverage = UVM_NO_COVERAGE);
+    super.new(name, n_bits, has_coverage);
+  endfunction : new
+
+  virtual function void build();
+    // create fields
+    classd_esc_cnt = dv_base_reg_field::type_id::create("classd_esc_cnt");
+    classd_esc_cnt.configure(
+      .parent(this),
+      .size(32),
+      .lsb_pos(0),
+      .access("RO"),
+      .volatile(1),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+  endfunction : build
+
+endclass : alert_handler_reg_classd_esc_cnt
+
+// Class: alert_handler_reg_classd_state
+class alert_handler_reg_classd_state extends dv_base_reg;
+  // fields
+  rand dv_base_reg_field classd_state;
+
+  `uvm_object_utils(alert_handler_reg_classd_state)
+
+  function new(string       name = "alert_handler_reg_classd_state",
+               int unsigned n_bits = 32,
+               int          has_coverage = UVM_NO_COVERAGE);
+    super.new(name, n_bits, has_coverage);
+  endfunction : new
+
+  virtual function void build();
+    // create fields
+    classd_state = dv_base_reg_field::type_id::create("classd_state");
+    classd_state.configure(
+      .parent(this),
+      .size(3),
+      .lsb_pos(0),
+      .access("RO"),
+      .volatile(1),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+  endfunction : build
+
+endclass : alert_handler_reg_classd_state
+
+// Class: alert_handler_reg_block
+class alert_handler_reg_block extends dv_base_reg_block;
+  // registers
+  rand alert_handler_reg_intr_state intr_state;
+  rand alert_handler_reg_intr_enable intr_enable;
+  rand alert_handler_reg_intr_test intr_test;
+  rand alert_handler_reg_regen regen;
+  rand alert_handler_reg_ping_timeout_cyc ping_timeout_cyc;
+  rand alert_handler_reg_alert_en alert_en;
+  rand alert_handler_reg_alert_class alert_class;
+  rand alert_handler_reg_alert_cause alert_cause;
+  rand alert_handler_reg_loc_alert_en loc_alert_en;
+  rand alert_handler_reg_loc_alert_class loc_alert_class;
+  rand alert_handler_reg_loc_alert_cause loc_alert_cause;
+  rand alert_handler_reg_classa_ctrl classa_ctrl;
+  rand alert_handler_reg_classa_clren classa_clren;
+  rand alert_handler_reg_classa_clr classa_clr;
+  rand alert_handler_reg_classa_accum_cnt classa_accum_cnt;
+  rand alert_handler_reg_classa_accum_thresh classa_accum_thresh;
+  rand alert_handler_reg_classa_timeout_cyc classa_timeout_cyc;
+  rand alert_handler_reg_classa_phase0_cyc classa_phase0_cyc;
+  rand alert_handler_reg_classa_phase1_cyc classa_phase1_cyc;
+  rand alert_handler_reg_classa_phase2_cyc classa_phase2_cyc;
+  rand alert_handler_reg_classa_phase3_cyc classa_phase3_cyc;
+  rand alert_handler_reg_classa_esc_cnt classa_esc_cnt;
+  rand alert_handler_reg_classa_state classa_state;
+  rand alert_handler_reg_classb_ctrl classb_ctrl;
+  rand alert_handler_reg_classb_clren classb_clren;
+  rand alert_handler_reg_classb_clr classb_clr;
+  rand alert_handler_reg_classb_accum_cnt classb_accum_cnt;
+  rand alert_handler_reg_classb_accum_thresh classb_accum_thresh;
+  rand alert_handler_reg_classb_timeout_cyc classb_timeout_cyc;
+  rand alert_handler_reg_classb_phase0_cyc classb_phase0_cyc;
+  rand alert_handler_reg_classb_phase1_cyc classb_phase1_cyc;
+  rand alert_handler_reg_classb_phase2_cyc classb_phase2_cyc;
+  rand alert_handler_reg_classb_phase3_cyc classb_phase3_cyc;
+  rand alert_handler_reg_classb_esc_cnt classb_esc_cnt;
+  rand alert_handler_reg_classb_state classb_state;
+  rand alert_handler_reg_classc_ctrl classc_ctrl;
+  rand alert_handler_reg_classc_clren classc_clren;
+  rand alert_handler_reg_classc_clr classc_clr;
+  rand alert_handler_reg_classc_accum_cnt classc_accum_cnt;
+  rand alert_handler_reg_classc_accum_thresh classc_accum_thresh;
+  rand alert_handler_reg_classc_timeout_cyc classc_timeout_cyc;
+  rand alert_handler_reg_classc_phase0_cyc classc_phase0_cyc;
+  rand alert_handler_reg_classc_phase1_cyc classc_phase1_cyc;
+  rand alert_handler_reg_classc_phase2_cyc classc_phase2_cyc;
+  rand alert_handler_reg_classc_phase3_cyc classc_phase3_cyc;
+  rand alert_handler_reg_classc_esc_cnt classc_esc_cnt;
+  rand alert_handler_reg_classc_state classc_state;
+  rand alert_handler_reg_classd_ctrl classd_ctrl;
+  rand alert_handler_reg_classd_clren classd_clren;
+  rand alert_handler_reg_classd_clr classd_clr;
+  rand alert_handler_reg_classd_accum_cnt classd_accum_cnt;
+  rand alert_handler_reg_classd_accum_thresh classd_accum_thresh;
+  rand alert_handler_reg_classd_timeout_cyc classd_timeout_cyc;
+  rand alert_handler_reg_classd_phase0_cyc classd_phase0_cyc;
+  rand alert_handler_reg_classd_phase1_cyc classd_phase1_cyc;
+  rand alert_handler_reg_classd_phase2_cyc classd_phase2_cyc;
+  rand alert_handler_reg_classd_phase3_cyc classd_phase3_cyc;
+  rand alert_handler_reg_classd_esc_cnt classd_esc_cnt;
+  rand alert_handler_reg_classd_state classd_state;
+
+  `uvm_object_utils(alert_handler_reg_block)
+
+  function new(string name = "alert_handler_reg_block",
+               int    has_coverage = UVM_NO_COVERAGE);
+    super.new(name, has_coverage);
+  endfunction : new
+
+  virtual function void build(uvm_reg_addr_t base_addr);
+    // create default map
+    this.default_map = create_map(.name("default_map"),
+                                  .base_addr(base_addr),
+                                  .n_bytes(4),
+                                  .endian(UVM_LITTLE_ENDIAN));
+
+    // create registers
+    intr_state = alert_handler_reg_intr_state::type_id::create("intr_state");
+    intr_state.configure(.blk_parent(this));
+    intr_state.build();
+    default_map.add_reg(.rg(intr_state),
+                        .offset(32'h0),
+                        .rights("RW"));
+    intr_enable = alert_handler_reg_intr_enable::type_id::create("intr_enable");
+    intr_enable.configure(.blk_parent(this));
+    intr_enable.build();
+    default_map.add_reg(.rg(intr_enable),
+                        .offset(32'h4),
+                        .rights("RW"));
+    intr_test = alert_handler_reg_intr_test::type_id::create("intr_test");
+    intr_test.configure(.blk_parent(this));
+    intr_test.build();
+    default_map.add_reg(.rg(intr_test),
+                        .offset(32'h8),
+                        .rights("WO"));
+    regen = alert_handler_reg_regen::type_id::create("regen");
+    regen.configure(.blk_parent(this));
+    regen.build();
+    default_map.add_reg(.rg(regen),
+                        .offset(32'hc),
+                        .rights("RW"));
+    ping_timeout_cyc = alert_handler_reg_ping_timeout_cyc::type_id::create("ping_timeout_cyc");
+    ping_timeout_cyc.configure(.blk_parent(this));
+    ping_timeout_cyc.build();
+    default_map.add_reg(.rg(ping_timeout_cyc),
+                        .offset(32'h10),
+                        .rights("RW"));
+    alert_en = alert_handler_reg_alert_en::type_id::create("alert_en");
+    alert_en.configure(.blk_parent(this));
+    alert_en.build();
+    default_map.add_reg(.rg(alert_en),
+                        .offset(32'h14),
+                        .rights("RW"));
+    alert_class = alert_handler_reg_alert_class::type_id::create("alert_class");
+    alert_class.configure(.blk_parent(this));
+    alert_class.build();
+    default_map.add_reg(.rg(alert_class),
+                        .offset(32'h18),
+                        .rights("RW"));
+    alert_cause = alert_handler_reg_alert_cause::type_id::create("alert_cause");
+    alert_cause.configure(.blk_parent(this));
+    alert_cause.build();
+    default_map.add_reg(.rg(alert_cause),
+                        .offset(32'h1c),
+                        .rights("RW"));
+    loc_alert_en = alert_handler_reg_loc_alert_en::type_id::create("loc_alert_en");
+    loc_alert_en.configure(.blk_parent(this));
+    loc_alert_en.build();
+    default_map.add_reg(.rg(loc_alert_en),
+                        .offset(32'h20),
+                        .rights("RW"));
+    loc_alert_class = alert_handler_reg_loc_alert_class::type_id::create("loc_alert_class");
+    loc_alert_class.configure(.blk_parent(this));
+    loc_alert_class.build();
+    default_map.add_reg(.rg(loc_alert_class),
+                        .offset(32'h24),
+                        .rights("RW"));
+    loc_alert_cause = alert_handler_reg_loc_alert_cause::type_id::create("loc_alert_cause");
+    loc_alert_cause.configure(.blk_parent(this));
+    loc_alert_cause.build();
+    default_map.add_reg(.rg(loc_alert_cause),
+                        .offset(32'h28),
+                        .rights("RW"));
+    classa_ctrl = alert_handler_reg_classa_ctrl::type_id::create("classa_ctrl");
+    classa_ctrl.configure(.blk_parent(this));
+    classa_ctrl.build();
+    default_map.add_reg(.rg(classa_ctrl),
+                        .offset(32'h2c),
+                        .rights("RW"));
+    classa_clren = alert_handler_reg_classa_clren::type_id::create("classa_clren");
+    classa_clren.configure(.blk_parent(this));
+    classa_clren.build();
+    default_map.add_reg(.rg(classa_clren),
+                        .offset(32'h30),
+                        .rights("RW"));
+    classa_clr = alert_handler_reg_classa_clr::type_id::create("classa_clr");
+    classa_clr.configure(.blk_parent(this));
+    classa_clr.build();
+    default_map.add_reg(.rg(classa_clr),
+                        .offset(32'h34),
+                        .rights("WO"));
+    classa_accum_cnt = alert_handler_reg_classa_accum_cnt::type_id::create("classa_accum_cnt");
+    classa_accum_cnt.configure(.blk_parent(this));
+    classa_accum_cnt.build();
+    default_map.add_reg(.rg(classa_accum_cnt),
+                        .offset(32'h38),
+                        .rights("RO"));
+    classa_accum_thresh = alert_handler_reg_classa_accum_thresh::type_id::create("classa_accum_thresh");
+    classa_accum_thresh.configure(.blk_parent(this));
+    classa_accum_thresh.build();
+    default_map.add_reg(.rg(classa_accum_thresh),
+                        .offset(32'h3c),
+                        .rights("RW"));
+    classa_timeout_cyc = alert_handler_reg_classa_timeout_cyc::type_id::create("classa_timeout_cyc");
+    classa_timeout_cyc.configure(.blk_parent(this));
+    classa_timeout_cyc.build();
+    default_map.add_reg(.rg(classa_timeout_cyc),
+                        .offset(32'h40),
+                        .rights("RW"));
+    classa_phase0_cyc = alert_handler_reg_classa_phase0_cyc::type_id::create("classa_phase0_cyc");
+    classa_phase0_cyc.configure(.blk_parent(this));
+    classa_phase0_cyc.build();
+    default_map.add_reg(.rg(classa_phase0_cyc),
+                        .offset(32'h44),
+                        .rights("RW"));
+    classa_phase1_cyc = alert_handler_reg_classa_phase1_cyc::type_id::create("classa_phase1_cyc");
+    classa_phase1_cyc.configure(.blk_parent(this));
+    classa_phase1_cyc.build();
+    default_map.add_reg(.rg(classa_phase1_cyc),
+                        .offset(32'h48),
+                        .rights("RW"));
+    classa_phase2_cyc = alert_handler_reg_classa_phase2_cyc::type_id::create("classa_phase2_cyc");
+    classa_phase2_cyc.configure(.blk_parent(this));
+    classa_phase2_cyc.build();
+    default_map.add_reg(.rg(classa_phase2_cyc),
+                        .offset(32'h4c),
+                        .rights("RW"));
+    classa_phase3_cyc = alert_handler_reg_classa_phase3_cyc::type_id::create("classa_phase3_cyc");
+    classa_phase3_cyc.configure(.blk_parent(this));
+    classa_phase3_cyc.build();
+    default_map.add_reg(.rg(classa_phase3_cyc),
+                        .offset(32'h50),
+                        .rights("RW"));
+    classa_esc_cnt = alert_handler_reg_classa_esc_cnt::type_id::create("classa_esc_cnt");
+    classa_esc_cnt.configure(.blk_parent(this));
+    classa_esc_cnt.build();
+    default_map.add_reg(.rg(classa_esc_cnt),
+                        .offset(32'h54),
+                        .rights("RO"));
+    classa_state = alert_handler_reg_classa_state::type_id::create("classa_state");
+    classa_state.configure(.blk_parent(this));
+    classa_state.build();
+    default_map.add_reg(.rg(classa_state),
+                        .offset(32'h58),
+                        .rights("RO"));
+    classb_ctrl = alert_handler_reg_classb_ctrl::type_id::create("classb_ctrl");
+    classb_ctrl.configure(.blk_parent(this));
+    classb_ctrl.build();
+    default_map.add_reg(.rg(classb_ctrl),
+                        .offset(32'h5c),
+                        .rights("RW"));
+    classb_clren = alert_handler_reg_classb_clren::type_id::create("classb_clren");
+    classb_clren.configure(.blk_parent(this));
+    classb_clren.build();
+    default_map.add_reg(.rg(classb_clren),
+                        .offset(32'h60),
+                        .rights("RW"));
+    classb_clr = alert_handler_reg_classb_clr::type_id::create("classb_clr");
+    classb_clr.configure(.blk_parent(this));
+    classb_clr.build();
+    default_map.add_reg(.rg(classb_clr),
+                        .offset(32'h64),
+                        .rights("WO"));
+    classb_accum_cnt = alert_handler_reg_classb_accum_cnt::type_id::create("classb_accum_cnt");
+    classb_accum_cnt.configure(.blk_parent(this));
+    classb_accum_cnt.build();
+    default_map.add_reg(.rg(classb_accum_cnt),
+                        .offset(32'h68),
+                        .rights("RO"));
+    classb_accum_thresh = alert_handler_reg_classb_accum_thresh::type_id::create("classb_accum_thresh");
+    classb_accum_thresh.configure(.blk_parent(this));
+    classb_accum_thresh.build();
+    default_map.add_reg(.rg(classb_accum_thresh),
+                        .offset(32'h6c),
+                        .rights("RW"));
+    classb_timeout_cyc = alert_handler_reg_classb_timeout_cyc::type_id::create("classb_timeout_cyc");
+    classb_timeout_cyc.configure(.blk_parent(this));
+    classb_timeout_cyc.build();
+    default_map.add_reg(.rg(classb_timeout_cyc),
+                        .offset(32'h70),
+                        .rights("RW"));
+    classb_phase0_cyc = alert_handler_reg_classb_phase0_cyc::type_id::create("classb_phase0_cyc");
+    classb_phase0_cyc.configure(.blk_parent(this));
+    classb_phase0_cyc.build();
+    default_map.add_reg(.rg(classb_phase0_cyc),
+                        .offset(32'h74),
+                        .rights("RW"));
+    classb_phase1_cyc = alert_handler_reg_classb_phase1_cyc::type_id::create("classb_phase1_cyc");
+    classb_phase1_cyc.configure(.blk_parent(this));
+    classb_phase1_cyc.build();
+    default_map.add_reg(.rg(classb_phase1_cyc),
+                        .offset(32'h78),
+                        .rights("RW"));
+    classb_phase2_cyc = alert_handler_reg_classb_phase2_cyc::type_id::create("classb_phase2_cyc");
+    classb_phase2_cyc.configure(.blk_parent(this));
+    classb_phase2_cyc.build();
+    default_map.add_reg(.rg(classb_phase2_cyc),
+                        .offset(32'h7c),
+                        .rights("RW"));
+    classb_phase3_cyc = alert_handler_reg_classb_phase3_cyc::type_id::create("classb_phase3_cyc");
+    classb_phase3_cyc.configure(.blk_parent(this));
+    classb_phase3_cyc.build();
+    default_map.add_reg(.rg(classb_phase3_cyc),
+                        .offset(32'h80),
+                        .rights("RW"));
+    classb_esc_cnt = alert_handler_reg_classb_esc_cnt::type_id::create("classb_esc_cnt");
+    classb_esc_cnt.configure(.blk_parent(this));
+    classb_esc_cnt.build();
+    default_map.add_reg(.rg(classb_esc_cnt),
+                        .offset(32'h84),
+                        .rights("RO"));
+    classb_state = alert_handler_reg_classb_state::type_id::create("classb_state");
+    classb_state.configure(.blk_parent(this));
+    classb_state.build();
+    default_map.add_reg(.rg(classb_state),
+                        .offset(32'h88),
+                        .rights("RO"));
+    classc_ctrl = alert_handler_reg_classc_ctrl::type_id::create("classc_ctrl");
+    classc_ctrl.configure(.blk_parent(this));
+    classc_ctrl.build();
+    default_map.add_reg(.rg(classc_ctrl),
+                        .offset(32'h8c),
+                        .rights("RW"));
+    classc_clren = alert_handler_reg_classc_clren::type_id::create("classc_clren");
+    classc_clren.configure(.blk_parent(this));
+    classc_clren.build();
+    default_map.add_reg(.rg(classc_clren),
+                        .offset(32'h90),
+                        .rights("RW"));
+    classc_clr = alert_handler_reg_classc_clr::type_id::create("classc_clr");
+    classc_clr.configure(.blk_parent(this));
+    classc_clr.build();
+    default_map.add_reg(.rg(classc_clr),
+                        .offset(32'h94),
+                        .rights("WO"));
+    classc_accum_cnt = alert_handler_reg_classc_accum_cnt::type_id::create("classc_accum_cnt");
+    classc_accum_cnt.configure(.blk_parent(this));
+    classc_accum_cnt.build();
+    default_map.add_reg(.rg(classc_accum_cnt),
+                        .offset(32'h98),
+                        .rights("RO"));
+    classc_accum_thresh = alert_handler_reg_classc_accum_thresh::type_id::create("classc_accum_thresh");
+    classc_accum_thresh.configure(.blk_parent(this));
+    classc_accum_thresh.build();
+    default_map.add_reg(.rg(classc_accum_thresh),
+                        .offset(32'h9c),
+                        .rights("RW"));
+    classc_timeout_cyc = alert_handler_reg_classc_timeout_cyc::type_id::create("classc_timeout_cyc");
+    classc_timeout_cyc.configure(.blk_parent(this));
+    classc_timeout_cyc.build();
+    default_map.add_reg(.rg(classc_timeout_cyc),
+                        .offset(32'ha0),
+                        .rights("RW"));
+    classc_phase0_cyc = alert_handler_reg_classc_phase0_cyc::type_id::create("classc_phase0_cyc");
+    classc_phase0_cyc.configure(.blk_parent(this));
+    classc_phase0_cyc.build();
+    default_map.add_reg(.rg(classc_phase0_cyc),
+                        .offset(32'ha4),
+                        .rights("RW"));
+    classc_phase1_cyc = alert_handler_reg_classc_phase1_cyc::type_id::create("classc_phase1_cyc");
+    classc_phase1_cyc.configure(.blk_parent(this));
+    classc_phase1_cyc.build();
+    default_map.add_reg(.rg(classc_phase1_cyc),
+                        .offset(32'ha8),
+                        .rights("RW"));
+    classc_phase2_cyc = alert_handler_reg_classc_phase2_cyc::type_id::create("classc_phase2_cyc");
+    classc_phase2_cyc.configure(.blk_parent(this));
+    classc_phase2_cyc.build();
+    default_map.add_reg(.rg(classc_phase2_cyc),
+                        .offset(32'hac),
+                        .rights("RW"));
+    classc_phase3_cyc = alert_handler_reg_classc_phase3_cyc::type_id::create("classc_phase3_cyc");
+    classc_phase3_cyc.configure(.blk_parent(this));
+    classc_phase3_cyc.build();
+    default_map.add_reg(.rg(classc_phase3_cyc),
+                        .offset(32'hb0),
+                        .rights("RW"));
+    classc_esc_cnt = alert_handler_reg_classc_esc_cnt::type_id::create("classc_esc_cnt");
+    classc_esc_cnt.configure(.blk_parent(this));
+    classc_esc_cnt.build();
+    default_map.add_reg(.rg(classc_esc_cnt),
+                        .offset(32'hb4),
+                        .rights("RO"));
+    classc_state = alert_handler_reg_classc_state::type_id::create("classc_state");
+    classc_state.configure(.blk_parent(this));
+    classc_state.build();
+    default_map.add_reg(.rg(classc_state),
+                        .offset(32'hb8),
+                        .rights("RO"));
+    classd_ctrl = alert_handler_reg_classd_ctrl::type_id::create("classd_ctrl");
+    classd_ctrl.configure(.blk_parent(this));
+    classd_ctrl.build();
+    default_map.add_reg(.rg(classd_ctrl),
+                        .offset(32'hbc),
+                        .rights("RW"));
+    classd_clren = alert_handler_reg_classd_clren::type_id::create("classd_clren");
+    classd_clren.configure(.blk_parent(this));
+    classd_clren.build();
+    default_map.add_reg(.rg(classd_clren),
+                        .offset(32'hc0),
+                        .rights("RW"));
+    classd_clr = alert_handler_reg_classd_clr::type_id::create("classd_clr");
+    classd_clr.configure(.blk_parent(this));
+    classd_clr.build();
+    default_map.add_reg(.rg(classd_clr),
+                        .offset(32'hc4),
+                        .rights("WO"));
+    classd_accum_cnt = alert_handler_reg_classd_accum_cnt::type_id::create("classd_accum_cnt");
+    classd_accum_cnt.configure(.blk_parent(this));
+    classd_accum_cnt.build();
+    default_map.add_reg(.rg(classd_accum_cnt),
+                        .offset(32'hc8),
+                        .rights("RO"));
+    classd_accum_thresh = alert_handler_reg_classd_accum_thresh::type_id::create("classd_accum_thresh");
+    classd_accum_thresh.configure(.blk_parent(this));
+    classd_accum_thresh.build();
+    default_map.add_reg(.rg(classd_accum_thresh),
+                        .offset(32'hcc),
+                        .rights("RW"));
+    classd_timeout_cyc = alert_handler_reg_classd_timeout_cyc::type_id::create("classd_timeout_cyc");
+    classd_timeout_cyc.configure(.blk_parent(this));
+    classd_timeout_cyc.build();
+    default_map.add_reg(.rg(classd_timeout_cyc),
+                        .offset(32'hd0),
+                        .rights("RW"));
+    classd_phase0_cyc = alert_handler_reg_classd_phase0_cyc::type_id::create("classd_phase0_cyc");
+    classd_phase0_cyc.configure(.blk_parent(this));
+    classd_phase0_cyc.build();
+    default_map.add_reg(.rg(classd_phase0_cyc),
+                        .offset(32'hd4),
+                        .rights("RW"));
+    classd_phase1_cyc = alert_handler_reg_classd_phase1_cyc::type_id::create("classd_phase1_cyc");
+    classd_phase1_cyc.configure(.blk_parent(this));
+    classd_phase1_cyc.build();
+    default_map.add_reg(.rg(classd_phase1_cyc),
+                        .offset(32'hd8),
+                        .rights("RW"));
+    classd_phase2_cyc = alert_handler_reg_classd_phase2_cyc::type_id::create("classd_phase2_cyc");
+    classd_phase2_cyc.configure(.blk_parent(this));
+    classd_phase2_cyc.build();
+    default_map.add_reg(.rg(classd_phase2_cyc),
+                        .offset(32'hdc),
+                        .rights("RW"));
+    classd_phase3_cyc = alert_handler_reg_classd_phase3_cyc::type_id::create("classd_phase3_cyc");
+    classd_phase3_cyc.configure(.blk_parent(this));
+    classd_phase3_cyc.build();
+    default_map.add_reg(.rg(classd_phase3_cyc),
+                        .offset(32'he0),
+                        .rights("RW"));
+    classd_esc_cnt = alert_handler_reg_classd_esc_cnt::type_id::create("classd_esc_cnt");
+    classd_esc_cnt.configure(.blk_parent(this));
+    classd_esc_cnt.build();
+    default_map.add_reg(.rg(classd_esc_cnt),
+                        .offset(32'he4),
+                        .rights("RO"));
+    classd_state = alert_handler_reg_classd_state::type_id::create("classd_state");
+    classd_state.configure(.blk_parent(this));
+    classd_state.build();
+    default_map.add_reg(.rg(classd_state),
+                        .offset(32'he8),
+                        .rights("RO"));
+  endfunction : build
+
+endclass : alert_handler_reg_block
+
+`endif
+
+// Block: nmi_gen
+`ifndef NMI_GEN_REG_BLOCK__SV
+`define NMI_GEN_REG_BLOCK__SV
+
+// Forward declare all register/memory/block classes
+typedef class nmi_gen_reg_intr_state;
+typedef class nmi_gen_reg_intr_enable;
+typedef class nmi_gen_reg_intr_test;
+typedef class nmi_gen_reg_block;
+
+// Class: nmi_gen_reg_intr_state
+class nmi_gen_reg_intr_state extends dv_base_reg;
+  // fields
+  rand dv_base_reg_field esc0;
+  rand dv_base_reg_field esc1;
+  rand dv_base_reg_field esc2;
+  rand dv_base_reg_field esc3;
+
+  `uvm_object_utils(nmi_gen_reg_intr_state)
+
+  function new(string       name = "nmi_gen_reg_intr_state",
+               int unsigned n_bits = 32,
+               int          has_coverage = UVM_NO_COVERAGE);
+    super.new(name, n_bits, has_coverage);
+  endfunction : new
+
+  virtual function void build();
+    // create fields
+    esc0 = dv_base_reg_field::type_id::create("esc0");
+    esc0.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(0),
+      .access("W1C"),
+      .volatile(1),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    esc1 = dv_base_reg_field::type_id::create("esc1");
+    esc1.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(1),
+      .access("W1C"),
+      .volatile(1),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    esc2 = dv_base_reg_field::type_id::create("esc2");
+    esc2.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(2),
+      .access("W1C"),
+      .volatile(1),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    esc3 = dv_base_reg_field::type_id::create("esc3");
+    esc3.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(3),
+      .access("W1C"),
+      .volatile(1),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+  endfunction : build
+
+endclass : nmi_gen_reg_intr_state
+
+// Class: nmi_gen_reg_intr_enable
+class nmi_gen_reg_intr_enable extends dv_base_reg;
+  // fields
+  rand dv_base_reg_field esc0;
+  rand dv_base_reg_field esc1;
+  rand dv_base_reg_field esc2;
+  rand dv_base_reg_field esc3;
+
+  `uvm_object_utils(nmi_gen_reg_intr_enable)
+
+  function new(string       name = "nmi_gen_reg_intr_enable",
+               int unsigned n_bits = 32,
+               int          has_coverage = UVM_NO_COVERAGE);
+    super.new(name, n_bits, has_coverage);
+  endfunction : new
+
+  virtual function void build();
+    // create fields
+    esc0 = dv_base_reg_field::type_id::create("esc0");
+    esc0.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(0),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    esc1 = dv_base_reg_field::type_id::create("esc1");
+    esc1.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(1),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    esc2 = dv_base_reg_field::type_id::create("esc2");
+    esc2.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(2),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    esc3 = dv_base_reg_field::type_id::create("esc3");
+    esc3.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(3),
+      .access("RW"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+  endfunction : build
+
+endclass : nmi_gen_reg_intr_enable
+
+// Class: nmi_gen_reg_intr_test
+class nmi_gen_reg_intr_test extends dv_base_reg;
+  // fields
+  rand dv_base_reg_field esc0;
+  rand dv_base_reg_field esc1;
+  rand dv_base_reg_field esc2;
+  rand dv_base_reg_field esc3;
+
+  `uvm_object_utils(nmi_gen_reg_intr_test)
+
+  function new(string       name = "nmi_gen_reg_intr_test",
+               int unsigned n_bits = 32,
+               int          has_coverage = UVM_NO_COVERAGE);
+    super.new(name, n_bits, has_coverage);
+  endfunction : new
+
+  virtual function void build();
+    // create fields
+    esc0 = dv_base_reg_field::type_id::create("esc0");
+    esc0.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(0),
+      .access("WO"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    esc1 = dv_base_reg_field::type_id::create("esc1");
+    esc1.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(1),
+      .access("WO"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    esc2 = dv_base_reg_field::type_id::create("esc2");
+    esc2.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(2),
+      .access("WO"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+    esc3 = dv_base_reg_field::type_id::create("esc3");
+    esc3.configure(
+      .parent(this),
+      .size(1),
+      .lsb_pos(3),
+      .access("WO"),
+      .volatile(0),
+      .reset(32'h0),
+      .has_reset(1),
+      .is_rand(1),
+      .individually_accessible(1));
+  endfunction : build
+
+endclass : nmi_gen_reg_intr_test
+
+// Class: nmi_gen_reg_block
+class nmi_gen_reg_block extends dv_base_reg_block;
+  // registers
+  rand nmi_gen_reg_intr_state intr_state;
+  rand nmi_gen_reg_intr_enable intr_enable;
+  rand nmi_gen_reg_intr_test intr_test;
+
+  `uvm_object_utils(nmi_gen_reg_block)
+
+  function new(string name = "nmi_gen_reg_block",
+               int    has_coverage = UVM_NO_COVERAGE);
+    super.new(name, has_coverage);
+  endfunction : new
+
+  virtual function void build(uvm_reg_addr_t base_addr);
+    // create default map
+    this.default_map = create_map(.name("default_map"),
+                                  .base_addr(base_addr),
+                                  .n_bytes(4),
+                                  .endian(UVM_LITTLE_ENDIAN));
+
+    // create registers
+    intr_state = nmi_gen_reg_intr_state::type_id::create("intr_state");
+    intr_state.configure(.blk_parent(this));
+    intr_state.build();
+    default_map.add_reg(.rg(intr_state),
+                        .offset(32'h0),
+                        .rights("RW"));
+    intr_enable = nmi_gen_reg_intr_enable::type_id::create("intr_enable");
+    intr_enable.configure(.blk_parent(this));
+    intr_enable.build();
+    default_map.add_reg(.rg(intr_enable),
+                        .offset(32'h4),
+                        .rights("RW"));
+    intr_test = nmi_gen_reg_intr_test::type_id::create("intr_test");
+    intr_test.configure(.blk_parent(this));
+    intr_test.build();
+    default_map.add_reg(.rg(intr_test),
+                        .offset(32'h8),
+                        .rights("WO"));
+  endfunction : build
+
+endclass : nmi_gen_reg_block
+
+`endif
+
 // Block: chip
 `ifndef CHIP_REG_BLOCK__SV
 `define CHIP_REG_BLOCK__SV
@@ -12399,6 +16275,8 @@ class chip_reg_block extends dv_base_reg_block;
   rand rv_plic_reg_block rv_plic;
   rand aes_reg_block aes;
   rand hmac_reg_block hmac;
+  rand alert_handler_reg_block alert_handler;
+  rand nmi_gen_reg_block nmi_gen;
   // memories
   rand chip_mem_rom rom;
   rand chip_mem_ram_main ram_main;
@@ -12464,6 +16342,16 @@ class chip_reg_block extends dv_base_reg_block;
     hmac.build(.base_addr(base_addr + 32'h40120000));
     default_map.add_submap(.child_map(hmac.default_map),
                            .offset(base_addr + 32'h40120000));
+    alert_handler = alert_handler_reg_block::type_id::create("alert_handler");
+    alert_handler.configure(.parent(this));
+    alert_handler.build(.base_addr(base_addr + 32'h40130000));
+    default_map.add_submap(.child_map(alert_handler.default_map),
+                           .offset(base_addr + 32'h40130000));
+    nmi_gen = nmi_gen_reg_block::type_id::create("nmi_gen");
+    nmi_gen.configure(.parent(this));
+    nmi_gen.build(.base_addr(base_addr + 32'h40140000));
+    default_map.add_submap(.child_map(nmi_gen.default_map),
+                           .offset(base_addr + 32'h40140000));
 
     // create memories
     rom = chip_mem_rom::type_id::create("rom");
