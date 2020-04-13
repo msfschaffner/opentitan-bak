@@ -1,0 +1,586 @@
+// Copyright lowRISC contributors.
+// Licensed under the Apache License, Version 2.0, see LICENSE for details.
+// SPDX-License-Identifier: Apache-2.0
+{ name: "csrng",
+  clock_primary: "clk_i",
+  bus_device: "tlul",
+  bus_host: "none",
+  param_list: [
+    { name: "NSwApps",
+      type: "int",
+      default: "4",
+      desc: "Number of CSRNG software applications",
+      local: "true"
+    } 
+    { name: "NHwApps",
+      type: "int",
+      default: "4",
+      desc: "Number of CSRNG hardware applications",
+      local: "true"
+    } 
+  ],
+  interrupt_list: [
+    { name: "cs_ins_req_done"
+      desc: "Asserted when an instantiate request is completed."}
+    { name: "cs_res_req_done"
+      desc: "Asserted when a reseed request is completed."}
+    { name: "cs_gen_req_done"
+      desc: "Asserted when a generate request is completed."}
+    { name: "cs_upd_req_done"
+      desc: "Asserted when an update request is completed."}
+    { name: "cs_uni_req_done"
+      desc: "Asserted when an uninstantiate request is completed."}
+    { name: "cs_fifo_err"
+      desc: "Asserted when a FIFO error occurs."}
+  ],
+  regwidth: "32",
+  registers: [
+    { name: "CS_REGEN",
+      desc: "Register write enable for all control registers",
+      swaccess: "rw1c",
+      hwaccess: "hro",
+      fields: [
+        {
+            bits:   "0",
+            desc: '''
+                  When true, the CS_APP_INS_REQ, CS_APP_INS_SEED, CS_APP_RES_REQ, CS_APP_GEN_REQ,
+                  CS_APP_UPD_REQ, CS_ADD_DATA_IN, and CS_APP_UNI_REQ registers can be modified.
+                  When false, they become read-only. Defaults true, write one to clear. Note that this needs to be
+                  cleared after initial configuration at boot in order to lock in the listed register settings.
+                  '''
+            resval: 1 
+        },
+      ]
+    },
+    { name: "CS_CTRL",
+      desc: "CSRNG control registers",
+      swaccess: "rw",
+      hwaccess: "hro",
+      fields: [
+        {
+            bits: "0",
+            name: "CS_ENABLE",
+            desc: '''
+                  Setting this bit will enable the CSRNG module. Register-based CSRNG interfaces
+                  will be enabled only if the respective efuse input is enabled. Additionally, entropy requests
+                  will be made from the entropy_src module until the request FIFO fills up.
+                  '''
+        },
+        {
+            bits: "19:16",
+            name: "FIFO_DEPTH_STS_SEL",
+            desc: "This field will select which FIFO depth will be read out for diagnostic purposes."
+        },
+      ]
+    },
+    {
+      name: "CS_SUM_STS",
+      desc: "CSRNG summary status register",
+      swaccess: "rw",
+      hwaccess: "hwo",
+      fields: [
+        { bits: "23:0",
+          name: "FIFO_DEPTH_STS",
+          desc: "These bits show the current status of the CRSNG FIFO depths."
+        }
+        { bits: "31",
+          name: "DIAG",
+          desc: "This this an internal generic diagnostic bit."
+        }
+      ]
+    },
+    { multireg: {
+        name: "CS_APP_INS_REQ",
+        desc: "CSRNG application instantiation request register",
+        count: "NSwApps",
+        cname: "SwApps",
+        swaccess: "wo",
+        hwaccess: "hro",
+        hwqe: "true",
+        regwen: "CS_REGEN",
+        fields: [
+          { bits: "0",
+            name: "INS_REQ",
+            desc: '''
+                  Setting this bit will start an instantiation request for this application interface.
+                  The application seed register must be set up before setting this request bit.
+                  '''
+          }
+        ]
+      }  
+    },
+    { multireg: {
+        name: "CS_APP_SEED_CLR",
+        desc: "CSRNG application seed fifo clear register",
+        count: "NSwApps",
+        cname: "SwApps",
+        swaccess: "wo",
+        hwaccess: "hro",
+        hwqe: "true",
+        regwen: "CS_REGEN",
+        fields: [
+          { bits: "0",
+            name: "APP_SEED_CLR",
+            desc: "Setting this bit will clear the application seed input FIFO."
+          }
+        ]
+      }  
+    },
+    { multireg: {
+        name: "CS_DET_MODE",
+        desc: "CSRNG deterministic mode register",
+        count: "NSwApps",
+        cname: "SwApps",
+        swaccess: "rw",
+        hwaccess: "hro",
+        regwen: "CS_REGEN",
+        fields: [
+          { bits: "0",
+            name: "DET_MODE",
+            desc: "Setting this bit will put this interface in deterministic mode."
+          }
+        ]
+      }  
+    },
+    { multireg: {
+        name: "CS_APP_INS_ACK",
+        desc: "CSRNG application instantiation ack register",
+        count: "NSwApps",
+        cname: "SwApps",
+        swaccess: "rw",
+        hwaccess: "hwo",
+        fields: [
+          { bits: "0",
+            name: "INS_ACK",
+            desc: '''This bit is set when the instantiation request has completed. This bit must
+                     be cleared before a new request is made.
+                  '''
+           }
+        ]
+      }
+    },
+    { multireg: {
+        name: "CS_APP_INS_STS",
+        desc: "CSRNG application instantiation status register",
+        count: "NSwApps",
+        cname: "SwApps",
+        swaccess: "rw",
+        hwaccess: "hwo",
+        fields: [
+          { bits: "1:0",
+            name: "INS_STS",
+            desc: ''' 
+                  This two bit field is the status code return with the instantiation ack bit.
+                  0b00: Request is pending
+                  0b01: Request is completed ok
+                  0b10: Request end with an error
+                  0b11: Request end with a severe error
+                  '''
+          }
+        ]
+      }
+    },
+    { multireg: {
+        name: "CS_APP_SEED_FIFO_STS",
+        desc: "CSRNG application instantiation FIFO status register",
+        count: "NSwApps",
+        cname: "SwApps",
+        swaccess: "ro",
+        hwaccess: "hwo",
+        hwext: "true",
+        fields: [
+          { bits: "1:0",
+            name: "APP_SEED_FIFO_STS",
+            desc: ''' 
+                  This two bit field is the status of the application seed input FIFO.
+                  0b00: Not Full, Not Empty
+                  0b01: Not Full, Empty
+                  0b10: Full, Not Empty
+                  0b11: Reserved
+                  '''
+          }
+        ]
+      }
+    },
+    { multireg: {
+        name: "CS_APP_INS_SEED",
+        desc: "CSRNG application instantiation seed register",
+        count: "NSwApps",
+        cname: "SwApps",
+        swaccess: "wo",
+        hwqe: "true",
+        regwen: "CS_REGEN",
+        fields: [
+          { bits: "31:0",
+            name: "APP_SEED",
+            desc: '''
+                  This seed register will be written repeatedly to put an entire seed into
+                  this application request. A seed of 384 bits will require 12 writes to 
+                  this register.
+                  '''
+          }
+        ]
+      }
+    }
+    { multireg: {
+        name: "CS_APP_RES_REQ",
+        desc: "CSRNG application reseed request register",
+        count: "NSwApps",
+        cname: "SwApps",
+        swaccess: "wo",
+        hwaccess: "hro",
+        hwqe: "true",
+        regwen: "CS_REGEN",
+        fields: [
+          { bits: "0",
+            name: "RES_REQ",
+            desc: "Setting this bit will start a reseed request for this application interface."
+          }
+        ]
+      }  
+    },
+    { multireg: {
+        name: "CS_APP_RES_ACK",
+        desc: "CSRNG application reseed status register",
+        count: "NSwApps",
+        cname: "SwApps",
+        swaccess: "rw",
+        hwaccess: "hwo",
+        fields: [
+          { bits: "0",
+            name: "RES_ACK",
+            desc: '''
+                  This bit is set when the reseed request has completed. This bit must
+                  be cleared before a new request is made.
+                  '''
+          }
+        ]
+      }
+    },
+    { multireg: {
+        name: "CS_APP_RES_STS",
+        desc: "CSRNG application reseed status register",
+        count: "NSwApps",
+        cname: "SwApps",
+        swaccess: "rw",
+        hwaccess: "hwo",
+        fields: [
+          { bits: "1:0",
+            name: "RES_STS",
+            desc: ''' 
+                  This two bit field is the status code return with the reseed ack bit.
+                  0b00: Request is pending
+                  0b01: Request is completed ok
+                  0b10: Request end with an error
+                  0b11: Request end with a severe error
+                  '''
+          }
+        ]
+      }
+    },
+    { multireg: {
+        name: "CS_APP_GEN_REQ",
+        desc: "CSRNG application generate request register",
+        count: "NSwApps",
+        cname: "SwApps",
+        swaccess: "wo",
+        hwaccess: "hro",
+        hwqe: "true",
+        regwen: "CS_REGEN",
+        fields: [
+          { bits: "0",
+            name: "GEN_REQ",
+            desc: "Setting this bit will start a generate request for this application interface."
+          }
+        ]
+      }  
+    },
+    { multireg: {
+        name: "CS_APP_RND_OUT_CLR",
+        desc: "CSRNG application rnd output FIFO clear register",
+        count: "NSwApps",
+        cname: "SwApps",
+        swaccess: "wo",
+        hwaccess: "hro",
+        hwqe: "true",
+        regwen: "CS_REGEN",
+        fields: [
+          { bits: "0",
+            name: "RND_OUT_CLR",
+            desc: "Setting this bit will clear the rnd output FIFO."
+          }
+        ]
+      }  
+    },
+    { multireg: {
+        name: "CS_APP_PRE_RES",
+        desc: "CSRNG application predictive resistance register",
+        count: "NSwApps",
+        cname: "SwApps",
+        swaccess: "rw",
+        hwaccess: "hro",
+        regwen: "CS_REGEN",
+        fields: [
+          { bits: "0",
+            name: "PRE_RES",
+            desc: "Setting this bit will enable prediction resistance for this application interface."
+          }
+        ]
+      }  
+    },
+    { multireg: {
+        name: "CS_APP_GEN_ACK",
+        desc: "CSRNG application generate ack register",
+        count: "NSwApps",
+        cname: "SwApps",
+        swaccess: "rw",
+        hwaccess: "hwo",
+        fields: [
+          { bits: "0",
+            name: "GEN_ACK",
+            desc: '''
+                  This bit is set when the generate request has completed. This bit must
+                  be cleared before a new request is made.
+                  '''
+          }
+        ]
+      }
+    },
+    { multireg: {
+        name: "CS_APP_GEN_STS",
+        desc: "CSRNG application generate status register",
+        count: "NSwApps",
+        cname: "SwApps",
+        swaccess: "rw",
+        hwaccess: "hwo",
+        fields: [
+          { bits: "1:0",
+            name: "GEN_STS",
+            desc: '''
+                  This two bit field is the status code return with the generate ack bit.
+                  0b00: Request is pending
+                  0b01: Request is completed ok
+                  0b10: Request end with an error
+                  0b11: Request end with a severe error
+                  '''
+          }
+        ]
+      }
+    },
+    { multireg: {
+        name: "CS_APP_GEN_RND_OUT_VLD",
+        desc: "CSRNG application generate rnd out valid register",
+        count: "NSwApps",
+        cname: "SwApps",
+        swaccess: "ro",
+        hwaccess: "hwo",
+        hwext: "true",
+        fields: [
+          { bits: "0",
+            name: "RND_OUT_VLD",
+            desc: "This bit is set when rnd output is available on this application interface."
+          }
+        ]
+      }
+    },
+    { multireg: {
+        name: "CS_RND_OUT_BITS",
+        desc: "CSRNG application generate rnd output register",
+        count: "NSwApps",
+        cname: "SwApps",
+        swaccess: "ro",
+        hwaccess: "hrw",
+        hwext: "true",
+        hwre: "true",
+        fields: [
+          { bits: "31:0",
+            name: "RND_OUT_BITS",
+            desc: '''
+                  Reading this register will get the rnd bits that were requested with the
+                  generate rnd request. A read of 128 bits will require 4 reads from
+                  this register.
+                  '''
+          }
+        ]
+      }
+    }
+    { multireg: {
+        name: "CS_APP_UPD_REQ",
+        desc: "CSRNG application update request register",
+        count: "NSwApps",
+        cname: "SwApps",
+        swaccess: "wo",
+        hwaccess: "hro",
+        hwqe: "true",
+        regwen: "CS_REGEN",
+        fields: [
+          { bits: "0",
+            name: "UPD_REQ",
+            desc: '''
+                  Setting this bit will start an update request for this application interface.
+                  The additional data register must be set up before setting this request bit.
+                  '''
+          }
+        ]
+      }  
+    },
+    { multireg: {
+        name: "CS_ADD_DATA_CLR",
+        desc: "CSRNG application additional data clear register",
+        count: "NSwApps",
+        cname: "SwApps",
+        swaccess: "wo",
+        hwaccess: "hro",
+        hwqe: "true",
+        regwen: "CS_REGEN",
+        fields: [
+          { bits: "0",
+            name: "ADD_DATA_CLR",
+            desc: "Setting this bit will clear the additional data input FIFO."
+          }
+        ]
+      }  
+    },
+    { multireg: {
+        name: "CS_APP_UPD_ACK",
+        desc: "CSRNG application update ack register",
+        count: "NSwApps",
+        cname: "SwApps",
+        swaccess: "rw",
+        hwaccess: "hwo",
+        fields: [
+          { bits: "0",
+            name: "UPD_ACK",
+            desc: '''
+                  This bit is set when the update request has completed. This bit must
+                  be cleared before a new request is made.
+                  '''
+          }
+        ]
+      }
+    },
+    { multireg: {
+        name: "CS_APP_UPD_STS",
+        desc: "CSRNG application update status register",
+        count: "NSwApps",
+        cname: "SwApps",
+        swaccess: "rw",
+        hwaccess: "hwo",
+        fields: [
+          { bits: "1:0",
+            name: "UPD_STS",
+            desc: '''
+                  This two bit field is the status code return with the update ack bit.
+                  0b00: Request is pending
+                  0b01: Request is completed ok
+                  0b10: Request end with an error
+                  0b11: Request end with a severe error
+                  '''
+          }
+        ]
+      }
+    },
+    { multireg: {
+        name: "CS_ADD_DATA_FIFO_STS",
+        desc: "CSRNG application additional data input FIFO status register",
+        count: "NSwApps",
+        cname: "SwApps",
+        swaccess: "ro",
+        hwaccess: "hwo",
+        hwext: "true",
+        fields: [
+          { bits: "1:0",
+            name: "ADD_DATA_FIFO_STS",
+            desc: '''
+                  This two bit field is the status of the additional data input FIFO.
+                  0b00: Not Full, Not Empty
+                  0b01: Not Full, Empty
+                  0b10: Full, Not Empty
+                  0b11: Reserved
+                  '''
+          }
+        ]
+      }
+    },
+    { multireg: {
+        name: "CS_ADD_DATA_IN",
+        desc: "CSRNG additional data input register",
+        count: "NSwApps",
+        cname: "SwApps",
+        swaccess: "wo",
+        hwqe: "true",
+        regwen: "CS_REGEN",
+        fields: [
+          { bits: "31:0",
+            name: "ADD_DATA_IN",
+            desc: '''
+                  This additional data input register will be written repeatedly for 
+                  this update request. Additional data of 128 bits will require 4 writes to 
+                  this register.
+                  '''
+          }
+        ]
+      }
+    }
+    { multireg: {
+        name: "CS_APP_UNI_REQ",
+        desc: "CSRNG application uninstantiate request register",
+        count: "NSwApps",
+        cname: "SwApps",
+        swaccess: "wo",
+        hwaccess: "hro",
+        hwqe: "true",
+        regwen: "CS_REGEN",
+        fields: [
+          { bits: "0",
+            name: "UNI_REQ",
+            desc: '''
+                  Setting this bit will start an uninstantiate request for this application
+                  interface.
+                  '''
+          }
+        ]
+      }  
+    },
+    { multireg: {
+        name: "CS_APP_UNI_ACK",
+        desc: "CSRNG application uninstantiate ack register",
+        count: "NSwApps",
+        cname: "SwApps",
+        swaccess: "rw",
+        hwaccess: "hwo",
+        fields: [
+          { bits: "0",
+            name: "UNI_ACK",
+            desc: '''
+                  This bit is set when the uninstantiate request has completed. This bit must
+                  be cleared before a new request is made.
+                  '''
+          }
+        ]
+      }
+    },
+    { multireg: {
+        name: "CS_APP_UNI_STS",
+        desc: "CSRNG application uninstantiate status register",
+        count: "NSwApps",
+        cname: "SwApps",
+        swaccess: "rw",
+        hwaccess: "hwo",
+        fields: [
+          { bits: "1:0",
+            name: "UNI_STS",
+            desc: ''' 
+                  This two bit field is the status code return with the uninstantiate ack bit.
+                  0b00: Request is pending
+                  0b01: Request is completed ok
+                  0b10: Request end with an error
+                  0b11: Request end with a severe error
+                  '''
+          }
+        ]
+      }
+    },
+  ]
+}
+
