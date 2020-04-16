@@ -11,13 +11,13 @@
       default: "4",
       desc: "Number of CSRNG software applications",
       local: "true"
-    } 
+    }
     { name: "NHwApps",
       type: "int",
       default: "4",
       desc: "Number of CSRNG hardware applications",
       local: "true"
-    } 
+    }
   ],
   interrupt_list: [
     { name: "cs_ins_req_done"
@@ -33,6 +33,46 @@
     { name: "cs_fifo_err"
       desc: "Asserted when a FIFO error occurs."}
   ],
+
+  inter_signal_list: [
+    { struct:  "csrng_entropy", // csrng_entropy_req_t, csrng_entropy_rsp_t
+      type:    "req_rsp",
+      name:    "csrng_entropy", // csrng_entropy_o (rsp), csrng_entropy_i (req)
+      act:     "responder",
+      package: "csrng_pkg",     // Origin package (only needs for the requester)
+    }
+    { struct:  "csrng_inst",
+      type:    "req_rsp",
+      name:    "csrng_inst",
+      act:     "responder",
+      package: "csrng_pkg",
+    }
+    { struct:  "csrng_reseed",
+      type:    "req_rsp",
+      name:    "csrng_reseed",
+      act:     "responder",
+      package: "csrng_pkg",
+    }
+    { struct:  "csrng_generate",
+      type:    "req_rsp",
+      name:    "csrng_generate",
+      act:     "responder",
+      package: "csrng_pkg",
+    }
+    { struct:  "csrng_update",
+      type:    "req_rsp",
+      name:    "csrng_update",
+      act:     "responder",
+      package: "csrng_pkg",
+    }
+    { struct:  "csrng_uninst",
+      type:    "req_rsp",
+      name:    "csrng_uninst",
+      act:     "responder",
+      package: "csrng_pkg",
+    }
+  ],
+
   regwidth: "32",
   registers: [
     { name: "CS_REGEN",
@@ -48,7 +88,7 @@
                   When false, they become read-only. Defaults true, write one to clear. Note that this needs to be
                   cleared after initial configuration at boot in order to lock in the listed register settings.
                   '''
-            resval: 1 
+            resval: 1
         },
       ]
     },
@@ -107,7 +147,7 @@
                   '''
           }
         ]
-      }  
+      }
     },
     { multireg: {
         name: "CS_APP_SEED_CLR",
@@ -124,7 +164,7 @@
             desc: "Setting this bit will clear the application seed input FIFO."
           }
         ]
-      }  
+      }
     },
     { multireg: {
         name: "CS_DET_MODE",
@@ -140,7 +180,7 @@
             desc: "Setting this bit will put this interface in deterministic mode."
           }
         ]
-      }  
+      }
     },
     { multireg: {
         name: "CS_APP_INS_ACK",
@@ -169,7 +209,7 @@
         fields: [
           { bits: "1:0",
             name: "INS_STS",
-            desc: ''' 
+            desc: '''
                   This two bit field is the status code return with the instantiation ack bit.
                   0b00: Request is pending
                   0b01: Request is completed ok
@@ -191,7 +231,7 @@
         fields: [
           { bits: "1:0",
             name: "APP_SEED_FIFO_STS",
-            desc: ''' 
+            desc: '''
                   This two bit field is the status of the application seed input FIFO.
                   0b00: Not Full, Not Empty
                   0b01: Not Full, Empty
@@ -215,7 +255,7 @@
             name: "APP_SEED",
             desc: '''
                   This seed register will be written repeatedly to put an entire seed into
-                  this application request. A seed of 384 bits will require 12 writes to 
+                  this application request. A seed of 384 bits will require 12 writes to
                   this register.
                   '''
           }
@@ -237,7 +277,7 @@
             desc: "Setting this bit will start a reseed request for this application interface."
           }
         ]
-      }  
+      }
     },
     { multireg: {
         name: "CS_APP_RES_ACK",
@@ -267,7 +307,7 @@
         fields: [
           { bits: "1:0",
             name: "RES_STS",
-            desc: ''' 
+            desc: '''
                   This two bit field is the status code return with the reseed ack bit.
                   0b00: Request is pending
                   0b01: Request is completed ok
@@ -293,7 +333,7 @@
             desc: "Setting this bit will start a generate request for this application interface."
           }
         ]
-      }  
+      }
     },
     { multireg: {
         name: "CS_APP_RND_OUT_CLR",
@@ -310,7 +350,7 @@
             desc: "Setting this bit will clear the rnd output FIFO."
           }
         ]
-      }  
+      }
     },
     { multireg: {
         name: "CS_APP_PRE_RES",
@@ -326,7 +366,7 @@
             desc: "Setting this bit will enable prediction resistance for this application interface."
           }
         ]
-      }  
+      }
     },
     { multireg: {
         name: "CS_APP_GEN_ACK",
@@ -422,7 +462,7 @@
                   '''
           }
         ]
-      }  
+      }
     },
     { multireg: {
         name: "CS_ADD_DATA_CLR",
@@ -439,7 +479,7 @@
             desc: "Setting this bit will clear the additional data input FIFO."
           }
         ]
-      }  
+      }
     },
     { multireg: {
         name: "CS_APP_UPD_ACK",
@@ -514,8 +554,8 @@
           { bits: "31:0",
             name: "ADD_DATA_IN",
             desc: '''
-                  This additional data input register will be written repeatedly for 
-                  this update request. Additional data of 128 bits will require 4 writes to 
+                  This additional data input register will be written repeatedly for
+                  this update request. Additional data of 128 bits will require 4 writes to
                   this register.
                   '''
           }
@@ -540,7 +580,7 @@
                   '''
           }
         ]
-      }  
+      }
     },
     { multireg: {
         name: "CS_APP_UNI_ACK",
@@ -570,7 +610,7 @@
         fields: [
           { bits: "1:0",
             name: "UNI_STS",
-            desc: ''' 
+            desc: '''
                   This two bit field is the status code return with the uninstantiate ack bit.
                   0b00: Request is pending
                   0b01: Request is completed ok
