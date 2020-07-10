@@ -192,9 +192,21 @@ class LintCfg(OneShotCfg):
         if len(table) > 1:
             self.results_md = results_str + tabulate(
                 table, headers="firstrow", tablefmt="pipe",
-                colalign=colalign) + "\n" + fail_msgs
+                colalign=colalign) + "\n"
+            # if reports to be sent out / published have to be sanitized, do not append
+            # detailed error messages and warnings
+            self.email_results_md = self.results_md
+            self.publish_results_md = self.results_md
+            if not self.sanitize_email_results:
+                self.email_results_md += fail_msgs
+            if not self.sanitize_publish_results:
+                self.publish_results_md += fail_msgs
+            # locally generated result always contains all details
+            self.results_md += fail_msgs
         else:
             self.results_md = results_str + "\nNo results to display.\n"
+            self.email_results_md = self.results_md
+            self.publish_results_md = self.results_md
 
         # Write results to the scratch area
         self.results_file = self.scratch_path + "/results_" + self.timestamp + ".md"

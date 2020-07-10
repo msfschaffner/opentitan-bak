@@ -353,23 +353,34 @@ class SynCfg(OneShotCfg):
                              ("Elab Errors", "elab_errors"),
                              ("Compile Warnings", "compile_warnings"),
                              ("Compile Errors", "compile_errors")]
-
+            fail_msgs = ""
             has_msg = False
             for _, key in hdr_key_pairs:
                 if key in self.result['messages']:
                     has_msg = True
                     break
 
-            if has_msg and not self.args.publish:
-                results_str += "\n### Errors and Warnings for Build Mode `'" + mode.name + "'`\n"
+            if has_msg:
+                fail_msgs += "\n### Errors and Warnings for Build Mode `'" + mode.name + "'`\n"
                 for hdr, key in hdr_key_pairs:
                     msgs = self.result['messages'].get(key)
-                    results_str += print_msg_list("#### " + hdr, msgs, self.max_msg_count)
+                    fail_msgs += print_msg_list("#### " + hdr, msgs, self.max_msg_count)
+
+            # if reports to be sent out / published have to be sanitized, do not append
+            # detailed error messages and warnings
+            self.results_md = results_str
+            self.email_results_md = results_str
+            self.publish_results_md = results_str
+            if not self.sanitize_email_results:
+                self.email_results_md += fail_msgs
+            if not self.sanitize_publish_results:
+                self.publish_results_md += fail_msgs
+            # locally generated result always contains all details
+            self.results_md += fail_msgs
 
             # TODO: add support for pie / bar charts for area splits and
             # QoR history
 
-        self.results_md = results_str
         # Write results to the scratch area
         self.results_file = self.scratch_path + "/results_" + self.timestamp + ".md"
         log.info("Detailed results are available at %s", self.results_file)

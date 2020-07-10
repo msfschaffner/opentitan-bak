@@ -83,7 +83,7 @@ check_design                                              > "${REPDIR}/check.rpt
 set_verification_top
 
 write_file -format ddc -hierarchy -output "${DDCDIR}/elab.ddc"
-write_file -format verilog -hierarchy -output "${DDCDIR}/elab.v"
+#write_file -format verilog -hierarchy -output "${DDCDIR}/elab.v"
 
 #############################
 ##   CLOCK GATING SETUP    ##
