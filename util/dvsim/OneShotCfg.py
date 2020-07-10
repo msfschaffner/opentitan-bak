@@ -20,8 +20,8 @@ class OneShotCfg(FlowCfg):
     """Simple one-shot build flow for non-simulation targets like
     linting, synthesis and FPV.
     """
-    def __init__(self, flow_cfg_file, proj_root, args):
-        super().__init__(flow_cfg_file, proj_root, args)
+    def __init__(self, flow_cfg_file, proj_root, args, revision):
+        super().__init__(flow_cfg_file, proj_root, args, revision)
 
         assert args.tool is not None
 

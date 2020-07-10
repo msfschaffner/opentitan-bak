@@ -84,8 +84,8 @@ class SimCfg(FlowCfg):
     A simulation configuration class holds key information required for building a DV
     regression framework.
     """
-    def __init__(self, flow_cfg_file, proj_root, args):
-        super().__init__(flow_cfg_file, proj_root, args)
+    def __init__(self, flow_cfg_file, proj_root, args, revision):
+        super().__init__(flow_cfg_file, proj_root, args, revision)
         # Options set from command line
         self.tool = args.tool
         self.build_opts = []
@@ -576,6 +576,7 @@ class SimCfg(FlowCfg):
         # Generate results table for runs.
         results_str = "## " + self.results_title + "\n"
         results_str += "### " + self.timestamp_long + "\n"
+        results_str += "### " + self.revision_string + "\n"
 
         # Add path to testplan.
         if hasattr(self, "testplan_doc_path"):
@@ -648,6 +649,7 @@ class SimCfg(FlowCfg):
             table.append(row)
         self.results_summary_md = "## " + self.results_title + " (Summary)\n"
         self.results_summary_md += "### " + self.timestamp_long + "\n"
+        self.results_summary_md += "### " + self.revision_string + "\n"
         self.results_summary_md += tabulate(table,
                                             headers="firstrow",
                                             tablefmt="pipe",

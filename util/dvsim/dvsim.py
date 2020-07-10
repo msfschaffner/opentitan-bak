@@ -23,6 +23,7 @@ import argparse
 import datetime
 import logging as log
 import os
+import re
 import subprocess
 import sys
 import textwrap
@@ -136,6 +137,23 @@ def resolve_branch(branch):
 
     return branch
 
+def resolve_commit():
+    '''Get commit hash of current working repo
+    '''
+    result = subprocess.run(["git", "log", "-n1"],
+                            stdout=subprocess.PIPE)
+    commit = result.stdout.decode("utf-8")
+    commit = re.split(r'[ \n]', commit)
+
+    if len(commit) >= 2:
+        commit = commit[1]
+    else:
+        log.warning("Failed to find current git commit hash. "
+                    "Setting it to \"unknown\"")
+        commit = "unknown"
+
+    return commit
+
 
 def make_config(args, proj_root):
     '''A factory method for FlowCfg objects'''
@@ -153,7 +171,13 @@ def make_config(args, proj_root):
     }
 
     factory = factories.get(args.tool, SimCfg.SimCfg)
-    return factory(args.cfg, proj_root, args)
+
+    # if this is a git repo get current branch and commit of GIT repo
+    revision = lambda:0
+    revision.branch = resolve_branch(None)
+    revision.commit = resolve_commit()
+
+    return factory(args.cfg, proj_root, args, revision)
 
 
 # Get the project root directory path - this is used to construct the full paths

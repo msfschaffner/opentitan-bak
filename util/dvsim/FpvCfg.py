@@ -15,8 +15,8 @@ from utils import subst_wildcards
 class FpvCfg(OneShotCfg):
     """Derivative class for FPV purposes.
     """
-    def __init__(self, flow_cfg_file, proj_root, args):
-        super().__init__(flow_cfg_file, proj_root, args)
+    def __init__(self, flow_cfg_file, proj_root, args, revision):
+        super().__init__(flow_cfg_file, proj_root, args, revision)
         self.header = ["name", "errors", "warnings", "proven", "cex", "undetermined",
                        "covered", "unreachable", "pass_rate", "cov_rate"]
         self.summary_header = ["name", "pass_rate", "stimuli_cov", "coi_cov", "prove_cov"]
@@ -125,7 +125,8 @@ class FpvCfg(OneShotCfg):
         log.info("Create summary of FPV results")
 
         results_str = "## " + self.results_title + " (Summary)\n\n"
-        results_str += "### " + self.timestamp_long + "\n\n"
+        results_str += "### " + self.timestamp_long + "\n"
+        results_str += "### " + self.revision_string + "\n\n"
 
         colalign = ("center", ) * len(self.summary_header)
         table = [self.summary_header]
@@ -216,6 +217,7 @@ class FpvCfg(OneShotCfg):
         #   }
         results_str = "## " + self.results_title + "\n\n"
         results_str += "### " + self.timestamp_long + "\n"
+        results_str += "### " + self.revision_string + "\n"
         results_str += "### FPV Tool: " + self.tool.upper() + "\n"
         results_str += "### LogFile dir: " + self.scratch_path + "/default\n\n"
 

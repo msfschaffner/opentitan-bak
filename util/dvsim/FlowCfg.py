@@ -24,7 +24,7 @@ class FlowCfg():
     def __repr__(self):
         return pprint.pformat(self.__dict__)
 
-    def __init__(self, flow_cfg_file, proj_root, args):
+    def __init__(self, flow_cfg_file, proj_root, args, revision):
         # Options set from command line
         self.items = args.items
         self.list_items = args.list
@@ -72,6 +72,11 @@ class FlowCfg():
         self.errors_seen = False
         self.rel_path = ""
         self.results_title = ""
+        self.revision = revision
+        self.git_server_prefix = ""
+        self.git_server = ""
+        self.git_server_project_path = ""
+        self.git_server_commit_dir = ""
         self.results_server_prefix = ""
         self.results_server_url_prefix = ""
         self.results_server_cmd = ""
@@ -108,7 +113,7 @@ class FlowCfg():
         '''Create a new instance of this class for the given config file.
 
         '''
-        return type(self)(flow_cfg_file, self.proj_root, self.args)
+        return type(self)(flow_cfg_file, self.proj_root, self.args, self.revision)
 
     def kill(self):
         '''kill running processes and jobs gracefully
@@ -159,6 +164,23 @@ class FlowCfg():
             self.sanitize_publish_results = False
         elif self.sanitize_publish_results == "True":
             self.sanitize_publish_results = True
+
+        # assemble revision string and link if to GitHub if URL is available
+        # abbreviate commit hash if necessary
+        if len(self.revision.commit) > 8:
+            commit_abbrev = self.revision.commit[0:8]
+        else:
+            commit_abbrev = self.revision.commit
+
+        self.revision_string = "Revision: "
+        if self.git_server_commit_dir and self.args.publish:
+            self.revision_string += "[`" + commit_abbrev + "`](" +  \
+                                    self.git_server_commit_dir  + "/"  + \
+                                    self.revision.commit +")"
+        else:
+            self.revision_string += "`" + self.revision.commit + "`"
+
+        self.revision_string += " on `" + self.revision.branch + "`"
 
     def check_if_master_cfg(self, hjson_dict):
         # This is a master cfg only if it has a single key called "use_cfgs"
