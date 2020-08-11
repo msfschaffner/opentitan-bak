@@ -26,12 +26,14 @@ fi
 # overwriting of uncomitted changes
 git add -u
 
+echo "Using verible-verilog-format version $VERIBLE_VERSION" > $REPORT_FILE
+
 # get all system verilog files and pipe through style formatter
 find hw/{ip,vendor,top_earlgrey} -type f -name "*.sv" -o -name "*.svh" | \
     xargs -n 1 -P $NUM_PROCS verible-verilog-format                      \
-    --inplace
+    --inplace 2>&1 | tee -a $REPORT_FILE
 
-echo "Usign verible-verilog-format version $VERIBLE_VERSION" > $REPORT_FILE
+echo "Changed files:"
 
 # report changed files
 git status                  | \
