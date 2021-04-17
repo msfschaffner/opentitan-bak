@@ -74,18 +74,17 @@ class alert_handler_base_vseq extends cip_base_vseq #(
   endtask
 
   virtual task alert_handler_wr_regwen_regs(bit [NUM_ALERT_HANDLER_CLASSES-1:0] regwen);
-    if (!regwen[0]) csr_wr(.ptr(ral.classa_regwen), .value($urandom_range(0, 1)));
-    if (!regwen[1]) csr_wr(.ptr(ral.classb_regwen), .value($urandom_range(0, 1)));
-    if (!regwen[2]) csr_wr(.ptr(ral.classc_regwen), .value($urandom_range(0, 1)));
-    if (!regwen[3]) csr_wr(.ptr(ral.classd_regwen), .value($urandom_range(0, 1)));
+    if (!regwen[0]) csr_wr(.ptr(ral.classa_clr_regwen), .value($urandom_range(0, 1)));
+    if (!regwen[1]) csr_wr(.ptr(ral.classb_clr_regwen), .value($urandom_range(0, 1)));
+    if (!regwen[2]) csr_wr(.ptr(ral.classc_clr_regwen), .value($urandom_range(0, 1)));
+    if (!regwen[3]) csr_wr(.ptr(ral.classd_clr_regwen), .value($urandom_range(0, 1)));
   endtask
 
-  // If do_lock_config is set, write value 0 to rewgen register.
-  // If not set, this task has 50% of chance to write value 1 to regwen register.
-  // Please note that writing 1 to regwen won't lock any lockable regs.
+  // If do_lock_config is set, write value 1 to ping_timer_en register.
+  // If not set, this task has 50% of chance to write value 1 to ping_timer_en register.
   virtual task lock_config(bit do_lock_config);
     if (do_lock_config || $urandom_range(0, 1)) begin
-      csr_wr(.ptr(ral.regwen), .value(!do_lock_config));
+      csr_wr(.ptr(ral.ping_timer_en), .value(do_lock_config));
     end
   endtask
 
