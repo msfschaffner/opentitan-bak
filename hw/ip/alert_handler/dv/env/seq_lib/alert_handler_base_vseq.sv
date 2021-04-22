@@ -52,9 +52,9 @@ class alert_handler_base_vseq extends cip_base_vseq #(
                                   bit [NUM_LOCAL_ALERT-1:0]           loc_alert_en = '1,
                                   bit [TL_DW-1:0]                     loc_alert_class = 'h0);
     csr_wr(.ptr(ral.intr_enable), .value(intr_en));
-    csr_wr(.ptr(ral.alert_en), .value(alert_en));
-    csr_wr(.ptr(ral.loc_alert_en), .value(loc_alert_en));
-    csr_wr(.ptr(ral.loc_alert_class), .value(loc_alert_class));
+    csr_wr(.ptr(ral.alert_en_0), .value(alert_en));
+    csr_wr(.ptr(ral.loc_alert_en_0), .value(loc_alert_en));
+    csr_wr(.ptr(ral.loc_alert_class_0), .value(loc_alert_class));
     for (int i = 0; i < $ceil(NUM_ALERTS * 2 / TL_DW); i++) begin
       string alert_name = (NUM_ALERTS <= TL_DW / 2) ? "alert_class" :
                                                       $sformatf("alert_class_%0d", i);
@@ -151,8 +151,8 @@ class alert_handler_base_vseq extends cip_base_vseq #(
   // checking for csr_rd is done in scb
   virtual task read_alert_cause();
     bit [TL_DW-1:0] alert_cause;
-    csr_rd(.ptr(ral.alert_cause), .value(alert_cause));
-    csr_rd(.ptr(ral.loc_alert_cause), .value(alert_cause));
+    csr_rd(.ptr(ral.alert_cause_0), .value(alert_cause));
+    csr_rd(.ptr(ral.loc_alert_cause_0), .value(alert_cause));
   endtask
 
   virtual task read_esc_status();
