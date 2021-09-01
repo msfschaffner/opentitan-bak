@@ -341,25 +341,25 @@ class Register(RegBase):
 
         This is true if any of the following are true:
 
-          - The register is shadowed (because shadow registers need to know
-            about reads)
-
           - There's an RC field (where we'll attach the read-enable signal to
             the subreg's we port)
 
           - The register is hwext and allows reads (in which case the hardware
             side might need the re signal)
 
+          - The register is shadowed and allows reads (because shadow registers
+            need to know about reads)
         '''
-        if self.shadowed:
-            return True
-
         for fld in self.fields:
             if fld.swaccess.key == 'rc':
                 return True
 
-            if self.hwext and fld.swaccess.allows_read():
-                return True
+            if fld.swaccess.allows_read():
+                if self.hwext:
+                    return True
+
+                if self.shadowed:
+                    return True
 
         return False
 
