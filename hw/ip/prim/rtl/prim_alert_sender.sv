@@ -246,11 +246,13 @@ module prim_alert_sender
       // to the same value and continuously toggling
       // them.
       SigInt: begin
-        state_d  = Idle;
-        if (sigint_detected) begin
-          state_d  = SigInt;
-          alert_pd = ~alert_pq;
-          alert_nd = ~alert_pq;
+        alert_pd = ~alert_pq;
+        alert_nd = ~alert_pq;
+        // If the sigint has disappeared, we clear the ping
+        // request state of this sender and go back to idle.
+        if (!sigint_detected) begin
+          state_d = Idle;
+          ping_clr = 1'b1;
         end
       end
       // catch parasitic states
