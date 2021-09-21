@@ -130,5 +130,15 @@ module prim_alert_rxtx_assert_fpv (
       strong(##[1:$] (prim_alert_rxtx_fpv.i_prim_alert_receiver.state_q ==
       prim_alert_rxtx_fpv.i_prim_alert_receiver.Idle)),
       clk_i, !rst_ni || error_present || init_trig_i == lc_ctrl_pkg::On)
+  // check that the in-band reset trigger moves sender and receiver FSMs into
+  // Idle state, and that the FSMs stay in that state if no alert or ping is requested.
+  `ASSERT(InBandInitBothFsms_A,
+      init_trig_i == lc_ctrl_pkg::On ##1 init_trig_i != lc_ctrl_pkg::On [*20:$]
+      |->
+      (prim_alert_rxtx_fpv.i_prim_alert_sender.state_q ==
+      prim_alert_rxtx_fpv.i_prim_alert_sender.Idle) &&
+      (prim_alert_rxtx_fpv.i_prim_alert_receiver.state_q ==
+      prim_alert_rxtx_fpv.i_prim_alert_receiver.Idle),
+      clk_i, !rst_ni || error_present || alert_req_i || alert_test_i || ping_req_i)
 
 endmodule : prim_alert_rxtx_assert_fpv
