@@ -32,6 +32,9 @@ module alert_handler
   output logic                    intr_classb_o,
   output logic                    intr_classc_o,
   output logic                    intr_classd_o,
+  // Clock gating and reset info from rstmgr and clkmgr
+  input  lc_ctrl_pkg::lc_tx_t [NLpg-1:0] lpg_cg_en_i,
+  input  lc_ctrl_pkg::lc_tx_t [NLpg-1:0] lpg_rst_en_i,
   // State information for HW crashdump
   output alert_crashdump_t        crashdump_o,
   // Entropy Input
@@ -130,6 +133,19 @@ module alert_handler
     .esc_ping_fail_o    ( loc_alert_trig[1]              )
   );
 
+  /////////////////////////////
+  // Low-power group control //
+  /////////////////////////////
+
+  lc_ctrl_pkg::lc_tx_t [NAlerts-1:0] lp_init_trig;
+  alert_handler_lp_ctrl u_alert_handler_lp_ctrl (
+    .clk_i,
+    .rst_ni,
+    .lpg_cg_en_i,
+    .lpg_rst_en_i,
+    .init_trig_o ( lp_init_trig )
+  );
+
   /////////////////////
   // Alert Receivers //
   /////////////////////
@@ -142,9 +158,10 @@ module alert_handler
     prim_alert_receiver #(
       .AsyncOn(AsyncOn[k])
     ) u_alert_receiver (
-      .clk_i                              ,
-      .rst_ni                             ,
-      .ping_req_i   ( alert_ping_req[k]   ),
+      .clk_i,
+      .rst_ni,
+      .init_trig_i  ( lp_init_trig[k]    ),
+      .ping_req_i   ( alert_ping_req[k]  ),
       .ping_ok_o    ( alert_ping_ok[k]   ),
       .integ_fail_o ( alert_integfail[k] ),
       .alert_o      ( alert_trig[k]      ),
