@@ -8,10 +8,7 @@
 #  - n_alerts:    Number of alert sources
 #  - esc_cnt_dw:  Width of escalation counter
 #  - accu_cnt_dw: Width of accumulator
-#  - async_on:    Enables asynchronous sygnalling between specific alert RX/TX pairs
 #  - n_classes:   Number of supported classes (leave this at 4 at the moment)
-#  - n_lpg:       Number of low-power groups (LPGs)
-#  - lpg_map:     Defines a mapping from alerts to LPGs.
 <%
 import math
 chars = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
@@ -49,26 +46,6 @@ chars = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
       default: "${n_alerts}",
       local: "true"
     },
-    { name: "NLpg",
-      desc: "Number of LPGs.",
-      type: "int",
-      default: "${n_lpg}",
-      local: "true"
-    },
-    { name: "NLpgWidth",
-      desc: "Width of LPG ID.",
-      type: "int",
-      default: "${n_lpg.bit_length()}",
-      local: "true"
-    },
-    { name: "AlertLpgMap",
-      desc: '''
-            Defines a mapping from alerts to LPGs.
-            '''
-      type: "logic [NAlerts-1:0][NLpgWidth-1:0]",
-      default: "${lpg_map}",
-      local: "true"
-    },
     { name: "EscCntDw",
       desc: "Width of the escalation timer.",
       type: "int",
@@ -79,15 +56,6 @@ chars = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
       desc: "Width of the accumulation counter.",
       type: "int",
       default: "${accu_cnt_dw}",
-      local: "true"
-    },
-    { name: "AsyncOn",
-      desc: '''
-            Each bit of this parameter corresponds to an escalation channel and
-            defines whether the protocol is synchronous (0) or asynchronous (1).
-            '''
-      type: "logic [NAlerts-1:0]",
-      default: "${async_on}",
       local: "true"
     },
     { name: "N_CLASSES",

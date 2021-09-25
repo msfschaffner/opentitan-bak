@@ -15,37 +15,39 @@ module alert_handler
   import prim_alert_pkg::*;
   import prim_esc_pkg::*;
 #(
+  // Parameters for integration
+  parameter bit [NAlerts-1:0] AsyncOn  = {NAlerts{1'b1}},
   // Compile time random constants, to be overriden by topgen.
   parameter lfsr_seed_t RndCnstLfsrSeed = RndCnstLfsrSeedDefault,
   parameter lfsr_perm_t RndCnstLfsrPerm = RndCnstLfsrPermDefault
 ) (
-  input                                  clk_i,
-  input                                  rst_ni,
-  input                                  rst_shadowed_ni,
-  input                                  clk_edn_i,
-  input                                  rst_edn_ni,
+  input                                        clk_i,
+  input                                        rst_ni,
+  input                                        rst_shadowed_ni,
+  input                                        clk_edn_i,
+  input                                        rst_edn_ni,
   // Bus Interface (device)
-  input  tlul_pkg::tl_h2d_t              tl_i,
-  output tlul_pkg::tl_d2h_t              tl_o,
+  input  tlul_pkg::tl_h2d_t                    tl_i,
+  output tlul_pkg::tl_d2h_t                    tl_o,
   // Interrupt Requests
-  output logic                           intr_classa_o,
-  output logic                           intr_classb_o,
-  output logic                           intr_classc_o,
-  output logic                           intr_classd_o,
-  // Clock gating and reset info from rstmgr and clkmgr
-  input  lc_ctrl_pkg::lc_tx_t [NLpg-1:0] lpg_cg_en_i,
-  input  lc_ctrl_pkg::lc_tx_t [NLpg-1:0] lpg_rst_en_i,
+  output logic                                 intr_classa_o,
+  output logic                                 intr_classb_o,
+  output logic                                 intr_classc_o,
+  output logic                                 intr_classd_o,
+  // Per alert init trigger coming from top-specific alert_handler_lp_ctrl module
+  input  lc_ctrl_pkg::lc_tx_t [NAlerts-1:0]    alert_cg_en_i,
+  input  lc_ctrl_pkg::lc_tx_t [NAlerts-1:0]    alert_rst_en_i,
   // State information for HW crashdump
-  output alert_crashdump_t               crashdump_o,
+  output alert_crashdump_t                     crashdump_o,
   // Entropy Input
-  output edn_pkg::edn_req_t              edn_o,
-  input  edn_pkg::edn_rsp_t              edn_i,
+  output edn_pkg::edn_req_t                    edn_o,
+  input  edn_pkg::edn_rsp_t                    edn_i,
   // Alert Sources
-  input  alert_tx_t [NAlerts-1:0]        alert_tx_i,
-  output alert_rx_t [NAlerts-1:0]        alert_rx_o,
+  input  alert_tx_t [NAlerts-1:0]              alert_tx_i,
+  output alert_rx_t [NAlerts-1:0]              alert_rx_o,
   // Escalation outputs
-  input  esc_rx_t [N_ESC_SEV-1:0]        esc_rx_i,
-  output esc_tx_t [N_ESC_SEV-1:0]        esc_tx_o
+  input  esc_rx_t [N_ESC_SEV-1:0]              esc_rx_i,
+  output esc_tx_t [N_ESC_SEV-1:0]              esc_tx_o
 );
 
   //////////////////////////////////
@@ -133,18 +135,34 @@ module alert_handler
     .esc_ping_fail_o    ( loc_alert_trig[1]              )
   );
 
-  /////////////////////////////
-  // Low-power group control //
-  /////////////////////////////
+  ////////////////////////////////////
+  // Low Power Init Trigger signals //
+  ////////////////////////////////////
 
-  lc_ctrl_pkg::lc_tx_t [NAlerts-1:0] lp_init_trig;
-  alert_handler_lp_ctrl u_alert_handler_lp_ctrl (
-    .clk_i,
-    .rst_ni,
-    .lpg_cg_en_i,
-    .lpg_rst_en_i,
-    .init_trig_o ( lp_init_trig )
-  );
+  lc_ctrl_pkg::lc_tx_t [NAlerts-1:0] alert_init_trig;
+  for (genvar k = 0 ; k < NAlerts ; k++) begin : gen_alerts
+    // Perform a logical OR operation of the multibit life cycle signals.
+    // I.e., if any of the incoming multibit signals is On, the output will also be On.
+    // Otherwise, the output may have any value other than On.
+    lc_ctrl_pkg::lc_tx_t alert_init_trig_unbuf;
+    prim_lc_combine #(
+      .ActiveLow(0),  // Active Value is "On"
+      .CombineMode(0) // Combo mode is "OR"
+    ) u_prim_lc_combine (
+      .lc_en_a_i(alert_cg_en_i[k]),
+      .lc_en_b_i(alert_rst_en_i[k]),
+      .lc_en_o  (alert_init_trig_unbuf)
+    );
+
+    prim_lc_sync #(
+      .AsyncOn(0) // no sync flops
+    ) u_prim_lc_sync_lpg_en (
+      .clk_i,
+      .rst_ni,
+      .lc_en_i(alert_init_trig_unbuf),
+      .lc_en_o({alert_init_trig[k]})
+    );
+  end
 
   /////////////////////
   // Alert Receivers //
@@ -160,7 +178,7 @@ module alert_handler
     ) u_alert_receiver (
       .clk_i,
       .rst_ni,
-      .init_trig_i  ( lp_init_trig[k]    ),
+      .init_trig_i  ( alert_init_trig[k] ),
       .ping_req_i   ( alert_ping_req[k]  ),
       .ping_ok_o    ( alert_ping_ok[k]   ),
       .integ_fail_o ( alert_integfail[k] ),
