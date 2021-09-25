@@ -291,7 +291,33 @@ module top_${top["name"]} #(
     .tdo_oe_i (1'b0)
   );
 
-## Peripheral Instantiation
+  // Clock manager / reset manager to alert handler sync and mapping
+<%
+## Get the alert handler primary reset and clock names
+alert_handler_clk = 'undef'
+alert_handler_rst = 'undef'
+for m in top["module"]:
+  if m['type'] == 'alert_handler':
+    alert_handler_clk = m['clock_connections']['clk_i']
+    alert_handler_rst = lib.get_reset_path(top, m["reset_connections"]['rst_ni'])
+%>\
+  lc_ctrl_pkg::lc_tx_t [NAlerts-1:0] alert_cg_en;
+  lc_ctrl_pkg::lc_tx_t [NAlerts-1:0] alert_rst_en;
+  clkmgr_pkg::clkmgr_cg_en_t clkmgr_aon_cg_en_synced;
+  clkmgr_pkg::rstmgr_rst_en_t rstmgr_aon_rst_en_synced;
+  alert_handler_lp_sync #(
+    .NClocks(clkmgr_pkg::NumOutputClk),
+    .NResets(rstmgr_pkg::NumOutputRst),
+  ) u_alert_handler_lp_sync (
+    .clk_i     ( ${alert_handler_clk}     ),
+    .rst_ni    ( ${alert_handler_rst}     ),
+    .cg_en_i   ( clkmgr_aon_cg_en         ),
+    .rst_en_i  ( rstmgr_aon_rst_en        ),
+    .cg_en_o   ( clkmgr_aon_cg_en_synced  ),
+    .rst_en_o  ( rstmgr_aon_rst_en_synced )
+  );
+
+  // Peripheral Instantiation
 
 <% alert_idx = 0 %>
 % for m in top["module"]:
@@ -310,11 +336,7 @@ max_intrwidth = (max(len(x.name) for x in block.interrupts)
   % if m["param_list"] or block.alerts:
   ${m["type"]} #(
   % if block.alerts:
-<%
-w = len(block.alerts)
-slice = str(alert_idx+w-1) + ":" + str(alert_idx)
-%>\
-    .AlertAsyncOn(alert_handler_reg_pkg::AsyncOn[${slice}])${"," if m["param_list"] else ""}
+    .AlertAsyncOn({${len(block.alerts)}{1'b1}})
   % endif
     % for i in m["param_list"]:
     .${i["name"]}(${i["name_top" if i.get("expose") == "true" or i.get("randtype", "none") != "none" else "default"]})${"," if not loop.last else ""}
@@ -346,6 +368,9 @@ slice = str(alert_idx+w-1) + ":" + str(alert_idx)
       .${lib.ljust("intr_"+intr.name+"_o",max_intrwidth+7)} (intr_${m["name"]}_${intr.name}),
     % endfor
     % if block.alerts:
+<%
+      slice = str(alert_idx + len(block.alerts) - 1) + ":" + str(alert_idx)
+%>\
       % for alert in block.alerts:
       // [${alert_idx}]: ${alert.name}<% alert_idx += 1 %>
       % endfor
@@ -399,9 +424,10 @@ slice = str(alert_idx+w-1) + ":" + str(alert_idx)
       .alert_rx_o  ( alert_rx ),
       .alert_tx_i  ( alert_tx ),
 
-      // TODO(#8174): top-level integration for LPGs
-      .lpg_cg_en_i ( {lc_ctrl_pkg::Off} ),
-      .lpg_rst_en_i ( {lc_ctrl_pkg::Off} ),
+      // synchronized clock gated / reset asserted
+      // indications for each alert
+      .alert_cg_en_i  ( alert_cg_en  ),
+      .alert_rst_en_i ( alert_rst_en ),
     % endif
     % if block.scan:
       .scanmode_i,
@@ -424,7 +450,18 @@ slice = str(alert_idx+w-1) + ":" + str(alert_idx)
       .${port} (${lib.get_reset_path(top, reset)})${"," if not loop.last else ""}
     % endfor
   );
+  % if block.alerts:
+  // Clock gating and reset indications for the alerts in this module
+<%
+  cg_en = m['clock_connections']['clk_i'].split('.')
+  rst_en = lib.get_reset_path(top, m["reset_connections"]['rst_ni']).split('.')
+%>\
+  assign alert_cg_en[${slice}] =
+      {${len(block.alerts)}{clkmgr_aon_cg_en_synced.${cg_en[1]}}};
+  assign alert_rst_en[${slice}] =
+      {${len(block.alerts)}{rstmgr_aon_rst_en_synced.${rst_en[1]}}};
 
+  % endif
 % endfor
   // interrupt assignments
 <% base = interrupt_num %>\

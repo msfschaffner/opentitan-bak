@@ -2664,6 +2664,18 @@
           index: -1
         }
         {
+          name: rst_en
+          struct: rstmgr_rst_en
+          package: rstmgr_pkg
+          type: uni
+          act: req
+          width: 1
+          inst_name: rstmgr_aon
+          default: ""
+          top_signame: rstmgr_aon_rst_en
+          index: -1
+        }
+        {
           name: rst_cpu_n
           struct: logic
           type: uni
@@ -2799,6 +2811,18 @@
           inst_name: clkmgr_aon
           default: ""
           top_signame: clkmgr_aon_clocks
+          index: -1
+        }
+        {
+          name: cg_en
+          struct: clkmgr_cg_en
+          package: clkmgr_pkg
+          type: uni
+          act: req
+          width: 1
+          inst_name: clkmgr_aon
+          default: ""
+          top_signame: clkmgr_aon_cg_en
           index: -1
         }
         {
@@ -7498,7 +7522,9 @@
     top:
     [
       clkmgr_aon.clocks
+      clkmgr_aon.cg_en
       rstmgr_aon.resets
+      rstmgr_aon.rst_en
       rv_core_ibex.irq_timer
       rv_core_ibex.hart_id
       rv_core_ibex.boot_addr
@@ -14855,6 +14881,18 @@
         index: -1
       }
       {
+        name: rst_en
+        struct: rstmgr_rst_en
+        package: rstmgr_pkg
+        type: uni
+        act: req
+        width: 1
+        inst_name: rstmgr_aon
+        default: ""
+        top_signame: rstmgr_aon_rst_en
+        index: -1
+      }
+      {
         name: rst_cpu_n
         struct: logic
         type: uni
@@ -14925,6 +14963,18 @@
         inst_name: clkmgr_aon
         default: ""
         top_signame: clkmgr_aon_clocks
+        index: -1
+      }
+      {
+        name: cg_en
+        struct: clkmgr_cg_en
+        package: clkmgr_pkg
+        type: uni
+        act: req
+        width: 1
+        inst_name: clkmgr_aon
+        default: ""
+        top_signame: clkmgr_aon_cg_en
         index: -1
       }
       {
@@ -20558,9 +20608,27 @@
         default: ""
       }
       {
+        package: clkmgr_pkg
+        struct: clkmgr_cg_en
+        signame: clkmgr_aon_cg_en
+        width: 1
+        type: uni
+        end_idx: -1
+        default: ""
+      }
+      {
         package: rstmgr_pkg
         struct: rstmgr_out
         signame: rstmgr_aon_resets
+        width: 1
+        type: uni
+        end_idx: -1
+        default: ""
+      }
+      {
+        package: rstmgr_pkg
+        struct: rstmgr_rst_en
+        signame: rstmgr_aon_rst_en
         width: 1
         type: uni
         end_idx: -1

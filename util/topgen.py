@@ -120,12 +120,8 @@ def generate_alert_handler(top, out_path):
     # default values
     esc_cnt_dw = 32
     accu_cnt_dw = 16
-    async_on = "'0"
     # leave this constant
     n_classes = 4
-    # TODO(#8174): topgen integration for LPGs
-    n_lpg = 1
-    lpg_map = "'0"
 
     topname = top["name"]
 
@@ -137,24 +133,10 @@ def generate_alert_handler(top, out_path):
     # Count number of alerts
     n_alerts = sum([x["width"] if "width" in x else 1 for x in top["alert"]])
 
-    if n_alerts < 1:
-        # set number of alerts to 1 such that the config is still valid
-        # that input will be tied off
-        n_alerts = 1
-        log.warning("no alerts are defined in the system")
-    else:
-        async_on = ""
-        for alert in top['alert']:
-            for k in range(alert['width']):
-                async_on = str(alert['async']) + async_on
-        # convert to hexstring to shorten line length
-        async_on = ("%d'h" % n_alerts) + hex(int(async_on, 2))[2:]
-
     log.info("alert handler parameterization:")
     log.info("NAlerts   = %d" % n_alerts)
     log.info("EscCntDw  = %d" % esc_cnt_dw)
     log.info("AccuCntDw = %d" % accu_cnt_dw)
-    log.info("AsyncOn   = %s" % async_on)
 
     # Define target path
     rtl_path = out_path / 'ip/alert_handler/rtl/autogen'
@@ -175,10 +157,7 @@ def generate_alert_handler(top, out_path):
             out = hjson_tpl.render(n_alerts=n_alerts,
                                    esc_cnt_dw=esc_cnt_dw,
                                    accu_cnt_dw=accu_cnt_dw,
-                                   async_on=async_on,
-                                   n_classes=n_classes,
-                                   n_lpg=n_lpg,
-                                   lpg_map=lpg_map)
+                                   n_classes=n_classes)
         except:  # noqa: E722
             log.error(exceptions.text_error_template().render())
         log.info("alert_handler hjson: %s" % out)

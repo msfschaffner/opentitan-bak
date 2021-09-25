@@ -707,7 +707,9 @@ module top_earlgrey #(
   tlul_pkg::tl_h2d_t       adc_ctrl_aon_tl_req;
   tlul_pkg::tl_d2h_t       adc_ctrl_aon_tl_rsp;
   clkmgr_pkg::clkmgr_out_t       clkmgr_aon_clocks;
+  clkmgr_pkg::clkmgr_cg_en_t       clkmgr_aon_cg_en;
   rstmgr_pkg::rstmgr_out_t       rstmgr_aon_resets;
+  rstmgr_pkg::rstmgr_rst_en_t       rstmgr_aon_rst_en;
   logic       rv_core_ibex_irq_timer;
   logic [31:0] rv_core_ibex_hart_id;
   logic [31:0] rv_core_ibex_boot_addr;
@@ -797,10 +799,28 @@ module top_earlgrey #(
     .tdo_oe_i (1'b0)
   );
 
+  // Clock manager / reset manager to alert handler sync and mapping
+  lc_ctrl_pkg::lc_tx_t [NAlerts-1:0] alert_cg_en;
+  lc_ctrl_pkg::lc_tx_t [NAlerts-1:0] alert_rst_en;
+  clkmgr_pkg::clkmgr_cg_en_t clkmgr_aon_cg_en_synced;
+  clkmgr_pkg::rstmgr_rst_en_t rstmgr_aon_rst_en_synced;
+  alert_handler_lp_sync #(
+    .NClocks(clkmgr_pkg::NumOutputClk),
+    .NResets(rstmgr_pkg::NumOutputRst),
+  ) u_alert_handler_lp_sync (
+    .clk_i     ( clkmgr_aon_clocks.clk_io_div4_secure     ),
+    .rst_ni    ( rstmgr_aon_resets.rst_lc_io_div4_n[rstmgr_pkg::Domain0Sel]     ),
+    .cg_en_i   ( clkmgr_aon_cg_en         ),
+    .rst_en_i  ( rstmgr_aon_rst_en        ),
+    .cg_en_o   ( clkmgr_aon_cg_en_synced  ),
+    .rst_en_o  ( rstmgr_aon_rst_en_synced )
+  );
+
+  // Peripheral Instantiation
 
 
   uart #(
-    .AlertAsyncOn(alert_handler_reg_pkg::AsyncOn[0:0])
+    .AlertAsyncOn({1{1'b1}})
   ) u_uart0 (
 
       // Input
@@ -831,9 +851,14 @@ module top_earlgrey #(
       .clk_i (clkmgr_aon_clocks.clk_io_div4_peri),
       .rst_ni (rstmgr_aon_resets.rst_sys_io_div4_n[rstmgr_pkg::Domain0Sel])
   );
+  // Clock gating and reset indications for the alerts in this module
+  assign alert_cg_en[0:0] =
+      {1{clkmgr_aon_cg_en_synced.clk_io_div4_peri}};
+  assign alert_rst_en[0:0] =
+      {1{rstmgr_aon_rst_en_synced.rst_sys_io_div4_n[rstmgr_pkg::Domain0Sel]}};
 
   uart #(
-    .AlertAsyncOn(alert_handler_reg_pkg::AsyncOn[1:1])
+    .AlertAsyncOn({1{1'b1}})
   ) u_uart1 (
 
       // Input
@@ -864,9 +889,14 @@ module top_earlgrey #(
       .clk_i (clkmgr_aon_clocks.clk_io_div4_peri),
       .rst_ni (rstmgr_aon_resets.rst_sys_io_div4_n[rstmgr_pkg::Domain0Sel])
   );
+  // Clock gating and reset indications for the alerts in this module
+  assign alert_cg_en[1:1] =
+      {1{clkmgr_aon_cg_en_synced.clk_io_div4_peri}};
+  assign alert_rst_en[1:1] =
+      {1{rstmgr_aon_rst_en_synced.rst_sys_io_div4_n[rstmgr_pkg::Domain0Sel]}};
 
   uart #(
-    .AlertAsyncOn(alert_handler_reg_pkg::AsyncOn[2:2])
+    .AlertAsyncOn({1{1'b1}})
   ) u_uart2 (
 
       // Input
@@ -897,9 +927,14 @@ module top_earlgrey #(
       .clk_i (clkmgr_aon_clocks.clk_io_div4_peri),
       .rst_ni (rstmgr_aon_resets.rst_sys_io_div4_n[rstmgr_pkg::Domain0Sel])
   );
+  // Clock gating and reset indications for the alerts in this module
+  assign alert_cg_en[2:2] =
+      {1{clkmgr_aon_cg_en_synced.clk_io_div4_peri}};
+  assign alert_rst_en[2:2] =
+      {1{rstmgr_aon_rst_en_synced.rst_sys_io_div4_n[rstmgr_pkg::Domain0Sel]}};
 
   uart #(
-    .AlertAsyncOn(alert_handler_reg_pkg::AsyncOn[3:3])
+    .AlertAsyncOn({1{1'b1}})
   ) u_uart3 (
 
       // Input
@@ -930,9 +965,14 @@ module top_earlgrey #(
       .clk_i (clkmgr_aon_clocks.clk_io_div4_peri),
       .rst_ni (rstmgr_aon_resets.rst_sys_io_div4_n[rstmgr_pkg::Domain0Sel])
   );
+  // Clock gating and reset indications for the alerts in this module
+  assign alert_cg_en[3:3] =
+      {1{clkmgr_aon_cg_en_synced.clk_io_div4_peri}};
+  assign alert_rst_en[3:3] =
+      {1{rstmgr_aon_rst_en_synced.rst_sys_io_div4_n[rstmgr_pkg::Domain0Sel]}};
 
   gpio #(
-    .AlertAsyncOn(alert_handler_reg_pkg::AsyncOn[4:4])
+    .AlertAsyncOn({1{1'b1}})
   ) u_gpio (
 
       // Input
@@ -956,9 +996,14 @@ module top_earlgrey #(
       .clk_i (clkmgr_aon_clocks.clk_io_div4_peri),
       .rst_ni (rstmgr_aon_resets.rst_sys_io_div4_n[rstmgr_pkg::Domain0Sel])
   );
+  // Clock gating and reset indications for the alerts in this module
+  assign alert_cg_en[4:4] =
+      {1{clkmgr_aon_cg_en_synced.clk_io_div4_peri}};
+  assign alert_rst_en[4:4] =
+      {1{rstmgr_aon_rst_en_synced.rst_sys_io_div4_n[rstmgr_pkg::Domain0Sel]}};
 
   spi_device #(
-    .AlertAsyncOn(alert_handler_reg_pkg::AsyncOn[5:5])
+    .AlertAsyncOn({1{1'b1}})
   ) u_spi_device (
 
       // Input
@@ -999,9 +1044,14 @@ module top_earlgrey #(
       .scan_clk_i (clkmgr_aon_clocks.clk_io_div2_peri),
       .rst_ni (rstmgr_aon_resets.rst_spi_device_n[rstmgr_pkg::Domain0Sel])
   );
+  // Clock gating and reset indications for the alerts in this module
+  assign alert_cg_en[5:5] =
+      {1{clkmgr_aon_cg_en_synced.clk_io_div4_peri}};
+  assign alert_rst_en[5:5] =
+      {1{rstmgr_aon_rst_en_synced.rst_spi_device_n[rstmgr_pkg::Domain0Sel]}};
 
   spi_host #(
-    .AlertAsyncOn(alert_handler_reg_pkg::AsyncOn[6:6])
+    .AlertAsyncOn({1{1'b1}})
   ) u_spi_host0 (
 
       // Input
@@ -1035,9 +1085,14 @@ module top_earlgrey #(
       .rst_ni (rstmgr_aon_resets.rst_spi_host0_n[rstmgr_pkg::Domain0Sel]),
       .rst_core_ni (rstmgr_aon_resets.rst_spi_host0_core_n[rstmgr_pkg::Domain0Sel])
   );
+  // Clock gating and reset indications for the alerts in this module
+  assign alert_cg_en[6:6] =
+      {1{clkmgr_aon_cg_en_synced.clk_io_div4_peri}};
+  assign alert_rst_en[6:6] =
+      {1{rstmgr_aon_rst_en_synced.rst_spi_host0_n[rstmgr_pkg::Domain0Sel]}};
 
   spi_host #(
-    .AlertAsyncOn(alert_handler_reg_pkg::AsyncOn[7:7])
+    .AlertAsyncOn({1{1'b1}})
   ) u_spi_host1 (
 
       // Input
@@ -1071,9 +1126,14 @@ module top_earlgrey #(
       .rst_ni (rstmgr_aon_resets.rst_spi_host1_n[rstmgr_pkg::Domain0Sel]),
       .rst_core_ni (rstmgr_aon_resets.rst_spi_host1_core_n[rstmgr_pkg::Domain0Sel])
   );
+  // Clock gating and reset indications for the alerts in this module
+  assign alert_cg_en[7:7] =
+      {1{clkmgr_aon_cg_en_synced.clk_io_div4_peri}};
+  assign alert_rst_en[7:7] =
+      {1{rstmgr_aon_rst_en_synced.rst_spi_host1_n[rstmgr_pkg::Domain0Sel]}};
 
   i2c #(
-    .AlertAsyncOn(alert_handler_reg_pkg::AsyncOn[8:8])
+    .AlertAsyncOn({1{1'b1}})
   ) u_i2c0 (
 
       // Input
@@ -1115,9 +1175,14 @@ module top_earlgrey #(
       .clk_i (clkmgr_aon_clocks.clk_io_div4_peri),
       .rst_ni (rstmgr_aon_resets.rst_i2c0_n[rstmgr_pkg::Domain0Sel])
   );
+  // Clock gating and reset indications for the alerts in this module
+  assign alert_cg_en[8:8] =
+      {1{clkmgr_aon_cg_en_synced.clk_io_div4_peri}};
+  assign alert_rst_en[8:8] =
+      {1{rstmgr_aon_rst_en_synced.rst_i2c0_n[rstmgr_pkg::Domain0Sel]}};
 
   i2c #(
-    .AlertAsyncOn(alert_handler_reg_pkg::AsyncOn[9:9])
+    .AlertAsyncOn({1{1'b1}})
   ) u_i2c1 (
 
       // Input
@@ -1159,9 +1224,14 @@ module top_earlgrey #(
       .clk_i (clkmgr_aon_clocks.clk_io_div4_peri),
       .rst_ni (rstmgr_aon_resets.rst_i2c1_n[rstmgr_pkg::Domain0Sel])
   );
+  // Clock gating and reset indications for the alerts in this module
+  assign alert_cg_en[9:9] =
+      {1{clkmgr_aon_cg_en_synced.clk_io_div4_peri}};
+  assign alert_rst_en[9:9] =
+      {1{rstmgr_aon_rst_en_synced.rst_i2c1_n[rstmgr_pkg::Domain0Sel]}};
 
   i2c #(
-    .AlertAsyncOn(alert_handler_reg_pkg::AsyncOn[10:10])
+    .AlertAsyncOn({1{1'b1}})
   ) u_i2c2 (
 
       // Input
@@ -1203,9 +1273,14 @@ module top_earlgrey #(
       .clk_i (clkmgr_aon_clocks.clk_io_div4_peri),
       .rst_ni (rstmgr_aon_resets.rst_i2c2_n[rstmgr_pkg::Domain0Sel])
   );
+  // Clock gating and reset indications for the alerts in this module
+  assign alert_cg_en[10:10] =
+      {1{clkmgr_aon_cg_en_synced.clk_io_div4_peri}};
+  assign alert_rst_en[10:10] =
+      {1{rstmgr_aon_rst_en_synced.rst_i2c2_n[rstmgr_pkg::Domain0Sel]}};
 
   pattgen #(
-    .AlertAsyncOn(alert_handler_reg_pkg::AsyncOn[11:11])
+    .AlertAsyncOn({1{1'b1}})
   ) u_pattgen (
 
       // Output
@@ -1233,9 +1308,14 @@ module top_earlgrey #(
       .clk_i (clkmgr_aon_clocks.clk_io_div4_peri),
       .rst_ni (rstmgr_aon_resets.rst_sys_io_div4_n[rstmgr_pkg::Domain0Sel])
   );
+  // Clock gating and reset indications for the alerts in this module
+  assign alert_cg_en[11:11] =
+      {1{clkmgr_aon_cg_en_synced.clk_io_div4_peri}};
+  assign alert_rst_en[11:11] =
+      {1{rstmgr_aon_rst_en_synced.rst_sys_io_div4_n[rstmgr_pkg::Domain0Sel]}};
 
   rv_timer #(
-    .AlertAsyncOn(alert_handler_reg_pkg::AsyncOn[12:12])
+    .AlertAsyncOn({1{1'b1}})
   ) u_rv_timer (
 
       // Interrupt
@@ -1252,9 +1332,14 @@ module top_earlgrey #(
       .clk_i (clkmgr_aon_clocks.clk_io_div4_timers),
       .rst_ni (rstmgr_aon_resets.rst_sys_io_div4_n[rstmgr_pkg::Domain0Sel])
   );
+  // Clock gating and reset indications for the alerts in this module
+  assign alert_cg_en[12:12] =
+      {1{clkmgr_aon_cg_en_synced.clk_io_div4_timers}};
+  assign alert_rst_en[12:12] =
+      {1{rstmgr_aon_rst_en_synced.rst_sys_io_div4_n[rstmgr_pkg::Domain0Sel]}};
 
   usbdev #(
-    .AlertAsyncOn(alert_handler_reg_pkg::AsyncOn[13:13])
+    .AlertAsyncOn({1{1'b1}})
   ) u_usbdev (
 
       // Input
@@ -1325,9 +1410,14 @@ module top_earlgrey #(
       .rst_aon_ni (rstmgr_aon_resets.rst_sys_aon_n[rstmgr_pkg::Domain0Sel]),
       .rst_usb_48mhz_ni (rstmgr_aon_resets.rst_usbif_n[rstmgr_pkg::Domain0Sel])
   );
+  // Clock gating and reset indications for the alerts in this module
+  assign alert_cg_en[13:13] =
+      {1{clkmgr_aon_cg_en_synced.clk_io_div4_peri}};
+  assign alert_rst_en[13:13] =
+      {1{rstmgr_aon_rst_en_synced.rst_usb_n[rstmgr_pkg::Domain0Sel]}};
 
   otp_ctrl #(
-    .AlertAsyncOn(alert_handler_reg_pkg::AsyncOn[16:14]),
+    .AlertAsyncOn({3{1'b1}})
     .MemInitFile(OtpCtrlMemInitFile),
     .RndCnstLfsrSeed(RndCnstOtpCtrlLfsrSeed),
     .RndCnstLfsrPerm(RndCnstOtpCtrlLfsrPerm)
@@ -1387,9 +1477,14 @@ module top_earlgrey #(
       .rst_ni (rstmgr_aon_resets.rst_lc_io_div4_n[rstmgr_pkg::Domain0Sel]),
       .rst_edn_ni (rstmgr_aon_resets.rst_sys_n[rstmgr_pkg::Domain0Sel])
   );
+  // Clock gating and reset indications for the alerts in this module
+  assign alert_cg_en[16:14] =
+      {3{clkmgr_aon_cg_en_synced.clk_io_div4_secure}};
+  assign alert_rst_en[16:14] =
+      {3{rstmgr_aon_rst_en_synced.rst_lc_io_div4_n[rstmgr_pkg::Domain0Sel]}};
 
   lc_ctrl #(
-    .AlertAsyncOn(alert_handler_reg_pkg::AsyncOn[19:17]),
+    .AlertAsyncOn({3{1'b1}})
     .RndCnstLcKeymgrDivInvalid(RndCnstLcCtrlLcKeymgrDivInvalid),
     .RndCnstLcKeymgrDivTestDevRma(RndCnstLcCtrlLcKeymgrDivTestDevRma),
     .RndCnstLcKeymgrDivProduction(RndCnstLcCtrlLcKeymgrDivProduction)
@@ -1447,6 +1542,11 @@ module top_earlgrey #(
       .rst_ni (rstmgr_aon_resets.rst_lc_io_div4_n[rstmgr_pkg::Domain0Sel]),
       .rst_kmac_ni (rstmgr_aon_resets.rst_sys_n[rstmgr_pkg::Domain0Sel])
   );
+  // Clock gating and reset indications for the alerts in this module
+  assign alert_cg_en[19:17] =
+      {3{clkmgr_aon_cg_en_synced.clk_io_div4_secure}};
+  assign alert_rst_en[19:17] =
+      {3{rstmgr_aon_rst_en_synced.rst_lc_io_div4_n[rstmgr_pkg::Domain0Sel]}};
 
   alert_handler #(
     .RndCnstLfsrSeed(RndCnstAlertHandlerLfsrSeed),
@@ -1471,9 +1571,10 @@ module top_earlgrey #(
       .alert_rx_o  ( alert_rx ),
       .alert_tx_i  ( alert_tx ),
 
-      // TODO(#8174): top-level integration for LPGs
-      .lpg_cg_en_i ( {lc_ctrl_pkg::Off} ),
-      .lpg_rst_en_i ( {lc_ctrl_pkg::Off} ),
+      // synchronized clock gated / reset asserted
+      // indications for each alert
+      .alert_cg_en_i  ( alert_cg_en  ),
+      .alert_rst_en_i ( alert_rst_en ),
 
       // Clock and reset connections
       .clk_i (clkmgr_aon_clocks.clk_io_div4_secure),
@@ -1482,9 +1583,8 @@ module top_earlgrey #(
       .rst_ni (rstmgr_aon_resets.rst_lc_io_div4_n[rstmgr_pkg::Domain0Sel]),
       .rst_edn_ni (rstmgr_aon_resets.rst_sys_n[rstmgr_pkg::Domain0Sel])
   );
-
   pwrmgr #(
-    .AlertAsyncOn(alert_handler_reg_pkg::AsyncOn[20:20])
+    .AlertAsyncOn({1{1'b1}})
   ) u_pwrmgr_aon (
 
       // Interrupt
@@ -1524,9 +1624,14 @@ module top_earlgrey #(
       .rst_main_ni (rstmgr_aon_resets.rst_por_aon_n[rstmgr_pkg::Domain0Sel]),
       .rst_slow_ni (rstmgr_aon_resets.rst_por_aon_n[rstmgr_pkg::DomainAonSel])
   );
+  // Clock gating and reset indications for the alerts in this module
+  assign alert_cg_en[20:20] =
+      {1{clkmgr_aon_cg_en_synced.clk_io_div4_powerup}};
+  assign alert_rst_en[20:20] =
+      {1{rstmgr_aon_rst_en_synced.rst_por_io_div4_n[rstmgr_pkg::DomainAonSel]}};
 
   rstmgr #(
-    .AlertAsyncOn(alert_handler_reg_pkg::AsyncOn[21:21])
+    .AlertAsyncOn({1{1'b1}})
   ) u_rstmgr_aon (
       // [21]: fatal_fault
       .alert_tx_o  ( alert_tx[21:21] ),
@@ -1537,6 +1642,7 @@ module top_earlgrey #(
       .pwr_i(pwrmgr_aon_pwr_rst_req),
       .pwr_o(pwrmgr_aon_pwr_rst_rsp),
       .resets_o(rstmgr_aon_resets),
+      .rst_en_o(rstmgr_aon_rst_en),
       .rst_cpu_n_i(rv_core_ibex_rst_cpu_n),
       .ndmreset_req_i(rv_dm_ndmreset_req),
       .alert_dump_i(alert_handler_crashdump),
@@ -1556,9 +1662,14 @@ module top_earlgrey #(
       .clk_io_div4_i (clkmgr_aon_clocks.clk_io_div4_powerup),
       .rst_ni (rstmgr_aon_resets.rst_por_io_div4_n[rstmgr_pkg::DomainAonSel])
   );
+  // Clock gating and reset indications for the alerts in this module
+  assign alert_cg_en[21:21] =
+      {1{clkmgr_aon_cg_en_synced.clk_io_div4_powerup}};
+  assign alert_rst_en[21:21] =
+      {1{rstmgr_aon_rst_en_synced.rst_por_io_div4_n[rstmgr_pkg::DomainAonSel]}};
 
   clkmgr #(
-    .AlertAsyncOn(alert_handler_reg_pkg::AsyncOn[23:22])
+    .AlertAsyncOn({2{1'b1}})
   ) u_clkmgr_aon (
       // [22]: recov_fault
       // [23]: fatal_fault
@@ -1567,6 +1678,7 @@ module top_earlgrey #(
 
       // Inter-module signals
       .clocks_o(clkmgr_aon_clocks),
+      .cg_en_o(clkmgr_aon_cg_en),
       .lc_dft_en_i(lc_ctrl_lc_dft_en),
       .ast_clk_byp_req_o(ast_clk_byp_req_o),
       .ast_clk_byp_ack_i(ast_clk_byp_ack_i),
@@ -1594,9 +1706,14 @@ module top_earlgrey #(
       .rst_io_div4_ni (rstmgr_aon_resets.rst_por_io_div4_n[rstmgr_pkg::DomainAonSel]),
       .rst_aon_ni (rstmgr_aon_resets.rst_por_aon_n[rstmgr_pkg::DomainAonSel])
   );
+  // Clock gating and reset indications for the alerts in this module
+  assign alert_cg_en[23:22] =
+      {2{clkmgr_aon_cg_en_synced.clk_io_div4_powerup}};
+  assign alert_rst_en[23:22] =
+      {2{rstmgr_aon_rst_en_synced.rst_por_io_div4_n[rstmgr_pkg::DomainAonSel]}};
 
   sysrst_ctrl #(
-    .AlertAsyncOn(alert_handler_reg_pkg::AsyncOn[24:24])
+    .AlertAsyncOn({1{1'b1}})
   ) u_sysrst_ctrl_aon (
 
       // Input
@@ -1644,9 +1761,14 @@ module top_earlgrey #(
       .rst_ni (rstmgr_aon_resets.rst_sys_io_div4_n[rstmgr_pkg::DomainAonSel]),
       .rst_aon_ni (rstmgr_aon_resets.rst_sys_aon_n[rstmgr_pkg::DomainAonSel])
   );
+  // Clock gating and reset indications for the alerts in this module
+  assign alert_cg_en[24:24] =
+      {1{clkmgr_aon_cg_en_synced.clk_io_div4_infra}};
+  assign alert_rst_en[24:24] =
+      {1{rstmgr_aon_rst_en_synced.rst_sys_io_div4_n[rstmgr_pkg::DomainAonSel]}};
 
   adc_ctrl #(
-    .AlertAsyncOn(alert_handler_reg_pkg::AsyncOn[25:25])
+    .AlertAsyncOn({1{1'b1}})
   ) u_adc_ctrl_aon (
 
       // Interrupt
@@ -1668,9 +1790,14 @@ module top_earlgrey #(
       .rst_ni (rstmgr_aon_resets.rst_sys_io_div4_n[rstmgr_pkg::DomainAonSel]),
       .rst_aon_ni (rstmgr_aon_resets.rst_sys_aon_n[rstmgr_pkg::DomainAonSel])
   );
+  // Clock gating and reset indications for the alerts in this module
+  assign alert_cg_en[25:25] =
+      {1{clkmgr_aon_cg_en_synced.clk_io_div4_peri}};
+  assign alert_rst_en[25:25] =
+      {1{rstmgr_aon_rst_en_synced.rst_sys_io_div4_n[rstmgr_pkg::DomainAonSel]}};
 
   pwm #(
-    .AlertAsyncOn(alert_handler_reg_pkg::AsyncOn[26:26])
+    .AlertAsyncOn({1{1'b1}})
   ) u_pwm_aon (
 
       // Output
@@ -1690,9 +1817,14 @@ module top_earlgrey #(
       .rst_ni (rstmgr_aon_resets.rst_sys_io_div4_n[rstmgr_pkg::DomainAonSel]),
       .rst_core_ni (rstmgr_aon_resets.rst_sys_aon_n[rstmgr_pkg::DomainAonSel])
   );
+  // Clock gating and reset indications for the alerts in this module
+  assign alert_cg_en[26:26] =
+      {1{clkmgr_aon_cg_en_synced.clk_io_div4_powerup}};
+  assign alert_rst_en[26:26] =
+      {1{rstmgr_aon_rst_en_synced.rst_sys_io_div4_n[rstmgr_pkg::DomainAonSel]}};
 
   pinmux #(
-    .AlertAsyncOn(alert_handler_reg_pkg::AsyncOn[27:27]),
+    .AlertAsyncOn({1{1'b1}})
     .TargetCfg(PinmuxAonTargetCfg)
   ) u_pinmux_aon (
       // [27]: fatal_fault
@@ -1748,9 +1880,14 @@ module top_earlgrey #(
       .rst_ni (rstmgr_aon_resets.rst_sys_io_div4_n[rstmgr_pkg::DomainAonSel]),
       .rst_aon_ni (rstmgr_aon_resets.rst_sys_aon_n[rstmgr_pkg::DomainAonSel])
   );
+  // Clock gating and reset indications for the alerts in this module
+  assign alert_cg_en[27:27] =
+      {1{clkmgr_aon_cg_en_synced.clk_io_div4_powerup}};
+  assign alert_rst_en[27:27] =
+      {1{rstmgr_aon_rst_en_synced.rst_sys_io_div4_n[rstmgr_pkg::DomainAonSel]}};
 
   aon_timer #(
-    .AlertAsyncOn(alert_handler_reg_pkg::AsyncOn[28:28])
+    .AlertAsyncOn({1{1'b1}})
   ) u_aon_timer_aon (
 
       // Interrupt
@@ -1775,9 +1912,14 @@ module top_earlgrey #(
       .rst_ni (rstmgr_aon_resets.rst_lc_io_div4_n[rstmgr_pkg::DomainAonSel]),
       .rst_aon_ni (rstmgr_aon_resets.rst_lc_aon_n[rstmgr_pkg::DomainAonSel])
   );
+  // Clock gating and reset indications for the alerts in this module
+  assign alert_cg_en[28:28] =
+      {1{clkmgr_aon_cg_en_synced.clk_io_div4_timers}};
+  assign alert_rst_en[28:28] =
+      {1{rstmgr_aon_rst_en_synced.rst_lc_io_div4_n[rstmgr_pkg::DomainAonSel]}};
 
   sensor_ctrl #(
-    .AlertAsyncOn(alert_handler_reg_pkg::AsyncOn[30:29])
+    .AlertAsyncOn({2{1'b1}})
   ) u_sensor_ctrl (
 
       // Output
@@ -1804,9 +1946,14 @@ module top_earlgrey #(
       .rst_ni (rstmgr_aon_resets.rst_lc_io_div4_n[rstmgr_pkg::DomainAonSel]),
       .rst_aon_ni (rstmgr_aon_resets.rst_lc_aon_n[rstmgr_pkg::DomainAonSel])
   );
+  // Clock gating and reset indications for the alerts in this module
+  assign alert_cg_en[30:29] =
+      {2{clkmgr_aon_cg_en_synced.clk_io_div4_secure}};
+  assign alert_rst_en[30:29] =
+      {2{rstmgr_aon_rst_en_synced.rst_lc_io_div4_n[rstmgr_pkg::DomainAonSel]}};
 
   sram_ctrl #(
-    .AlertAsyncOn(alert_handler_reg_pkg::AsyncOn[31:31]),
+    .AlertAsyncOn({1{1'b1}})
     .RndCnstSramKey(RndCnstSramCtrlRetAonSramKey),
     .RndCnstSramNonce(RndCnstSramCtrlRetAonSramNonce),
     .RndCnstLfsrSeed(RndCnstSramCtrlRetAonLfsrSeed),
@@ -1836,9 +1983,14 @@ module top_earlgrey #(
       .rst_ni (rstmgr_aon_resets.rst_sys_io_div4_n[rstmgr_pkg::DomainAonSel]),
       .rst_otp_ni (rstmgr_aon_resets.rst_lc_io_div4_n[rstmgr_pkg::DomainAonSel])
   );
+  // Clock gating and reset indications for the alerts in this module
+  assign alert_cg_en[31:31] =
+      {1{clkmgr_aon_cg_en_synced.clk_io_div4_infra}};
+  assign alert_rst_en[31:31] =
+      {1{rstmgr_aon_rst_en_synced.rst_sys_io_div4_n[rstmgr_pkg::DomainAonSel]}};
 
   flash_ctrl #(
-    .AlertAsyncOn(alert_handler_reg_pkg::AsyncOn[33:32]),
+    .AlertAsyncOn({2{1'b1}})
     .RndCnstAddrKey(RndCnstFlashCtrlAddrKey),
     .RndCnstDataKey(RndCnstFlashCtrlDataKey),
     .RndCnstLfsrSeed(RndCnstFlashCtrlLfsrSeed),
@@ -1903,9 +2055,14 @@ module top_earlgrey #(
       .rst_ni (rstmgr_aon_resets.rst_lc_n[rstmgr_pkg::Domain0Sel]),
       .rst_otp_ni (rstmgr_aon_resets.rst_lc_io_div4_n[rstmgr_pkg::Domain0Sel])
   );
+  // Clock gating and reset indications for the alerts in this module
+  assign alert_cg_en[33:32] =
+      {2{clkmgr_aon_cg_en_synced.clk_main_infra}};
+  assign alert_rst_en[33:32] =
+      {2{rstmgr_aon_rst_en_synced.rst_lc_n[rstmgr_pkg::Domain0Sel]}};
 
   rv_dm #(
-    .AlertAsyncOn(alert_handler_reg_pkg::AsyncOn[34:34]),
+    .AlertAsyncOn({1{1'b1}})
     .IdcodeValue(RvDmIdcodeValue)
   ) u_rv_dm (
       // [34]: fatal_fault
@@ -1933,9 +2090,14 @@ module top_earlgrey #(
       .clk_i (clkmgr_aon_clocks.clk_main_infra),
       .rst_ni (rstmgr_aon_resets.rst_lc_n[rstmgr_pkg::Domain0Sel])
   );
+  // Clock gating and reset indications for the alerts in this module
+  assign alert_cg_en[34:34] =
+      {1{clkmgr_aon_cg_en_synced.clk_main_infra}};
+  assign alert_rst_en[34:34] =
+      {1{rstmgr_aon_rst_en_synced.rst_lc_n[rstmgr_pkg::Domain0Sel]}};
 
   rv_plic #(
-    .AlertAsyncOn(alert_handler_reg_pkg::AsyncOn[35:35])
+    .AlertAsyncOn({1{1'b1}})
   ) u_rv_plic (
       // [35]: fatal_fault
       .alert_tx_o  ( alert_tx[35:35] ),
@@ -1953,9 +2115,14 @@ module top_earlgrey #(
       .clk_i (clkmgr_aon_clocks.clk_main_secure),
       .rst_ni (rstmgr_aon_resets.rst_sys_n[rstmgr_pkg::Domain0Sel])
   );
+  // Clock gating and reset indications for the alerts in this module
+  assign alert_cg_en[35:35] =
+      {1{clkmgr_aon_cg_en_synced.clk_main_secure}};
+  assign alert_rst_en[35:35] =
+      {1{rstmgr_aon_rst_en_synced.rst_sys_n[rstmgr_pkg::Domain0Sel]}};
 
   aes #(
-    .AlertAsyncOn(alert_handler_reg_pkg::AsyncOn[37:36]),
+    .AlertAsyncOn({2{1'b1}})
     .AES192Enable(1'b1),
     .Masking(AesMasking),
     .SBoxImpl(AesSBoxImpl),
@@ -1989,9 +2156,14 @@ module top_earlgrey #(
       .rst_ni (rstmgr_aon_resets.rst_sys_n[rstmgr_pkg::Domain0Sel]),
       .rst_edn_ni (rstmgr_aon_resets.rst_sys_n[rstmgr_pkg::Domain0Sel])
   );
+  // Clock gating and reset indications for the alerts in this module
+  assign alert_cg_en[37:36] =
+      {2{clkmgr_aon_cg_en_synced.clk_main_aes}};
+  assign alert_rst_en[37:36] =
+      {2{rstmgr_aon_rst_en_synced.rst_sys_n[rstmgr_pkg::Domain0Sel]}};
 
   hmac #(
-    .AlertAsyncOn(alert_handler_reg_pkg::AsyncOn[38:38])
+    .AlertAsyncOn({1{1'b1}})
   ) u_hmac (
 
       // Interrupt
@@ -2011,9 +2183,14 @@ module top_earlgrey #(
       .clk_i (clkmgr_aon_clocks.clk_main_hmac),
       .rst_ni (rstmgr_aon_resets.rst_sys_n[rstmgr_pkg::Domain0Sel])
   );
+  // Clock gating and reset indications for the alerts in this module
+  assign alert_cg_en[38:38] =
+      {1{clkmgr_aon_cg_en_synced.clk_main_hmac}};
+  assign alert_rst_en[38:38] =
+      {1{rstmgr_aon_rst_en_synced.rst_sys_n[rstmgr_pkg::Domain0Sel]}};
 
   kmac #(
-    .AlertAsyncOn(alert_handler_reg_pkg::AsyncOn[39:39]),
+    .AlertAsyncOn({1{1'b1}})
     .EnMasking(KmacEnMasking),
     .ReuseShare(KmacReuseShare),
     .SecCmdDelay(SecKmacCmdDelay),
@@ -2046,9 +2223,14 @@ module top_earlgrey #(
       .rst_ni (rstmgr_aon_resets.rst_sys_n[rstmgr_pkg::Domain0Sel]),
       .rst_edn_ni (rstmgr_aon_resets.rst_sys_n[rstmgr_pkg::Domain0Sel])
   );
+  // Clock gating and reset indications for the alerts in this module
+  assign alert_cg_en[39:39] =
+      {1{clkmgr_aon_cg_en_synced.clk_main_kmac}};
+  assign alert_rst_en[39:39] =
+      {1{rstmgr_aon_rst_en_synced.rst_sys_n[rstmgr_pkg::Domain0Sel]}};
 
   keymgr #(
-    .AlertAsyncOn(alert_handler_reg_pkg::AsyncOn[41:40]),
+    .AlertAsyncOn({2{1'b1}})
     .KmacEnMasking(KeymgrKmacEnMasking),
     .RndCnstLfsrSeed(RndCnstKeymgrLfsrSeed),
     .RndCnstLfsrPerm(RndCnstKeymgrLfsrPerm),
@@ -2097,9 +2279,14 @@ module top_earlgrey #(
       .rst_ni (rstmgr_aon_resets.rst_sys_n[rstmgr_pkg::Domain0Sel]),
       .rst_edn_ni (rstmgr_aon_resets.rst_sys_n[rstmgr_pkg::Domain0Sel])
   );
+  // Clock gating and reset indications for the alerts in this module
+  assign alert_cg_en[41:40] =
+      {2{clkmgr_aon_cg_en_synced.clk_main_secure}};
+  assign alert_rst_en[41:40] =
+      {2{rstmgr_aon_rst_en_synced.rst_sys_n[rstmgr_pkg::Domain0Sel]}};
 
   csrng #(
-    .AlertAsyncOn(alert_handler_reg_pkg::AsyncOn[43:42]),
+    .AlertAsyncOn({2{1'b1}})
     .RndCnstCsKeymgrDivNonProduction(RndCnstCsrngCsKeymgrDivNonProduction),
     .RndCnstCsKeymgrDivProduction(RndCnstCsrngCsKeymgrDivProduction),
     .SBoxImpl(CsrngSBoxImpl)
@@ -2131,9 +2318,14 @@ module top_earlgrey #(
       .clk_i (clkmgr_aon_clocks.clk_main_secure),
       .rst_ni (rstmgr_aon_resets.rst_sys_n[rstmgr_pkg::Domain0Sel])
   );
+  // Clock gating and reset indications for the alerts in this module
+  assign alert_cg_en[43:42] =
+      {2{clkmgr_aon_cg_en_synced.clk_main_secure}};
+  assign alert_rst_en[43:42] =
+      {2{rstmgr_aon_rst_en_synced.rst_sys_n[rstmgr_pkg::Domain0Sel]}};
 
   entropy_src #(
-    .AlertAsyncOn(alert_handler_reg_pkg::AsyncOn[45:44]),
+    .AlertAsyncOn({2{1'b1}})
     .Stub(EntropySrcStub)
   ) u_entropy_src (
 
@@ -2166,9 +2358,14 @@ module top_earlgrey #(
       .clk_i (clkmgr_aon_clocks.clk_main_secure),
       .rst_ni (rstmgr_aon_resets.rst_sys_n[rstmgr_pkg::Domain0Sel])
   );
+  // Clock gating and reset indications for the alerts in this module
+  assign alert_cg_en[45:44] =
+      {2{clkmgr_aon_cg_en_synced.clk_main_secure}};
+  assign alert_rst_en[45:44] =
+      {2{rstmgr_aon_rst_en_synced.rst_sys_n[rstmgr_pkg::Domain0Sel]}};
 
   edn #(
-    .AlertAsyncOn(alert_handler_reg_pkg::AsyncOn[47:46])
+    .AlertAsyncOn({2{1'b1}})
   ) u_edn0 (
 
       // Interrupt
@@ -2191,9 +2388,14 @@ module top_earlgrey #(
       .clk_i (clkmgr_aon_clocks.clk_main_secure),
       .rst_ni (rstmgr_aon_resets.rst_sys_n[rstmgr_pkg::Domain0Sel])
   );
+  // Clock gating and reset indications for the alerts in this module
+  assign alert_cg_en[47:46] =
+      {2{clkmgr_aon_cg_en_synced.clk_main_secure}};
+  assign alert_rst_en[47:46] =
+      {2{rstmgr_aon_rst_en_synced.rst_sys_n[rstmgr_pkg::Domain0Sel]}};
 
   edn #(
-    .AlertAsyncOn(alert_handler_reg_pkg::AsyncOn[49:48])
+    .AlertAsyncOn({2{1'b1}})
   ) u_edn1 (
 
       // Interrupt
@@ -2216,9 +2418,14 @@ module top_earlgrey #(
       .clk_i (clkmgr_aon_clocks.clk_main_secure),
       .rst_ni (rstmgr_aon_resets.rst_sys_n[rstmgr_pkg::Domain0Sel])
   );
+  // Clock gating and reset indications for the alerts in this module
+  assign alert_cg_en[49:48] =
+      {2{clkmgr_aon_cg_en_synced.clk_main_secure}};
+  assign alert_rst_en[49:48] =
+      {2{rstmgr_aon_rst_en_synced.rst_sys_n[rstmgr_pkg::Domain0Sel]}};
 
   sram_ctrl #(
-    .AlertAsyncOn(alert_handler_reg_pkg::AsyncOn[50:50]),
+    .AlertAsyncOn({1{1'b1}})
     .RndCnstSramKey(RndCnstSramCtrlMainSramKey),
     .RndCnstSramNonce(RndCnstSramCtrlMainSramNonce),
     .RndCnstLfsrSeed(RndCnstSramCtrlMainLfsrSeed),
@@ -2248,9 +2455,14 @@ module top_earlgrey #(
       .rst_ni (rstmgr_aon_resets.rst_sys_n[rstmgr_pkg::Domain0Sel]),
       .rst_otp_ni (rstmgr_aon_resets.rst_lc_io_div4_n[rstmgr_pkg::Domain0Sel])
   );
+  // Clock gating and reset indications for the alerts in this module
+  assign alert_cg_en[50:50] =
+      {1{clkmgr_aon_cg_en_synced.clk_main_infra}};
+  assign alert_rst_en[50:50] =
+      {1{rstmgr_aon_rst_en_synced.rst_sys_n[rstmgr_pkg::Domain0Sel]}};
 
   otbn #(
-    .AlertAsyncOn(alert_handler_reg_pkg::AsyncOn[52:51]),
+    .AlertAsyncOn({2{1'b1}})
     .Stub(OtbnStub),
     .RegFile(OtbnRegFile),
     .RndCnstUrndLfsrSeed(RndCnstOtbnUrndLfsrSeed),
@@ -2288,9 +2500,14 @@ module top_earlgrey #(
       .rst_edn_ni (rstmgr_aon_resets.rst_sys_n[rstmgr_pkg::Domain0Sel]),
       .rst_otp_ni (rstmgr_aon_resets.rst_lc_io_div4_n[rstmgr_pkg::Domain0Sel])
   );
+  // Clock gating and reset indications for the alerts in this module
+  assign alert_cg_en[52:51] =
+      {2{clkmgr_aon_cg_en_synced.clk_main_otbn}};
+  assign alert_rst_en[52:51] =
+      {2{rstmgr_aon_rst_en_synced.rst_sys_n[rstmgr_pkg::Domain0Sel]}};
 
   rom_ctrl #(
-    .AlertAsyncOn(alert_handler_reg_pkg::AsyncOn[53:53]),
+    .AlertAsyncOn({1{1'b1}})
     .BootRomInitFile(RomCtrlBootRomInitFile),
     .RndCnstScrNonce(RndCnstRomCtrlScrNonce),
     .RndCnstScrKey(RndCnstRomCtrlScrKey),
@@ -2315,9 +2532,14 @@ module top_earlgrey #(
       .clk_i (clkmgr_aon_clocks.clk_main_infra),
       .rst_ni (rstmgr_aon_resets.rst_sys_n[rstmgr_pkg::Domain0Sel])
   );
+  // Clock gating and reset indications for the alerts in this module
+  assign alert_cg_en[53:53] =
+      {1{clkmgr_aon_cg_en_synced.clk_main_infra}};
+  assign alert_rst_en[53:53] =
+      {1{rstmgr_aon_rst_en_synced.rst_sys_n[rstmgr_pkg::Domain0Sel]}};
 
   rv_core_ibex #(
-    .AlertAsyncOn(alert_handler_reg_pkg::AsyncOn[57:54]),
+    .AlertAsyncOn({4{1'b1}})
     .RndCnstLfsrSeed(RndCnstRvCoreIbexLfsrSeed),
     .RndCnstLfsrPerm(RndCnstRvCoreIbexLfsrPerm),
     .PMPEnable(RvCoreIbexPMPEnable),
@@ -2378,6 +2600,11 @@ module top_earlgrey #(
       .rst_ni (rstmgr_aon_resets.rst_sys_n[rstmgr_pkg::Domain0Sel]),
       .rst_esc_ni (rstmgr_aon_resets.rst_lc_io_div4_n[rstmgr_pkg::Domain0Sel])
   );
+  // Clock gating and reset indications for the alerts in this module
+  assign alert_cg_en[57:54] =
+      {4{clkmgr_aon_cg_en_synced.clk_main_infra}};
+  assign alert_rst_en[57:54] =
+      {4{rstmgr_aon_rst_en_synced.rst_sys_n[rstmgr_pkg::Domain0Sel]}};
 
   // interrupt assignments
   assign intr_vector = {
