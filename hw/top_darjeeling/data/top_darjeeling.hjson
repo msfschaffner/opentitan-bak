@@ -255,8 +255,9 @@
       clock_srcs: {clk_i: "io_div4", clk_kmac_i: "main"},
       clock_group: "secure",
       reset_connections: {rst_ni: "lc_io_div4", rst_kmac_ni: "lc"},
-      base_addr: {
-        hart: "0x30140000",
+      base_addrs: {
+        regs: {hart: "0x30140000"},
+        dbg:  {soc_dbg: "0x00020000"},
       },
       param_decl: {
         // NOTE THAT THIS IS A FEATURE FOR TEST CHIPS ONLY TO MITIGATE
@@ -561,6 +562,13 @@
       base_addrs: {
         mem:  {hart: "0x00040000"},
         regs: {hart: "0x21200000"},
+        dbg:  {soc_dbg: "0x00000000"},
+      },
+      param_decl: {
+        // NOTE THAT THIS IS A FEATURE FOR TEST CHIPS ONLY TO MITIGATE
+        // THE RISK OF A BROKEN OTP MACRO. THIS WILL BE DISABLED FOR
+        // PRODUCTION DEVICES.
+        SecVolatileRawUnlockEn: "top_pkg::SecVolatileRawUnlockEn",
       }
     },
     { name: "rv_plic",
@@ -1039,7 +1047,8 @@
       'pwrmgr_aon.pwr_otp'      : ['otp_ctrl.pwr_otp'],
       'pwrmgr_aon.pwr_lc'       : ['lc_ctrl.pwr_lc'],
       'pwrmgr_aon.strap'        : ['pinmux_aon.strap_en',
-                                   'gpio.strap_en'],
+                                   'gpio.strap_en',
+                                   'rv_dm.strap_en'],
       'pwrmgr_aon.low_power'    : ['pinmux_aon.sleep_en',
                                    'aon_timer_aon.sleep_mode'],
       'pwrmgr_aon.fetch_en'     : ['rv_core_ibex.pwrmgr_cpu_en'],
@@ -1098,7 +1107,8 @@
       'lc_ctrl.lc_keymgr_div'  : ['keymgr_dpe.lc_keymgr_div'],
 
       // Strap enable override signal, only used when SecVolatileRawUnlockEn = 1.
-      'lc_ctrl.strap_en_override'  : ['pinmux_aon.strap_en_override'],
+      'lc_ctrl.strap_en_override'  : ['pinmux_aon.strap_en_override',
+                                      'rv_dm.strap_en_override'],
 
       // LC function control signal broadcast
       'lc_ctrl.lc_dft_en'          : ['otp_ctrl.lc_dft_en',
@@ -1123,10 +1133,12 @@
                                       'sram_ctrl_ret_aon.lc_escalate_en',
                                       'sram_ctrl_mbox.lc_escalate_en',
                                       'aon_timer_aon.lc_escalate_en',
-                                      'pinmux_aon.lc_escalate_en'],
+                                      'pinmux_aon.lc_escalate_en',
+                                      'rv_dm.lc_escalate_en'],
 
       'lc_ctrl.lc_check_byp_en'    : ['otp_ctrl.lc_check_byp_en',
-                                      'pinmux_aon.lc_check_byp_en'],
+                                      'pinmux_aon.lc_check_byp_en',
+                                      'rv_dm.lc_check_byp_en'],
       'lc_ctrl.lc_clk_byp_req'     : ['clkmgr_aon.lc_clk_byp_req'],
       'lc_ctrl.lc_clk_byp_ack'     : ['clkmgr_aon.lc_clk_byp_ack'],
 
@@ -1254,13 +1266,7 @@
         'mbx_pcie1.doe_intr_en'           : 'mbx_pcie1_doe_intr_en',
         'mbx_pcie1.doe_intr_support'      : 'mbx_pcie1_doe_intr_support',
         'mbx_pcie1.doe_async_msg_support' : 'mbx_pcie1_doe_async_msg_support',
-        'dbg.tl_dbg'                      : 'mbx_jtag_dmi',
-        'lc_ctrl.dmi_tl_h2d'              : 'lc_ctrl_dmi_h2d',
-        'lc_ctrl.dmi_tl_d2h'              : 'lc_ctrl_dmi_d2h',
-        'rv_dm.dmi_tl_h2d'                : 'rv_dm_dmi_h2d',
-        'rv_dm.dmi_tl_d2h'                : 'rv_dm_dmi_d2h',
-        'pwrmgr_aon.strap'                : 'pwrmgr_strap_en',
-        'rv_dm.pinmux_hw_debug_en'        : 'rv_pinmux_hw_debug_en',
+        'dbg.tl_dbg'                      : 'dbg_tl',
         'peri.tl_ast'                     : 'ast_tl',
         'pinmux_aon.dft_strap_test'       : 'dft_strap_test'
         'pinmux_aon.dft_hold_tap_sel'     : 'dft_hold_tap_sel',
@@ -1315,10 +1321,10 @@
       reset_connections: {rst_mbx_ni: "lc"},
     },
     { name: "dbg",
-      clock_srcs: {clk_dbg_i: "main"},
+      clock_srcs: {clk_dbg_i: "main", clk_peri_i: "io_div4"},
       clock_group: "infra",
       reset: "lc",
-      reset_connections: {rst_dbg_ni: "lc"},
+      reset_connections: {rst_dbg_ni: "lc", rst_peri_ni: "lc_io_div4"},
     },
   ],
 
@@ -1352,8 +1358,13 @@
     // where the ports have to be switched to a real type when the ANALOGSIM macro is defined).
     pads: [
       // Special manually connected pads
-      { name: 'POR_N'           , type: 'InputStd', bank: 'VIO' , connection: 'manual', desc: 'System reset'},
-      { name: 'OTP_EXT_VOLT'    , type: 'AnalogIn1',bank: 'VIO' , connection: 'manual', desc: 'OTP external voltage input'},
+      { name: 'POR_N'           , type: 'InputStd',     bank: 'VIO' , connection: 'manual', desc: 'System reset'},
+      { name: 'JTAG_TCK'        , type: 'InputStd',     bank: 'VIO' , connection: 'manual', desc: 'JTAG TCK signal'},
+      { name: 'JTAG_TMS'        , type: 'InputStd',     bank: 'VIO' , connection: 'manual', desc: 'JTAG TMS signal'},
+      { name: 'JTAG_TDI'        , type: 'InputStd',     bank: 'VIO' , connection: 'manual', desc: 'JTAG TDI signal'},
+      { name: 'JTAG_TDO'        , type: 'BidirStd',     bank: 'VIO' , connection: 'manual', desc: 'JTAG TDO signal'},
+      { name: 'JTAG_TRST_N'     , type: 'InputStd',     bank: 'VIO' , connection: 'manual', desc: 'JTAG TRST_N signal'},
+      { name: 'OTP_EXT_VOLT'    , type: 'AnalogIn1',    bank: 'VIO' , connection: 'manual', desc: 'OTP external voltage input'},
       // Dedicated IOs
       { name: 'SPI_HOST_D0'     , type: 'BidirStd', bank: 'VIO', connection: 'direct', desc: 'SPI host data'},
       { name: 'SPI_HOST_D1'     , type: 'BidirStd', bank: 'VIO', connection: 'direct', desc: 'SPI host data'},

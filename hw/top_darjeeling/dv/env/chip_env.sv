@@ -31,6 +31,9 @@ class chip_env extends cip_base_env #(
 
     // Set tl_agent's is_active bit based on the stub_cpu value.
     cfg.m_tl_agent_cfg.is_active = cfg.chip_vif.stub_cpu;
+    foreach (cfg.m_tl_agent_cfgs[i]) begin
+      cfg.m_tl_agent_cfgs[i].is_active = cfg.chip_vif.stub_cpu;
+    end
 
     for (chip_mem_e mem = mem.first(), int i = 0; i < mem.num(); mem = mem.next(), i++) begin
       string inst = $sformatf("mem_bkdr_util[%0s]", mem.name());

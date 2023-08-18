@@ -48,6 +48,7 @@ module top_darjeeling #(
   // parameters for sram_ctrl_ret_aon
   parameter bit SramCtrlRetAonInstrExec = 0,
   // parameters for rv_dm
+  parameter bit SecRvDmVolatileRawUnlockEn = top_pkg::SecVolatileRawUnlockEn,
   parameter logic [31:0] RvDmNextDmAddr = '0,
   // parameters for rv_plic
   // parameters for aes
@@ -203,14 +204,8 @@ module top_darjeeling #(
   output logic       mbx_pcie1_doe_intr_en_o,
   output logic       mbx_pcie1_doe_intr_support_o,
   output logic       mbx_pcie1_doe_async_msg_support_o,
-  input  tlul_pkg::tl_h2d_t       mbx_jtag_dmi_req_i,
-  output tlul_pkg::tl_d2h_t       mbx_jtag_dmi_rsp_o,
-  input  tlul_pkg::tl_h2d_t       lc_ctrl_dmi_h2d_i,
-  output tlul_pkg::tl_d2h_t       lc_ctrl_dmi_d2h_o,
-  input  tlul_pkg::tl_h2d_t       rv_dm_dmi_h2d_i,
-  output tlul_pkg::tl_d2h_t       rv_dm_dmi_d2h_o,
-  output logic       pwrmgr_strap_en_o,
-  input  lc_ctrl_pkg::lc_tx_t       rv_pinmux_hw_debug_en_i,
+  input  tlul_pkg::tl_h2d_t       dbg_tl_req_i,
+  output tlul_pkg::tl_d2h_t       dbg_tl_rsp_o,
   output tlul_pkg::tl_h2d_t       ast_tl_req_o,
   input  tlul_pkg::tl_d2h_t       ast_tl_rsp_i,
   output pinmux_pkg::dft_strap_test_req_t       dft_strap_test_o,
@@ -648,8 +643,8 @@ module top_darjeeling #(
   tlul_pkg::tl_d2h_t       otp_ctrl_core_tl_rsp;
   tlul_pkg::tl_h2d_t       otp_ctrl_prim_tl_req;
   tlul_pkg::tl_d2h_t       otp_ctrl_prim_tl_rsp;
-  tlul_pkg::tl_h2d_t       lc_ctrl_tl_req;
-  tlul_pkg::tl_d2h_t       lc_ctrl_tl_rsp;
+  tlul_pkg::tl_h2d_t       lc_ctrl_regs_tl_req;
+  tlul_pkg::tl_d2h_t       lc_ctrl_regs_tl_rsp;
   tlul_pkg::tl_h2d_t       sensor_ctrl_tl_req;
   tlul_pkg::tl_d2h_t       sensor_ctrl_tl_rsp;
   tlul_pkg::tl_h2d_t       alert_handler_tl_req;
@@ -678,8 +673,12 @@ module top_darjeeling #(
   tlul_pkg::tl_d2h_t       mbx_pcie0_soc_tl_d_rsp;
   tlul_pkg::tl_h2d_t       mbx_pcie1_soc_tl_d_req;
   tlul_pkg::tl_d2h_t       mbx_pcie1_soc_tl_d_rsp;
+  tlul_pkg::tl_h2d_t       rv_dm_dbg_tl_d_req;
+  tlul_pkg::tl_d2h_t       rv_dm_dbg_tl_d_rsp;
   tlul_pkg::tl_h2d_t       mbx_jtag_soc_tl_d_req;
   tlul_pkg::tl_d2h_t       mbx_jtag_soc_tl_d_rsp;
+  tlul_pkg::tl_h2d_t       lc_ctrl_dbg_tl_req;
+  tlul_pkg::tl_d2h_t       lc_ctrl_dbg_tl_rsp;
   clkmgr_pkg::clkmgr_out_t       clkmgr_aon_clocks;
   clkmgr_pkg::clkmgr_cg_en_t       clkmgr_aon_cg_en;
   rstmgr_pkg::rstmgr_out_t       rstmgr_aon_resets;
@@ -702,7 +701,6 @@ module top_darjeeling #(
   assign ast_ram_1p_cfg = ram_1p_cfg_i;
   assign ast_spi_ram_2p_cfg = spi_ram_2p_cfg_i;
   assign ast_rom_cfg = rom_cfg_i;
-  assign pwrmgr_strap_en_o = pwrmgr_aon_strap;
 
   // define partial inter-module tie-off
   edn_pkg::edn_rsp_t unused_edn1_edn_rsp1;
@@ -1178,8 +1176,6 @@ module top_darjeeling #(
       .alert_rx_i  ( alert_rx[12:10] ),
 
       // Inter-module signals
-      .dmi_tl_h2d_i(lc_ctrl_dmi_h2d_i),
-      .dmi_tl_d2h_o(lc_ctrl_dmi_d2h_o),
       .esc_scrap_state0_tx_i(alert_handler_esc_tx[1]),
       .esc_scrap_state0_rx_o(alert_handler_esc_rx[1]),
       .esc_scrap_state1_tx_i(alert_handler_esc_tx[2]),
@@ -1215,8 +1211,10 @@ module top_darjeeling #(
       .otp_manuf_state_i(lc_ctrl_otp_manuf_state),
       .hw_rev_o(),
       .strap_en_override_o(lc_ctrl_strap_en_override),
-      .tl_i(lc_ctrl_tl_req),
-      .tl_o(lc_ctrl_tl_rsp),
+      .regs_tl_i(lc_ctrl_regs_tl_req),
+      .regs_tl_o(lc_ctrl_regs_tl_rsp),
+      .dbg_tl_i(lc_ctrl_dbg_tl_req),
+      .dbg_tl_o(lc_ctrl_dbg_tl_rsp),
 
       // Clock and reset connections
       .clk_i (clkmgr_aon_clocks.clk_io_div4_secure),
@@ -1657,6 +1655,7 @@ module top_darjeeling #(
   );
   rv_dm #(
     .AlertAsyncOn(alert_handler_reg_pkg::AsyncOn[53:53]),
+    .SecVolatileRawUnlockEn(SecRvDmVolatileRawUnlockEn),
     .NextDmAddr(RvDmNextDmAddr)
   ) u_rv_dm (
       // [53]: fatal_fault
@@ -1664,10 +1663,11 @@ module top_darjeeling #(
       .alert_rx_i  ( alert_rx[53:53] ),
 
       // Inter-module signals
-      .dmi_tl_h2d_i(rv_dm_dmi_h2d_i),
-      .dmi_tl_d2h_o(rv_dm_dmi_d2h_o),
       .lc_hw_debug_en_i(lc_ctrl_lc_hw_debug_en),
-      .pinmux_hw_debug_en_i(rv_pinmux_hw_debug_en_i),
+      .lc_escalate_en_i(lc_ctrl_lc_escalate_en),
+      .lc_check_byp_en_i(lc_ctrl_lc_check_byp_en),
+      .strap_en_i(pwrmgr_aon_strap),
+      .strap_en_override_i(lc_ctrl_strap_en_override),
       .unavailable_i(1'b0),
       .ndmreset_req_o(rv_dm_ndmreset_req),
       .dmactive_o(),
@@ -1678,6 +1678,8 @@ module top_darjeeling #(
       .regs_tl_d_o(rv_dm_regs_tl_d_rsp),
       .mem_tl_d_i(rv_dm_mem_tl_d_req),
       .mem_tl_d_o(rv_dm_mem_tl_d_rsp),
+      .dbg_tl_d_i(rv_dm_dbg_tl_d_req),
+      .dbg_tl_d_o(rv_dm_dbg_tl_d_rsp),
       .scanmode_i,
 
       // Clock and reset connections
@@ -2848,9 +2850,9 @@ module top_darjeeling #(
     .tl_otp_ctrl__prim_o(otp_ctrl_prim_tl_req),
     .tl_otp_ctrl__prim_i(otp_ctrl_prim_tl_rsp),
 
-    // port: tl_lc_ctrl
-    .tl_lc_ctrl_o(lc_ctrl_tl_req),
-    .tl_lc_ctrl_i(lc_ctrl_tl_rsp),
+    // port: tl_lc_ctrl__regs
+    .tl_lc_ctrl__regs_o(lc_ctrl_regs_tl_req),
+    .tl_lc_ctrl__regs_i(lc_ctrl_regs_tl_rsp),
 
     // port: tl_sensor_ctrl
     .tl_sensor_ctrl_o(sensor_ctrl_tl_req),
@@ -2928,15 +2930,25 @@ module top_darjeeling #(
   );
   xbar_dbg u_xbar_dbg (
     .clk_dbg_i (clkmgr_aon_clocks.clk_main_infra),
+    .clk_peri_i (clkmgr_aon_clocks.clk_io_div4_infra),
     .rst_dbg_ni (rstmgr_aon_resets.rst_lc_n[rstmgr_pkg::Domain0Sel]),
+    .rst_peri_ni (rstmgr_aon_resets.rst_lc_io_div4_n[rstmgr_pkg::Domain0Sel]),
 
     // port: tl_dbg
-    .tl_dbg_i(mbx_jtag_dmi_req_i),
-    .tl_dbg_o(mbx_jtag_dmi_rsp_o),
+    .tl_dbg_i(dbg_tl_req_i),
+    .tl_dbg_o(dbg_tl_rsp_o),
+
+    // port: tl_rv_dm__dbg
+    .tl_rv_dm__dbg_o(rv_dm_dbg_tl_d_req),
+    .tl_rv_dm__dbg_i(rv_dm_dbg_tl_d_rsp),
 
     // port: tl_mbx_jtag__soc
     .tl_mbx_jtag__soc_o(mbx_jtag_soc_tl_d_req),
     .tl_mbx_jtag__soc_i(mbx_jtag_soc_tl_d_rsp),
+
+    // port: tl_lc_ctrl__dbg
+    .tl_lc_ctrl__dbg_o(lc_ctrl_dbg_tl_req),
+    .tl_lc_ctrl__dbg_i(lc_ctrl_dbg_tl_rsp),
 
 
     .scanmode_i

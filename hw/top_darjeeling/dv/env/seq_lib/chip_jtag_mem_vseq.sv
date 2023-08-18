@@ -13,7 +13,6 @@ class chip_jtag_mem_vseq extends chip_common_vseq;
   `uvm_object_new
 
   virtual task pre_start();
-    cfg.select_jtag = JtagTapRvDm;
     cfg.m_jtag_riscv_agent_cfg.is_rv_dm = 1;
     void'($value$plusargs("skip_por_n_during_first_pwrup=%0b", skip_por_n_during_first_pwrup));
     // If we want to skip POR_N,
@@ -22,7 +21,7 @@ class chip_jtag_mem_vseq extends chip_common_vseq;
     if (skip_por_n_during_first_pwrup && is_first_pwrup) begin
        cfg.m_jtag_riscv_agent_cfg.in_reset = 1;
        super.pre_start();
-       `DV_WAIT(cfg.chip_vif.pinmux_lc_hw_debug_en);
+       `DV_WAIT(cfg.chip_vif.rv_dm_lc_hw_debug_en);
        cfg.chip_vif.aon_clk_por_rst_if.wait_clks(1);
        cfg.m_jtag_riscv_agent_cfg.in_reset = 0;
     end else begin

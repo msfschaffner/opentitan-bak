@@ -6,11 +6,6 @@ class chip_sw_rom_e2e_jtag_debug_vseq extends chip_sw_base_vseq;
   `uvm_object_utils(chip_sw_rom_e2e_jtag_debug_vseq)
   `uvm_object_new
 
-  virtual task pre_start();
-    cfg.chip_vif.tap_straps_if.drive(JtagTapRvDm);
-    super.pre_start();
-  endtask
-
   virtual task body();
     string elf_file = {cfg.sw_images[SwTypeRom], ".elf"};
     string uart_msg_via_mem_access = "OK!";
@@ -30,7 +25,7 @@ class chip_sw_rom_e2e_jtag_debug_vseq extends chip_sw_base_vseq;
     // there is no need to issue an NDM reset again. Just wait for lc_ready signal and immediately
     // issue a halt req.
     cfg.debugger.set_elf_file(elf_file);
-    `DV_WAIT(cfg.chip_vif.pinmux_lc_hw_debug_en)
+    `DV_WAIT(cfg.chip_vif.rv_dm_lc_hw_debug_en)
     cfg.chip_vif.aon_clk_por_rst_if.wait_clks(1);
     cfg.debugger.set_dmactive(1);
     cfg.debugger.set_haltreq(1);

@@ -142,7 +142,7 @@ tl_device_t xbar_devices[$] = '{
     '{"otp_ctrl__prim", '{
         '{32'h30138000, 32'h3013801f}
     }},
-    '{"lc_ctrl", '{
+    '{"lc_ctrl__regs", '{
         '{32'h30140000, 32'h301400ff}
     }},
     '{"sensor_ctrl", '{
@@ -190,8 +190,14 @@ tl_device_t xbar_devices[$] = '{
     '{"mbx_pcie1__soc", '{
         '{32'h01460200, 32'h0146021f}
     }},
+    '{"rv_dm__dbg", '{
+        '{32'h00000000, 32'h000001ff}
+    }},
     '{"mbx_jtag__soc", '{
         '{32'h00001000, 32'h0000101f}
+    }},
+    '{"lc_ctrl__dbg", '{
+        '{32'h00020000, 32'h00020fff}
     }}};
 
   // List of Xbar hosts
@@ -223,7 +229,7 @@ tl_host_t xbar_hosts[$] = '{
         "pinmux_aon",
         "otp_ctrl__core",
         "otp_ctrl__prim",
-        "lc_ctrl",
+        "lc_ctrl__regs",
         "sensor_ctrl",
         "alert_handler",
         "ast",
@@ -277,7 +283,7 @@ tl_host_t xbar_hosts[$] = '{
         "pinmux_aon",
         "otp_ctrl__core",
         "otp_ctrl__prim",
-        "lc_ctrl",
+        "lc_ctrl__regs",
         "sensor_ctrl",
         "alert_handler",
         "ast",
@@ -332,7 +338,7 @@ tl_host_t xbar_hosts[$] = '{
         "pinmux_aon",
         "otp_ctrl__core",
         "otp_ctrl__prim",
-        "lc_ctrl",
+        "lc_ctrl__regs",
         "sensor_ctrl",
         "alert_handler",
         "ast",
