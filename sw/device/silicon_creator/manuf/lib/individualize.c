@@ -23,7 +23,7 @@
 
 #include "otp_ctrl_regs.h"
 
-typedef struct hw_cfg_settings {
+typedef struct hw_cfg0_settings {
   /**
    * Enable / disable execute from SRAM CSR switch.
    */
@@ -43,7 +43,7 @@ typedef struct hw_cfg_settings {
    * other related functions.
    */
   multi_bit_bool_t en_entropy_src_fw_over;
-} hw_cfg_settings_t;
+} hw_cfg0_settings_t;
 
 // Changing any of the following values may result in unexpected device
 // behavior.
@@ -53,7 +53,7 @@ typedef struct hw_cfg_settings {
 // - en_csrng_sw_app_read: required to be able to extract output from CSRNG.
 // - en_entropy_src_fw_read and en_entropy_src_fw_over: Required to implement
 //   entropy_src conditioner KAT.
-const hw_cfg_settings_t kHwCfgSettings = {
+const hw_cfg0_settings_t kHwCfg0Settings = {
     .en_sram_ifetch = kMultiBitBool8True,
     .en_csrng_sw_app_read = kMultiBitBool8True,
     .en_entropy_src_fw_read = kMultiBitBool8True,
@@ -61,21 +61,21 @@ const hw_cfg_settings_t kHwCfgSettings = {
 };
 
 /**
- * Configures digital logic settings in the HW_CFG partition.
+ * Configures digital logic settings in the HW_CFG0 partition.
  *
  * @param otp OTP controller instance.
  * @return The result of the operation.
  */
 OT_WARN_UNUSED_RESULT
-static status_t hw_cfg_enable_knobs_set(const dif_otp_ctrl_t *otp_ctrl) {
+static status_t hw_cfg0_enable_knobs_set(const dif_otp_ctrl_t *otp_ctrl) {
   uint32_t val =
-      bitfield_field32_write(0, kSramFetch, kHwCfgSettings.en_sram_ifetch);
+      bitfield_field32_write(0, kSramFetch, kHwCfg0Settings.en_sram_ifetch);
   val = bitfield_field32_write(val, kCsrngAppRead,
-                               kHwCfgSettings.en_csrng_sw_app_read);
+                               kHwCfg0Settings.en_csrng_sw_app_read);
   val = bitfield_field32_write(val, kEntropySrcFwRd,
-                               kHwCfgSettings.en_entropy_src_fw_read);
+                               kHwCfg0Settings.en_entropy_src_fw_read);
   val = bitfield_field32_write(val, kEntropySrcFwOvr,
-                               kHwCfgSettings.en_entropy_src_fw_over);
+                               kHwCfg0Settings.en_entropy_src_fw_over);
 
   TRY(otp_ctrl_testutils_dai_write32(otp_ctrl, kDifOtpCtrlPartitionHwCfg,
                                      kHwCfgEnSramIfetchOffset, &val,
@@ -83,7 +83,7 @@ static status_t hw_cfg_enable_knobs_set(const dif_otp_ctrl_t *otp_ctrl) {
   return OK_STATUS();
 }
 
-status_t manuf_individualize_device_hw_cfg(
+status_t manuf_individualize_device_hw_cfg0(
     dif_flash_ctrl_state_t *flash_state, const dif_otp_ctrl_t *otp_ctrl,
     dif_flash_ctrl_region_properties_t flash_info_page_0_permissions,
     uint32_t *device_id) {
@@ -138,7 +138,7 @@ status_t manuf_individualize_device_hw_cfg(
                                      kHwCfgManufStateSizeIn32BitWords));
 
   // Configure byte-sized hardware enable knobs.
-  TRY(hw_cfg_enable_knobs_set(otp_ctrl));
+  TRY(hw_cfg0_enable_knobs_set(otp_ctrl));
 
   TRY(otp_ctrl_testutils_lock_partition(otp_ctrl, kDifOtpCtrlPartitionHwCfg,
                                         /*digest=*/0));
@@ -146,7 +146,7 @@ status_t manuf_individualize_device_hw_cfg(
   return OK_STATUS();
 }
 
-status_t manuf_individualize_device_hw_cfg_check(
+status_t manuf_individualize_device_hw_cfg0_check(
     const dif_otp_ctrl_t *otp_ctrl) {
   // TODO: Add DeviceId by comparing OTP flash value against the value reported
   // by lc_ctrl. Consider erasing the data from the flash info pages.
