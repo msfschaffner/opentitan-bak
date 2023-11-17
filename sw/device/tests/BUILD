@@ -777,6 +777,22 @@ opentitan_functest(
 )
 
 opentitan_functest(
+    name = "dma_inline_hashing",
+    srcs = ["dma_inline_hashing.c"],
+    targets = [
+        "dv",
+    ],
+    deps = [
+        "//sw/device/lib/testing/test_framework:ottf_main",
+        "//sw/lib/sw/device/base:macros",
+        "//sw/lib/sw/device/base:mmio",
+        "//sw/lib/sw/device/runtime:log",
+        "//sw/top_darjeeling/sw/device/runtime:print",
+        "//sw/top_darjeeling/sw/dif:dma",
+    ],
+)
+
+opentitan_functest(
     name = "entropy_src_csrng_test",
     srcs = ["entropy_src_csrng_test.c"],
     verilator = verilator_params(
