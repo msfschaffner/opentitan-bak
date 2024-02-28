@@ -500,8 +500,8 @@ class cip_base_vseq #(
 
     // Iterate over all interrupt registers (typically there is only one).
     foreach (intr_state_csrs[i]) begin
-      irq_ro_mask[i*BUS_DW :+ BUS_DW] = interrupt_t'(intr_state_csrs[i].get_ro_mask());
-      clear_interrupt_reg(intr_state_csrs[i], uvm_reg_data_t'(irq_ro_mask[i*BUS_DW :+ BUS_DW]));
+      irq_ro_mask[i*BUS_DW +: BUS_DW] = interrupt_t'(intr_state_csrs[i].get_ro_mask());
+      clear_interrupt_reg(intr_state_csrs[i], uvm_reg_data_t'(irq_ro_mask[i*BUS_DW +: BUS_DW]));
       if (cfg.under_reset) break;
     end
 
