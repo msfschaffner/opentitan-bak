@@ -172,7 +172,7 @@ class sysrst_ctrl_ultra_low_pwr_vseq extends sysrst_ctrl_base_vseq;
                                   enable_ulp, pwrb_cycles, get_pwrb_timer),
                         $sformatf("ac_cycles=%0d, get_ac_timer=%0d", ac_cycles, get_ac_timer),
                         $sformatf("lid_cycles=%0d, lid_timer=%0d", lid_cycles, get_lid_timer)},
-                 UVM_MEDIUM)
+                 UVM_LOW)
        // (cycles == timer) => sysrst_ctrl_detect.state : DebounceSt -> IdleSt
        // (cycles == timer + 1) => sysrst_ctrl_detect.state : DetectSt -> IdleSt
        // Therefore we only need to check when cycles > timer + 1
@@ -184,6 +184,8 @@ class sysrst_ctrl_ultra_low_pwr_vseq extends sysrst_ctrl_base_vseq;
          `DV_CHECK_EQ(cfg.vif.z3_wakeup, 1);
          csr_rd(ral.wkup_status, wkup_sts_rdata);
          csr_rd_check(ral.wkup_status, .compare_value(1));
+         // wait for sync of interrupt causes
+         cfg.clk_aon_rst_vif.wait_clks(20);
 
          // Check if the ulp wakeup event is detected
          csr_rd_check(ral.ulp_status, .compare_value(1));
@@ -191,7 +193,6 @@ class sysrst_ctrl_ultra_low_pwr_vseq extends sysrst_ctrl_base_vseq;
          // Clear the ulp_status register
          csr_wr(ral.ulp_status, 'h1);
 
-         cfg.clk_aon_rst_vif.wait_clks(20);
 
          // Check if the register is cleared
          csr_rd_check(ral.ulp_status, .compare_value(0));
@@ -231,7 +232,7 @@ class sysrst_ctrl_ultra_low_pwr_vseq extends sysrst_ctrl_base_vseq;
        cfg.clk_aon_rst_vif.wait_clks($urandom_range(0, 10));
      end
      disable z3_wakeup_check;
-     `uvm_info(`gfn, "Disble Z3 wakeup check", UVM_LOW)
+     `uvm_info(`gfn, "Disable Z3 wakeup check", UVM_LOW)
    endtask : body
 
    // A helper function to determine if the set time is long enough to cover the debounce state.
